@@ -5,7 +5,7 @@ import yaml
 
 SUB = os.environ["SUB_URL"]
 API = "http://127.0.0.1:19090"
-sub = yaml.safe_load(urllib.request.urlopen(SUB + "&target=clash", timeout=60).read())
+sub = yaml.safe_load(urllib.request.urlopen(urllib.request.Request(SUB + "&target=clash", headers={"User-Agent": "Mozilla/5.0 edgetunnel-proxyip-screen"}), timeout=60).read())
 base = copy.deepcopy(sub["proxies"][0])
 ips = open("proxyip/us.txt").read().strip().split(",")[:3]
 ps = []
