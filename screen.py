@@ -8,7 +8,10 @@ against a Cloudflare-hosted URL (only CF-hosted targets go through ProxyIP).
 Stages:
   1. one probe per candidate (low concurrency), keep the fastest STAGE2 candidates
   2. ROUNDS2 probes each, score = median + 0.3 * max (penalises spikes), keep the top TOP_N
-  3. every keeper must also pass real requests to each SITES url
+  3. top SITE_POOL must pass real requests to each SITES url
+  4. survivors are tested one by one for download and upload throughput through the ProxyIP
+     (BW_ROUNDS each, worst round counts), must clear MIN_DOWN / MIN_UP, ranked by
+     sqrt(down*up) with a small latency penalty; best TOP_N are written
 
 Environment:
   SUB_URL       required  your EdgeTunnel subscription link (clash format)
@@ -36,6 +39,13 @@ import yaml
 
 SOURCE = "https://zip.cm.edu.kg.cmliussss.net/all.json"
 PROBE = "https://claude.ai/cdn-cgi/trace"
+# Throughput targets must be Cloudflare-hosted, otherwise the Worker connects directly and the
+# ProxyIP is never on the path. speed.cloudflare.com is answered by the Worker itself (204), so
+# it measures nothing. registry.npmjs.org serves large tarballs from CF; cdnjs.cloudflare.com
+# accepts and discards a POST body, which gives an upload sink.
+DOWN_URL = os.environ.get("DOWN_URL", "https://registry.npmjs.org/next/-/next-14.2.15.tgz")  # ~20 MB
+UP_URL = os.environ.get("UP_URL", "https://cdnjs.cloudflare.com/")
+UP_BYTES = int(os.environ.get("UP_BYTES", str(8_000_000)))
 SITES = [
     "https://chatgpt.com/backend-anon/me",
     "https://api.x.com/1.1/hashflags.json",
@@ -55,6 +65,10 @@ STAGE1_CONC = int(os.environ.get("STAGE1_CONC", "6"))  # >=8 inflates delays on 
 STAGE1_LIMIT = int(os.environ.get("STAGE1_LIMIT", "0"))  # 0 = all
 STAGE2 = int(os.environ.get("STAGE2", "40"))
 ROUNDS2 = int(os.environ.get("ROUNDS2", "6"))
+SITE_POOL = int(os.environ.get("SITE_POOL", "20"))   # stage-3/4 pool size
+BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "2"))
+MIN_DOWN = float(os.environ.get("MIN_DOWN", "20"))   # Mbps floor (runner-measured)
+MIN_UP = float(os.environ.get("MIN_UP", "5"))
 WORK = os.environ.get("WORK", "/tmp/pxscreen")
 
 
@@ -151,6 +165,25 @@ def site_ok(url):
     return code != "000", float(t)
 
 
+def throughput(direction):
+    """Mbps for one transfer through the selected node, or None on failure."""
+    if direction == "down":
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", "20", "-x", f"http://127.0.0.1:{PORT}",
+               "-w", "%{http_code} %{size_download} %{speed_download}", DOWN_URL]
+    else:
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", "20", "-x", f"http://127.0.0.1:{PORT}", "-X", "POST",
+               "-H", "Content-Type: application/octet-stream", "--data-binary", f"@{WORK}/up.bin",
+               "-w", "%{http_code} %{size_upload} %{speed_upload}", UP_URL]
+    out = subprocess.run(cmd, capture_output=True, text=True).stdout.split()
+    if len(out) != 3 or out[0] == "000":
+        return None
+    size, speed = int(out[1]), float(out[2])
+    want = 5_000_000 if direction == "down" else UP_BYTES
+    if size < want * 0.9:
+        return None
+    return round(speed * 8 / 1e6, 1)
+
+
 def main():
     node, opts_key = base_node()
     entry = os.environ.get("ENTRY_IP") or None
@@ -158,6 +191,9 @@ def main():
     items = list(cand.items())
     if STAGE1_LIMIT:
         items = items[:STAGE1_LIMIT]
+    os.makedirs(WORK, exist_ok=True)
+    with open(f"{WORK}/up.bin", "wb") as f:
+        f.write(os.urandom(UP_BYTES))
     log(f"{len(cand)} candidates for {COUNTRY}/{sorted(COLOS)}; testing {len(items)} via entry {entry or node['server']}")
     if not items:
         sys.exit("no candidates")
@@ -190,19 +226,40 @@ def main():
     scored.sort()
     log(f"stage2: {len(scored)}/{len(keep)} passed all {ROUNDS2} rounds")
 
-    # Stage 3: real site requests on the top few
-    final = []
+    # Stage 3: real site requests; everyone in the top SITE_POOL who passes moves on
+    passed = []
     with Mihomo():
-        for score, med, mx, n in scored[: TOP_N * 2]:
+        for score, med, mx, n in scored[:SITE_POOL]:
             select(n)
             results = [site_ok(u) for u in SITES]
             if all(ok for ok, _ in results):
-                final.append((n, med, mx, [round(t, 2) for _, t in results]))
-                log(f"keep {n} med={med} max={mx} sites={[round(t, 2) for _, t in results]}")
+                passed.append((n, med, mx, [round(t, 2) for _, t in results]))
             else:
                 log(f"drop {n}: site check failed {results}")
-            if len(final) >= TOP_N:
-                break
+    log(f"stage3: {len(passed)}/{min(SITE_POOL, len(scored))} passed site checks")
+
+    # Stage 4: throughput, one node at a time (no shared-link contention)
+    final = []
+    with Mihomo():
+        for n, med, mx, sites in passed:
+            select(n)
+            down = [x for x in (throughput("down") for _ in range(BW_ROUNDS)) if x is not None]
+            up = [x for x in (throughput("up") for _ in range(BW_ROUNDS)) if x is not None]
+            if len(down) < BW_ROUNDS or len(up) < BW_ROUNDS:
+                log(f"drop {n}: bandwidth test failed down={down} up={up}")
+                continue
+            d, u = min(down), min(up)  # worst of the rounds: stable beats bursty
+            if d < MIN_DOWN or u < MIN_UP:
+                log(f"drop {n}: down={d} up={u} Mbps below floor {MIN_DOWN}/{MIN_UP}")
+                continue
+            final.append((n, med, mx, sites, d, u))
+            log(f"bw {n} med={med} down={d} up={u} Mbps sites={sites}")
+    # Rank: bandwidth first (geometric mean of down/up, so one weak direction drags it down),
+    # latency as a tie-breaker (every 100 ms costs 10%).
+    final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
+    final = final[:TOP_N]
+    for n, med, mx, sites, d, u in final:
+        log(f"keep {n} med={med} max={mx} down={d} up={u} Mbps sites={sites}")
     if len(final) < max(2, TOP_N // 2):
         sys.exit(f"only {len(final)} passed; keeping previous list")
 
@@ -213,8 +270,10 @@ def main():
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "source": SOURCE, "probe": PROBE, "sites": SITES, "country": COUNTRY, "colos": sorted(COLOS),
         "tested": len(items), "alive": len(alive),
+        "down_url": DOWN_URL, "up_url": UP_URL, "min_down_mbps": MIN_DOWN, "min_up_mbps": MIN_UP,
         "results": [{"proxyip": n.split("|", 1)[1], "colo": n.split("|", 1)[0], "delay_median_ms": med,
-                     "delay_max_ms": mx, "site_ttfb_s": s} for n, med, mx, s in final],
+                     "delay_max_ms": mx, "site_ttfb_s": s, "down_mbps": d, "up_mbps": u}
+                    for n, med, mx, s, d, u in final],
     }
     json.dump(report, open(os.path.splitext(OUT)[0] + ".json", "w"), indent=2)
     log("wrote", OUT, ",".join(ips))
