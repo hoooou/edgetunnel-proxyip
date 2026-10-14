@@ -85,8 +85,16 @@ def log(*a):
     print(time.strftime("%H:%M:%S"), *a, flush=True)
 
 
-def fetch(url, timeout=60):
-    return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout).read()
+def fetch(url, timeout=60, tries=4):
+    # The subscription goes through a public converter that sometimes answers 502/504.
+    for i in range(tries):
+        try:
+            return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout).read()
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
+            if i == tries - 1:
+                raise
+            log(f"fetch failed ({getattr(e, 'code', e.__class__.__name__)}), retry {i + 1}")
+            time.sleep(15 * (i + 1))
 
 
 def candidates():
