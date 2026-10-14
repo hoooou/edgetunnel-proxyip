@@ -85,7 +85,7 @@ def log(*a):
     print(time.strftime("%H:%M:%S"), *a, flush=True)
 
 
-def fetch(url, timeout=60, tries=4):
+def fetch(url, timeout=60, tries=2):
     # The subscription goes through a public converter that sometimes answers 502/504.
     for i in range(tries):
         try:
@@ -112,17 +112,51 @@ def candidates():
     return out
 
 
+NODE_CACHE = os.environ.get("NODE_CACHE", "proxyip/node.enc")
+
+
+def _xor(data: bytes, key: bytes) -> bytes:
+    return bytes(b ^ key[i % len(key)] for i, b in enumerate(data))
+
+
+def _save_node(node):
+    # The node holds the UUID, and the repo is public: store it XOR'ed with a key derived from
+    # SUB_URL (a secret). Not strong crypto, just keeps the credential out of plain sight.
+    import hashlib, base64
+    key = hashlib.sha256(SUB_URL.encode()).digest()
+    os.makedirs(os.path.dirname(NODE_CACHE) or ".", exist_ok=True)
+    open(NODE_CACHE, "w").write(base64.b64encode(_xor(json.dumps(node).encode(), key)).decode() + "\n")
+
+
+def _load_node():
+    import hashlib, base64
+    key = hashlib.sha256(SUB_URL.encode()).digest()
+    return json.loads(_xor(base64.b64decode(open(NODE_CACHE).read().strip()), key))
+
+
 def base_node():
-    sub = yaml.safe_load(fetch(SUB_URL + ("&" if "?" in SUB_URL else "?") + "target=clash"))
-    if not isinstance(sub, dict) or not sub.get("proxies"):
-        sys.exit("subscription did not return a clash profile")
-    node = copy.deepcopy(sub["proxies"][0])
+    """First node of the subscription. Falls back to the last good copy when the subscription
+    converter (a third-party service) is down, so screening never depends on it."""
+    node = None
+    try:
+        sub = yaml.safe_load(fetch(SUB_URL + ("&" if "?" in SUB_URL else "?") + "target=clash"))
+        if isinstance(sub, dict) and sub.get("proxies"):
+            node = copy.deepcopy(sub["proxies"][0])
+            _save_node(node)
+    except Exception as e:
+        log(f"subscription unavailable ({getattr(e, 'code', e.__class__.__name__)}); using cached node")
+    if node is None:
+        try:
+            node = _load_node()
+        except (OSError, ValueError):
+            sys.exit("subscription unavailable and no cached node")
     if node.get("network") == "xhttp":
         opts_key = "xhttp-opts"
     elif node.get("network") == "ws":
         opts_key = "ws-opts"
     else:
         sys.exit(f"unsupported node network: {node.get('network')}")
+    node[opts_key]["path"] = "/"
     return node, opts_key
 
 

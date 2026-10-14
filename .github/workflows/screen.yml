@@ -48,7 +48,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add proxyip/us.txt proxyip/us.json
+          git add proxyip/us.txt proxyip/us.json proxyip/node.enc 2>/dev/null || git add proxyip/us.txt proxyip/us.json
           if git diff --cached --quiet; then echo "no change"; else git commit -m "proxyip/us: $(cat proxyip/us.txt)" && git push; fi
 
       - name: Publish TXT record
@@ -96,7 +96,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull -q --rebase origin main
-          git add proxyip/res-cache.json proxyip/res.txt proxyip/res.json 2>/dev/null || true
+          git add proxyip/res-cache.json proxyip/res.txt proxyip/res.json proxyip/node.enc 2>/dev/null || true
           if git diff --cached --quiet; then echo "no change"; else git commit -m "proxyip/res: $(cat proxyip/res.txt 2>/dev/null || echo cache)" && git push; fi
 
       - name: Publish TXT record
