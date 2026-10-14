@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "17 */6 * * *"   # every 6 hours (UTC)
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [screen.py, update_dns.py, .github/workflows/screen.yml]
 
 permissions:
   contents: write
