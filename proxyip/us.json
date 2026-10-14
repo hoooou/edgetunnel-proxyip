@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-10-14T10:48:03Z",
+  "source": "https://zip.cm.edu.kg.cmliussss.net/all.json",
+  "probe": "https://claude.ai/cdn-cgi/trace",
+  "sites": [
+    "https://chatgpt.com/backend-anon/me",
+    "https://api.x.com/1.1/hashflags.json",
+    "https://x.com/"
+  ],
+  "country": "US",
+  "colos": [
+    "LAX",
+    "PDX",
+    "SEA",
+    "SJC"
+  ],
+  "tested": 1382,
+  "alive": 1337,
+  "results": [
+    {
+      "proxyip": "173.249.207.140",
+      "colo": "LAX",
+      "delay_median_ms": 219.5,
+      "delay_max_ms": 229,
+      "site_ttfb_s": [
+        0.21,
+        0.21,
+        0.22
+      ]
+    },
+    {
+      "proxyip": "209.94.61.98",
+      "colo": "LAX",
+      "delay_median_ms": 213.0,
+      "delay_max_ms": 254,
+      "site_ttfb_s": [
+        0.21,
+        0.25,
+        0.24
+      ]
+    },
+    {
+      "proxyip": "198.199.93.33",
+      "colo": "SJC",
+      "delay_median_ms": 216.0,
+      "delay_max_ms": 247,
+      "site_ttfb_s": [
+        0.24,
+        0.23,
+        0.23
+      ]
+    },
+    {
+      "proxyip": "144.202.110.83:8443",
+      "colo": "LAX",
+      "delay_median_ms": 220.0,
+      "delay_max_ms": 243,
+      "site_ttfb_s": [
+        0.24,
+        0.24,
+        0.25
+      ]
+    },
+    {
+      "proxyip": "150.230.38.45",
+      "colo": "LAX",
+      "delay_median_ms": 217.0,
+      "delay_max_ms": 254,
+      "site_ttfb_s": [
+        0.29,
+        0.24,
+        0.21
+      ]
+    },
+    {
+      "proxyip": "144.225.247.145",
+      "colo": "LAX",
+      "delay_median_ms": 226.0,
+      "delay_max_ms": 233,
+      "site_ttfb_s": [
+        0.24,
+        0.26,
+        0.24
+      ]
+    }
+  ]
+}
