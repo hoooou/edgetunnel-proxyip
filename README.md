@@ -13,7 +13,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 1. 全部测一次延迟（并发 6；并发高于 8 会让延迟整体虚高），取最快的 40 个；
 2. 这 40 个测 6 轮，必须每轮都成功，按 `中位数 + 0.3 × 最大值` 排序；
-3. 前 20 个逐个真实请求 ChatGPT 接口、api.x.com、x.com，必须全部通过；
+3. 前 20 个逐个检查：经 Worker 看到的出口必须是 IPv4、不是 WARP 或 CF 自有 IP（X 对 IPv6 出口一律回 403 `IPv6`）；x.com 首页必须 200，api.x.com 不能 403，ChatGPT 要能连通；
 4. 通过的逐个测带宽（不并发）：下载 `registry.npmjs.org` 上约 20 MB 的 tgz，上传 8 MB 到 `cdnjs.cloudflare.com`（CF 收下后丢弃）。各测 2 次取较差的一次，下行低于 20 Mbps 或上行低于 5 Mbps 的淘汰；按 `√(下行×上行)` 排序，延迟每多 100 ms 扣 10%，留下前 6 个。
 
 带宽目标必须在 CF 上，否则 Worker 直连、不经过 ProxyIP。`speed.cloudflare.com` 不能用：EdgeTunnel 会在 Worker 内部直接回 204，测出来是假的。数字是 GitHub runner（美国）测到的 Worker → ProxyIP 这一段，不是你本地的网速。门槛可用环境变量 `MIN_DOWN` / `MIN_UP` 调整。

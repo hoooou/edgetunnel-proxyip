@@ -8,7 +8,8 @@ against a Cloudflare-hosted URL (only CF-hosted targets go through ProxyIP).
 Stages:
   1. one probe per candidate (low concurrency), keep the fastest STAGE2 candidates
   2. ROUNDS2 probes each, score = median + 0.3 * max (penalises spikes), keep the top TOP_N
-  3. top SITE_POOL must pass real requests to each SITES url
+  3. top SITE_POOL: egress (as seen by a CF site) must be IPv4, not WARP, not Cloudflare-owned;
+     x.com must return 200 and api.x.com must not be refused (403); ChatGPT must be reachable
   4. survivors are tested one by one for download and upload throughput through the ProxyIP
      (BW_ROUNDS each, worst round counts), must clear MIN_DOWN / MIN_UP, ranked by
      sqrt(down*up) with a small latency penalty; best TOP_N are written
@@ -34,6 +35,7 @@ import time
 import urllib.parse
 import urllib.request
 import concurrent.futures as cf
+import ipaddress
 
 import yaml
 
@@ -46,11 +48,18 @@ PROBE = "https://claude.ai/cdn-cgi/trace"
 DOWN_URL = os.environ.get("DOWN_URL", "https://registry.npmjs.org/next/-/next-14.2.15.tgz")  # ~20 MB
 UP_URL = os.environ.get("UP_URL", "https://cdnjs.cloudflare.com/")
 UP_BYTES = int(os.environ.get("UP_BYTES", str(8_000_000)))
+# Each site must answer with an accepted status. "Connected" is not enough: X answers 403 with a
+# body of "IPv6" when the egress is an IPv6 address it does not accept, and CF's bot wall answers
+# 403 with a cf-mitigated header. ChatGPT's anonymous endpoint is 403/cf-mitigated from any
+# datacenter IP, so it only checks reachability, not acceptance.
 SITES = [
-    "https://chatgpt.com/backend-anon/me",
-    "https://api.x.com/1.1/hashflags.json",
-    "https://x.com/",
+    ("https://x.com/", {200}),
+    ("https://api.x.com/1.1/hashflags.json", {200, 400, 401}),
+    ("https://chatgpt.com/backend-anon/me", None),
 ]
+TRACE = "https://x.com/cdn-cgi/trace"
+UA_BROWSER = "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36"
+REQUIRE_V4 = os.environ.get("REQUIRE_V4", "1") == "1"
 API = "http://127.0.0.1:19090"
 PORT = 17890
 UA = {"User-Agent": "Mozilla/5.0 edgetunnel-proxyip-screen"}
@@ -88,6 +97,8 @@ def candidates():
         colo = (m.get("colo") or {}).get("iata")
         if m.get("country") != COUNTRY or colo not in COLOS or not x.get("port"):
             continue
+        if REQUIRE_V4 and ":" in (m.get("clientIp") or ":"):
+            continue  # list was built by probing through it; its recorded egress is IPv6/unknown
         port = x["port"][0]
         out[x["ip"] if port == 443 else f"{x['ip']}:{port}"] = colo
     return out
@@ -158,11 +169,37 @@ def select(name):
     urllib.request.urlopen(urllib.request.Request(f"{API}/connections", method="DELETE"), timeout=5)
 
 
-def site_ok(url):
+def site_ok(url, accept):
+    """(ok, ttfb_s, status). accept=None means any HTTP response counts."""
     r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-m", "10", "-x", f"http://127.0.0.1:{PORT}",
-                        "-w", "%{http_code} %{time_starttransfer}", url], capture_output=True, text=True)
+                        "-A", UA_BROWSER, "-w", "%{http_code} %{time_starttransfer}", url],
+                       capture_output=True, text=True)
     code, t = (r.stdout.split() + ["000", "0"])[:2]
-    return code != "000", float(t)
+    ok = code != "000" and (accept is None or int(code) in accept)
+    return ok, float(t), code
+
+
+def egress():
+    """What a CF-hosted site sees as the client: (ip, warp flag)."""
+    r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{PORT}", TRACE],
+                       capture_output=True, text=True).stdout
+    kv = dict(l.split("=", 1) for l in r.splitlines() if "=" in l)
+    return kv.get("ip", ""), kv.get("warp", "")
+
+
+def is_cloudflare(ip):
+    try:
+        a = ipaddress.ip_address(ip)
+    except ValueError:
+        return False
+    return any(a in n for n in CF_NETS)
+
+
+CF_NETS = [ipaddress.ip_network(n) for n in (
+    "173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 "
+    "190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 "
+    "104.24.0.0/14 104.28.0.0/16 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 "
+    "2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32 2a09:bac0::/29").split()]
 
 
 def throughput(direction):
@@ -231,11 +268,18 @@ def main():
     with Mihomo():
         for score, med, mx, n in scored[:SITE_POOL]:
             select(n)
-            results = [site_ok(u) for u in SITES]
-            if all(ok for ok, _ in results):
-                passed.append((n, med, mx, [round(t, 2) for _, t in results]))
+            ip, warp = egress()
+            if not ip or warp == "on" or is_cloudflare(ip):
+                log(f"drop {n}: egress {ip or '?'} warp={warp} (Cloudflare/WARP exit)")
+                continue
+            if REQUIRE_V4 and ":" in ip:
+                log(f"drop {n}: egress is IPv6 {ip}")
+                continue
+            results = [site_ok(u, acc) for u, acc in SITES]
+            if all(ok for ok, _, _ in results):
+                passed.append((n, med, mx, [round(t, 2) for _, t, _ in results]))
             else:
-                log(f"drop {n}: site check failed {results}")
+                log(f"drop {n}: site check failed {[(u.split('/')[2], c) for (u, _), (_, _, c) in zip(SITES, results)]}")
     log(f"stage3: {len(passed)}/{min(SITE_POOL, len(scored))} passed site checks")
 
     # Stage 4: throughput, one node at a time (no shared-link contention)
@@ -268,7 +312,7 @@ def main():
     open(OUT, "w").write(",".join(ips) + "\n")
     report = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "source": SOURCE, "probe": PROBE, "sites": SITES, "country": COUNTRY, "colos": sorted(COLOS),
+        "source": SOURCE, "probe": PROBE, "sites": [u for u, _ in SITES], "require_ipv4_egress": REQUIRE_V4, "country": COUNTRY, "colos": sorted(COLOS),
         "tested": len(items), "alive": len(alive),
         "down_url": DOWN_URL, "up_url": UP_URL, "min_down_mbps": MIN_DOWN, "min_up_mbps": MIN_UP,
         "results": [{"proxyip": n.split("|", 1)[1], "colo": n.split("|", 1)[0], "delay_median_ms": med,
