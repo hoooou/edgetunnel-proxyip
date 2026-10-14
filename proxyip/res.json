@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-10-14T14:59:55Z",
+  "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
+  "countries": [
+    "AT",
+    "AU",
+    "BE",
+    "CA",
+    "CH",
+    "DE",
+    "DK",
+    "ES",
+    "FI",
+    "FR",
+    "GB",
+    "IE",
+    "IS",
+    "IT",
+    "LU",
+    "NL",
+    "NO",
+    "NZ",
+    "PT",
+    "SE",
+    "US"
+  ],
+  "min_purity": 90.0,
+  "candidates": 3492,
+  "not_hosting": 923,
+  "residential": 4,
+  "results": [
+    {
+      "proxyip": "174.108.80.25:8443",
+      "country": "US",
+      "colo": "ATL",
+      "company": "Charter Communications Inc",
+      "purity": 99.95,
+      "is_mobile": false,
+      "delay_ms": 611,
+      "down_mbps": 16.2,
+      "up_mbps": 13.1,
+      "site_ttfb_s": [
+        1.12,
+        0.58,
+        0.64
+      ]
+    },
+    {
+      "proxyip": "172.117.126.136",
+      "country": "US",
+      "colo": "LAX",
+      "company": "Charter Communications Inc",
+      "purity": 99.91,
+      "is_mobile": false,
+      "delay_ms": 370,
+      "down_mbps": 20.4,
+      "up_mbps": 10.6,
+      "site_ttfb_s": [
+        0.45,
+        0.41,
+        0.35
+      ]
+    }
+  ]
+}
