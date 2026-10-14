@@ -38,3 +38,17 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 - 每次运行约 2000 次请求打到 Worker，每天约 8000 次，在免费额度（每天 10 万次）内。带宽测试每次约传 1.3 GB，Workers 不按流量计费。
 - 仓库建议公开：公开仓库 Action 分钟数不限；订阅链接和 CF token 都在 Secrets 里，不会出现在日志或文件里。
 - 本地运行：`SUB_URL=... MIHOMO=./mihomo python3 screen.py`（需关闭 TUN，mihomo 用 v1.19.32）。
+
+## 住宅 ProxyIP（res.proxyip.yieti.top）
+
+同一个 workflow 的第二个 job，跑在美国筛选之后（不同时压 Worker）。国家：五眼（US/CA/GB/AU/NZ）+ 西欧（IE/DE/NL/FR/BE/LU/CH/AT/IT/ES/PT/DK/SE/NO/FI/IS）。
+
+1. 候选：同一数据源，国家在上述列表内、记录的出口是 IPv4；
+2. ip-api.com（免费）去掉 hosting / proxy；
+3. ipapi.is（Secret `IPAPI_IS_KEY`）：`is_datacenter=false` 且 `company.type=isp`，不是 VPN / Tor / 滥用者，纯净度 `100×(1−company.abuser_score)` ≥ 90。结果缓存 7 天在 `proxyip/res-cache.json`，每次最多新查 400 个，免费额度够用；
+4. 经 Worker 实测：出口必须就是该 IP 本身，x.com 200、api.x.com 非 403，带宽下行 ≥5、上行 ≥2 Mbps；
+5. 按纯净度、再按带宽和延迟排序，最多 8 个，写 `proxyip/res.txt` 并发布到 `CF_RECORD_RES`。少于 2 个不覆盖。
+
+「住宅」只代表 ipapi.is 判定所属公司是 ISP、网段不是机房；纯净度是网段层面的，不是单个 IP 的风险分。这类 IP 多是别人家里开放的设备，寿命短、速度不稳，适合做「需要干净 IP 的少数网站」专用节点，不适合当主力。
+
+用法：面板里的 PROXYIP 是全局的，所以住宅要单独做一个节点，path 写 `/proxyip=res.proxyip.yieti.top`，再在规则里把需要的网站分到这个节点。
