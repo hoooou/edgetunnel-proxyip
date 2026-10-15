@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:06:28Z",
+  "generated_at": "2026-10-15T19:05:06Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,51 +28,19 @@
   "min_purity": 90.0,
   "candidates": 3419,
   "not_hosting": 902,
-  "own_egress": 481,
+  "own_egress": 519,
   "residential": 14,
-  "usable": 11,
+  "usable": 7,
   "results": [
     {
-      "proxyip": "62.251.108.251",
-      "delay_ms": 664,
-      "down_mbps": 64.3,
-      "up_mbps": 5.3,
-      "site_ttfb_s": [
-        2.32,
-        0.64,
-        0.55
-      ],
-      "country": "NL",
-      "colo": "AMS",
-      "company": "Customers",
-      "purity": 99.99,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "70.79.240.221",
-      "delay_ms": 250,
-      "down_mbps": 47.4,
-      "up_mbps": 38.5,
-      "site_ttfb_s": [
-        0.37,
-        0.28,
-        0.25
-      ],
-      "country": "CA",
-      "colo": "YVR",
-      "company": "Shaw Communications",
-      "purity": 99.97,
-      "is_mobile": false
-    },
-    {
       "proxyip": "89.128.206.51",
-      "delay_ms": 671,
-      "down_mbps": 44.5,
-      "up_mbps": 4.4,
+      "delay_ms": 812,
+      "down_mbps": 50.9,
+      "up_mbps": 3.6,
       "site_ttfb_s": [
-        0.74,
-        0.67,
-        0.55
+        2.62,
+        0.88,
+        0.72
       ],
       "country": "ES",
       "colo": "MAD",
@@ -81,30 +49,14 @@
       "is_mobile": false
     },
     {
-      "proxyip": "31.201.109.180",
-      "delay_ms": 813,
-      "down_mbps": 48.5,
-      "up_mbps": 11.4,
-      "site_ttfb_s": [
-        1.24,
-        0.95,
-        0.86
-      ],
-      "country": "NL",
-      "colo": "AMS",
-      "company": "Odido Netherlands",
-      "purity": 99.96,
-      "is_mobile": false
-    },
-    {
       "proxyip": "50.35.41.6",
-      "delay_ms": 190,
-      "down_mbps": 113.9,
-      "up_mbps": 71.7,
+      "delay_ms": 358,
+      "down_mbps": 96.8,
+      "up_mbps": 4.9,
       "site_ttfb_s": [
-        0.24,
-        0.2,
-        0.23
+        0.56,
+        0.39,
+        0.43
       ],
       "country": "US",
       "colo": "SEA",
@@ -114,13 +66,13 @@
     },
     {
       "proxyip": "174.108.80.25:8443",
-      "delay_ms": 445,
-      "down_mbps": 18.7,
-      "up_mbps": 17.1,
+      "delay_ms": 561,
+      "down_mbps": 16.9,
+      "up_mbps": 12.5,
       "site_ttfb_s": [
-        0.52,
-        0.5,
-        0.47
+        1.26,
+        0.58,
+        0.63
       ],
       "country": "US",
       "colo": "IAD",
@@ -129,14 +81,30 @@
       "is_mobile": false
     },
     {
-      "proxyip": "172.117.126.136",
-      "delay_ms": 196,
-      "down_mbps": 19.9,
-      "up_mbps": 21.0,
+      "proxyip": "51.6.54.142",
+      "delay_ms": 819,
+      "down_mbps": 41.9,
+      "up_mbps": 3.5,
       "site_ttfb_s": [
-        0.39,
-        0.25,
-        0.22
+        1.1,
+        0.89,
+        0.76
+      ],
+      "country": "GB",
+      "colo": "LHR",
+      "company": "British Telecommunications Limited",
+      "purity": 99.95,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "172.117.126.136",
+      "delay_ms": 441,
+      "down_mbps": 20.3,
+      "up_mbps": 13.7,
+      "site_ttfb_s": [
+        0.44,
+        0.43,
+        0.42
       ],
       "country": "US",
       "colo": "LAX",
@@ -146,18 +114,34 @@
     },
     {
       "proxyip": "82.64.120.239",
-      "delay_ms": 730,
-      "down_mbps": 56.1,
-      "up_mbps": 4.9,
+      "delay_ms": 927,
+      "down_mbps": 53.4,
+      "up_mbps": 3.5,
       "site_ttfb_s": [
-        0.91,
-        0.7,
-        0.59
+        0.94,
+        0.98,
+        0.73
       ],
       "country": "FR",
       "colo": "CDG",
       "company": "Free SAS",
       "purity": 99.77,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "142.188.90.91",
+      "delay_ms": 664,
+      "down_mbps": 70.8,
+      "up_mbps": 5.3,
+      "site_ttfb_s": [
+        0.76,
+        0.66,
+        0.62
+      ],
+      "country": "CA",
+      "colo": "YYZ",
+      "company": "Sympatico HSE",
+      "purity": 99.61,
       "is_mobile": false
     }
   ]
