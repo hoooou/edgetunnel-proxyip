@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T18:54:51Z",
+  "generated_at": "2026-10-15T23:29:42Z",
   "source": "https://zip.cm.edu.kg.cmliussss.net/all.json",
   "probe": "https://claude.ai/cdn-cgi/trace",
   "sites": [
@@ -16,89 +16,89 @@
     "SJC"
   ],
   "tested": 271,
-  "alive": 253,
+  "alive": 256,
   "down_url": "https://registry.npmjs.org/next/-/next-14.2.15.tgz",
   "up_url": "https://cdnjs.cloudflare.com/",
   "min_down_mbps": 20.0,
   "min_up_mbps": 5.0,
   "results": [
     {
-      "proxyip": "49.51.50.56",
+      "proxyip": "138.2.236.17",
       "colo": "SJC",
-      "delay_median_ms": 261.0,
-      "delay_max_ms": 275,
+      "delay_median_ms": 125.5,
+      "delay_max_ms": 233,
       "site_ttfb_s": [
-        0.33,
-        0.25,
-        0.34
+        0.21,
+        0.19,
+        0.13
       ],
-      "down_mbps": 137.0,
-      "up_mbps": 18.4
+      "down_mbps": 255.6,
+      "up_mbps": 50.1
     },
     {
-      "proxyip": "104.233.158.148",
+      "proxyip": "185.65.151.81",
       "colo": "SJC",
-      "delay_median_ms": 259.0,
-      "delay_max_ms": 294,
+      "delay_median_ms": 123.5,
+      "delay_max_ms": 214,
       "site_ttfb_s": [
-        0.31,
-        0.26,
-        0.29
+        0.2,
+        0.2,
+        0.18
       ],
-      "down_mbps": 133.2,
-      "up_mbps": 16.6
+      "down_mbps": 321.7,
+      "up_mbps": 38.8
     },
     {
-      "proxyip": "31.58.87.71:8443",
+      "proxyip": "64.188.29.141:2053",
       "colo": "SJC",
-      "delay_median_ms": 254.5,
-      "delay_max_ms": 292,
+      "delay_median_ms": 137.5,
+      "delay_max_ms": 205,
       "site_ttfb_s": [
-        0.35,
-        0.28,
-        0.3
+        0.2,
+        0.15,
+        0.15
       ],
-      "down_mbps": 127.1,
-      "up_mbps": 13.7
+      "down_mbps": 334.4,
+      "up_mbps": 36.5
     },
     {
-      "proxyip": "149.28.218.198",
+      "proxyip": "45.32.136.112",
       "colo": "SJC",
-      "delay_median_ms": 257.5,
-      "delay_max_ms": 270,
+      "delay_median_ms": 154.5,
+      "delay_max_ms": 169,
       "site_ttfb_s": [
-        0.34,
-        0.26,
-        0.29
+        0.22,
+        0.15,
+        0.17
       ],
-      "down_mbps": 148.5,
-      "up_mbps": 11.1
+      "down_mbps": 302.9,
+      "up_mbps": 38.2
     },
     {
-      "proxyip": "198.2.237.25:8443",
-      "colo": "SJC",
-      "delay_median_ms": 257.5,
-      "delay_max_ms": 270,
+      "proxyip": "107.174.252.170:2087",
+      "colo": "PDX",
+      "delay_median_ms": 164.5,
+      "delay_max_ms": 179,
       "site_ttfb_s": [
-        0.4,
-        0.37,
-        0.26
+        0.24,
+        0.21,
+        0.19
       ],
-      "down_mbps": 139.5,
-      "up_mbps": 11.5
+      "down_mbps": 306.6,
+      "up_mbps": 35.6
     },
     {
-      "proxyip": "217.60.249.168:2053",
+      "proxyip": "163.192.19.221",
       "colo": "SJC",
-      "delay_median_ms": 247.0,
-      "delay_max_ms": 304,
+      "delay_median_ms": 123.5,
+      "delay_max_ms": 233,
       "site_ttfb_s": [
-        0.39,
-        0.28,
-        0.24
+        0.18,
+        0.17,
+        0.18
       ],
-      "down_mbps": 135.1,
-      "up_mbps": 10.2
+      "down_mbps": 222.3,
+      "up_mbps": 28.3
     }
   ]
 }
