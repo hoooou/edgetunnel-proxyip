@@ -3,7 +3,7 @@
 每 6 小时（北京时间 05:00、11:00、17:00、23:00）用 GitHub Action 经自己的 EdgeTunnel Worker 筛一遍美西公共 ProxyIP，结果：
 
 - 写进 `proxyip/us.txt`（逗号分隔，可直接粘贴）和 `proxyip/us.json`（测量明细），提交回仓库；
-- 同步成 Cloudflare DNS 的 TXT 记录 `us.proxyip.yieti.top`，EdgeTunnel 的 PROXYIP 填这个域名即可自动跟随。
+- 同步成 Cloudflare DNS 的 TXT 记录 `us.proxyip.<你的域名>`，EdgeTunnel 的 PROXYIP 填这个域名即可自动跟随。
 
 EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成 HTTPS 代理），所以要经 TXT 记录中转。Worker 解析域名时先查 TXT，按逗号拆分，支持 `ip:端口`，每个实例缓存至少 5 分钟。
 
@@ -22,12 +22,12 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 ## 设置
 
-1. Cloudflare 建 API Token：模板「Edit zone DNS」，Zone Resources 只选 `yieti.top`。
+1. Cloudflare 建 API Token：模板「Edit zone DNS」，Zone Resources 只选 你的域名（例如 `example.com`）。
 2. 本仓库 Settings → Secrets and variables → Actions：
    - Secrets：`SUB_URL` = 订阅链接（含 token）；`CF_API_TOKEN` = 上一步的 token
-   - Variables：`CF_ZONE` = `yieti.top`；`CF_RECORD` = `us.proxyip.yieti.top`；可选 `CF_ZONE_ID`（token 看不到 zone 列表时填）、`ENTRY_IP`
+   - Variables：`CF_ZONE` = 你的域名（例如 `example.com`）；`CF_RECORD` = `us.proxyip.<你的域名>`；可选 `CF_ZONE_ID`（token 看不到 zone 列表时填）、`ENTRY_IP`
 3. Actions 页手动 Run workflow 一次，确认 `proxyip/us.txt` 已生成、DNS 里出现 TXT 记录。
-4. EdgeTunnel 面板「反代」→ PROXYIP 改成 `us.proxyip.yieti.top`，保存，客户端更新订阅。
+4. EdgeTunnel 面板「反代」→ PROXYIP 改成 `us.proxyip.<你的域名>`，保存，客户端更新订阅。
 
 验证：浏览器打开 `https://claude.ai/cdn-cgi/trace`，`ip=` 应是 `us.txt` 里的某个。
 
@@ -39,7 +39,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 - 仓库建议公开：公开仓库 Action 分钟数不限；订阅链接和 CF token 都在 Secrets 里，不会出现在日志或文件里。
 - 本地运行：`SUB_URL=... MIHOMO=./mihomo python3 screen.py`（需关闭 TUN，mihomo 用 v1.19.32）。
 
-## 住宅 ProxyIP（res.proxyip.yieti.top）
+## 住宅 ProxyIP（res.proxyip.<你的域名>）
 
 同一个 workflow 的第二个 job，跑在美国筛选之后（不同时压 Worker）。国家：五眼（US/CA/GB/AU/NZ）+ 西欧（IE/DE/NL/FR/BE/LU/CH/AT/IT/ES/PT/DK/SE/NO/FI/IS）。
 
@@ -50,6 +50,6 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 5. 只对住宅 IP 做耗时的检查：x.com 200、api.x.com 非 403，带宽下行 ≥5、上行 ≥2 Mbps；
 6. 按纯净度、再按带宽和延迟排序，最多 8 个，写 `proxyip/res.txt` 并发布到 `CF_RECORD_RES`。少于 2 个不覆盖。
 
-「住宅」只代表 ipapi.is 判定所属公司是 ISP、网段不是机房；纯净度是网段层面的，不是单个 IP 的风险分。这类 IP 多是别人家里开放的设备，寿命短、速度不稳，适合做「需要干净 IP 的少数网站」专用节点，不适合当主力。
+「住宅」只代表 ipapi.is 判定所属运营主体类型是 ISP、网段不是机房；纯净度是网段层面的，不是单个 IP 的风险分。这类 IP 多是别人家里开放的设备，寿命短、速度不稳，适合做「需要干净 IP 的少数网站」专用节点，不适合当主力。
 
-用法：面板里的 PROXYIP 是全局的，所以住宅要单独做一个节点，path 写 `/proxyip=res.proxyip.yieti.top`，再在规则里把需要的网站分到这个节点。
+用法：面板里的 PROXYIP 是全局的，所以住宅要单独做一个节点，path 写 `/proxyip=res.proxyip.<你的域名>`，再在规则里把需要的网站分到这个节点。
