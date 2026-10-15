@@ -1,6 +1,6 @@
 # edgetunnel-proxyip
 
-每 6 小时用 GitHub Action 经自己的 EdgeTunnel Worker 筛一遍美西公共 ProxyIP，结果：
+每天北京时间 17:00 用 GitHub Action 经自己的 EdgeTunnel Worker 筛一遍美西公共 ProxyIP，结果：
 
 - 写进 `proxyip/us.txt`（逗号分隔，可直接粘贴）和 `proxyip/us.json`（测量明细），提交回仓库；
 - 同步成 Cloudflare DNS 的 TXT 记录 `us.proxyip.yieti.top`，EdgeTunnel 的 PROXYIP 填这个域名即可自动跟随。
@@ -35,7 +35,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 - 只配合 Worker Placement 在美西（如 AWS us-west-1，响应头 `cf-placement: remote-SJC`）使用。切回东京时要换日本列表。
 - Runner 在美国，入口段和你本地不同，但对所有候选相同；排序比较的是 Worker → ProxyIP 这一段。
-- 每次运行约 2000 次请求打到 Worker，每天约 8000 次，在免费额度（每天 10 万次）内。带宽测试每次约传 1.3 GB，Workers 不按流量计费。
+- 每次运行约 2000 次请求打到 Worker，每天一次，在免费额度（每天 10 万次）内。带宽测试每次约传 1.3 GB，Workers 不按流量计费。
 - 仓库建议公开：公开仓库 Action 分钟数不限；订阅链接和 CF token 都在 Secrets 里，不会出现在日志或文件里。
 - 本地运行：`SUB_URL=... MIHOMO=./mihomo python3 screen.py`（需关闭 TUN，mihomo 用 v1.19.32）。
 
@@ -45,7 +45,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 1. 候选：同一数据源，国家在上述列表内、记录的出口是 IPv4；
 2. ip-api.com（免费）去掉 hosting / proxy；
-3. ipapi.is（Secret `IPAPI_IS_KEY`）：`is_datacenter=false` 且 `company.type=isp`，不是 VPN / Tor / 滥用者，纯净度 `100×(1−company.abuser_score)` ≥ 90。结果缓存 7 天在 `proxyip/res-cache.json`，每次最多新查 400 个，免费额度够用；
+3. ipapi.is（Secret `IPAPI_IS_KEY`）：`is_datacenter=false` 且 `company.type=isp`，不是 VPN / Tor / 滥用者，纯净度 `100×(1−company.abuser_score)` ≥ 90。结果缓存 7 天在 `proxyip/res-cache.json`，每次最多新查 900 个（每天一次，免费额度每天 1000 个；全部候选 1–2 天查完）；
 4. 经 Worker 实测：出口必须就是该 IP 本身，x.com 200、api.x.com 非 403，带宽下行 ≥5、上行 ≥2 Mbps；
 5. 按纯净度、再按带宽和延迟排序，最多 8 个，写 `proxyip/res.txt` 并发布到 `CF_RECORD_RES`。少于 2 个不覆盖。
 
