@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Find residential (broadband ISP) ProxyIPs in Five Eyes / Western Europe and write the usable ones.
 
-Pipeline (each step only narrows the list; every claim is backed by a lookup or a live test):
+Order: cheap and free filters first, live tests second, the rate-limited reputation lookup last.
   1. candidates: zip.cm.edu.kg list, country in COUNTRIES, recorded egress is IPv4
   2. ip-api.com batch (free, no key): drop hosting=True and proxy=True
-  3. ipapi.is with IPAPI_IS_KEY: keep is_datacenter=False and company.type == "isp";
-     purity = 100 * (1 - company.abuser_score); drop is_abuser / is_vpn / is_tor.
-     Results are cached in proxyip/res-cache.json for CACHE_DAYS so the daily quota is not
-     spent on the same IPs again.
-  4. through the Worker: egress must be the ProxyIP itself (IPv4, not WARP/CF), x.com 200,
-     api.x.com not 403, then download/upload throughput.
-  5. rank by purity, then sqrt(down*up) with a latency penalty; write OUT and OUT.json.
+  3. cheap live checks on all of them, in parallel: reachable through the Worker and the egress a
+     CF site sees is the ProxyIP itself (IPv4, not WARP/CF/NAT)
+  4. ipapi.is (IPAPI_IS_KEY) only for the IPs that passed 3: keep is_datacenter=False and
+     company.type == "isp", not VPN/Tor/abuser, purity = 100 * (1 - company.abuser_score) >= MIN_PURITY.
+     Verdicts are cached in proxyip/res-cache.json for CACHE_DAYS.
+  5. expensive checks only for residential IPs: x.com 200, api.x.com not 403, download/upload floor
+  6. rank by purity, then sqrt(down*up) with a latency penalty; write OUT and OUT.json.
 
 "Residential" here means: ipapi.is says the owning company is an ISP and the range is not a
 datacenter. It does not prove a home connection, and it says nothing about stability.
@@ -24,6 +24,9 @@ import sys
 import time
 import urllib.request
 import concurrent.futures as cf
+import subprocess
+
+import yaml
 
 import screen as s  # reuse node building, mihomo control, probes and throughput
 
@@ -34,11 +37,12 @@ OUT = os.environ.get("RES_OUT", "proxyip/res.txt")
 CACHE = os.environ.get("RES_CACHE", "proxyip/res-cache.json")
 CACHE_DAYS = int(os.environ.get("RES_CACHE_DAYS", "7"))
 IPAPI_KEY = os.environ.get("IPAPI_IS_KEY", "")
-IPAPI_BUDGET = int(os.environ.get("IPAPI_BUDGET", "900"))  # one run/day; free tier is 1000 lookups/day
+IPAPI_BUDGET = int(os.environ.get("IPAPI_BUDGET", "200"))  # per run, 4 runs/day; only live-passed IPs are looked up
 MIN_PURITY = float(os.environ.get("MIN_PURITY", "90"))
 TOP_N = int(os.environ.get("RES_TOP_N", "8"))
 MIN_DOWN = float(os.environ.get("RES_MIN_DOWN", "5"))
 MIN_UP = float(os.environ.get("RES_MIN_UP", "2"))
+LISTEN_BASE = int(os.environ.get("RES_LISTEN_BASE", "21000"))
 
 log = s.log
 
@@ -134,45 +138,54 @@ def residential(v):
             and v.get("purity") is not None and v["purity"] >= MIN_PURITY)
 
 
-def main():
-    cand = candidates()
-    log(f"{len(cand)} IPv4-egress candidates in {len(COUNTRIES)} countries")
-
-    lite = ip_api(sorted(cand))
-    step2 = [ip for ip, x in lite.items() if x.get("hosting") is False and x.get("proxy") is False]
-    log(f"ip-api: {len(lite)} answered, {len(step2)} not hosting/proxy")
-
-    cache = load_cache()
-    ipapi_is(step2, cache)
-    os.makedirs(os.path.dirname(CACHE) or ".", exist_ok=True)
-    json.dump(cache, open(CACHE, "w"), indent=1, sort_keys=True)
-    res = [ip for ip in step2 if ip in cache and residential(cache[ip])]
-    log(f"ipapi.is: {len([i for i in step2 if i in cache])} verdicts, {len(res)} residential with purity >= {MIN_PURITY}")
-    if not res:
-        sys.exit("no residential candidates; keeping previous list")
-
-    # Live tests through the Worker
+def _nodes(cand, ips):
     node, opts_key = s.base_node()
     entry = os.environ.get("ENTRY_IP") or None
-    names = [(f"{cand[ip]['country']}|{cand[ip]['addr']}", f"/proxyip={cand[ip]['addr']}") for ip in res]
+    names = [(f"{cand[ip]['country']}|{cand[ip]['addr']}", f"/proxyip={cand[ip]['addr']}") for ip in ips]
+    return node, opts_key, entry, names
+
+
+def reachable_with_own_egress(cand, ips):
+    """Cheap live checks for every candidate, in parallel: reachable through the Worker, and the
+    address a CF site sees is the ProxyIP itself (IPv4, not WARP/CF/NAT). Each node gets its own
+    local listener so egress checks run concurrently instead of one select() at a time."""
+    node, opts_key, entry, names = _nodes(cand, ips)
     s.write_config(names, node, opts_key, entry)
-    os.makedirs(s.WORK, exist_ok=True)
+    cfg = yaml.safe_load(open(f"{s.WORK}/config.yaml"))
+    cfg["listeners"] = [{"name": f"l{i}", "type": "mixed", "port": LISTEN_BASE + i, "listen": "127.0.0.1",
+                         "proxy": n} for i, (n, _) in enumerate(names)]
+    yaml.safe_dump(cfg, open(f"{s.WORK}/config.yaml", "w"), allow_unicode=True)
+
+    def check(i_n):
+        i, (n, _) = i_n
+        d = s.delay(n)
+        if not d:
+            return n, None
+        r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{LISTEN_BASE + i}", s.TRACE],
+                           capture_output=True, text=True).stdout
+        kv = dict(l.split("=", 1) for l in r.splitlines() if "=" in l)
+        ip = n.split("|", 1)[1].split(":")[0]
+        return n, (d if kv.get("ip") == ip and kv.get("warp") != "on" else None)
+
+    with s.Mihomo():
+        with cf.ThreadPoolExecutor(int(os.environ.get("RES_CONC", "6"))) as ex:
+            res = dict(ex.map(check, enumerate(names)))
+    ok = {n.split("|", 1)[1].split(":")[0]: d for n, d in res.items() if d}
+    log(f"live: {len(ok)}/{len(names)} reachable through the Worker with the ProxyIP as egress")
+    return ok
+
+
+def site_and_bandwidth(cand, ips, delays):
+    """Expensive checks, one node at a time: site acceptance and down/up throughput."""
+    node, opts_key, entry, names = _nodes(cand, ips)
+    s.write_config(names, node, opts_key, entry)
     with open(f"{s.WORK}/up.bin", "wb") as f:
         f.write(os.urandom(s.UP_BYTES))
-    final = []
+    out = {}
     with s.Mihomo():
-        with cf.ThreadPoolExecutor(4) as ex:
-            d = dict(zip([n for n, _ in names], ex.map(s.delay, [n for n, _ in names])))
         for n, _ in names:
             ip = n.split("|", 1)[1].split(":")[0]
-            if not d.get(n):
-                log(f"drop {n}: unreachable through Worker")
-                continue
             s.select(n)
-            seen, warp = s.egress()
-            if seen != ip or warp == "on":
-                log(f"drop {n}: egress {seen or '?'} is not the ProxyIP itself")
-                continue
             sites = [s.site_ok(u, acc) for u, acc in s.SITES]
             if not all(ok for ok, _, _ in sites):
                 log(f"drop {n}: site check {[c for _, _, c in sites]}")
@@ -181,12 +194,46 @@ def main():
             if down is None or up is None or down < MIN_DOWN or up < MIN_UP:
                 log(f"drop {n}: bandwidth down={down} up={up}")
                 continue
-            v = cache[ip]
-            final.append({"proxyip": n.split("|", 1)[1], "country": cand[ip]["country"], "colo": cand[ip]["colo"],
-                          "company": v["company"], "purity": v["purity"], "is_mobile": v["is_mobile"],
-                          "delay_ms": d[n], "down_mbps": down, "up_mbps": up,
-                          "site_ttfb_s": [round(t, 2) for _, t, _ in sites]})
-            log(f"ok {n} {v['company']} purity={v['purity']} delay={d[n]} down={down} up={up}")
+            out[ip] = {"proxyip": n.split("|", 1)[1], "delay_ms": delays[ip], "down_mbps": down, "up_mbps": up,
+                       "site_ttfb_s": [round(t, 2) for _, t, _ in sites]}
+    return out
+
+
+def main():
+    # 1. candidates (free): Five Eyes + Western Europe, recorded egress IPv4
+    cand = candidates()
+    log(f"{len(cand)} IPv4-egress candidates in {len(COUNTRIES)} countries")
+
+    # 2. coarse datacenter filter (free, no key): ip-api hosting/proxy flags
+    lite = ip_api(sorted(cand))
+    step2 = [ip for ip, x in lite.items() if x.get("hosting") is False and x.get("proxy") is False]
+    log(f"ip-api: {len(lite)} answered, {len(step2)} not hosting/proxy")
+    if not step2:
+        sys.exit("ip-api returned no non-hosting candidates; keeping previous list")
+
+    # 3. cheap live checks on all of them: dead or wrong-egress IPs never reach the reputation lookup
+    delays = reachable_with_own_egress(cand, step2)
+    if not delays:
+        sys.exit("no candidate reachable with its own egress; keeping previous list")
+
+    # 4. residential + purity, only for IPs that work (cached for CACHE_DAYS)
+    cache = load_cache()
+    ipapi_is(sorted(delays), cache)
+    os.makedirs(os.path.dirname(CACHE) or ".", exist_ok=True)
+    json.dump(cache, open(CACHE, "w"), indent=1, sort_keys=True)
+    res = [ip for ip in delays if ip in cache and residential(cache[ip])]
+    log(f"ipapi.is: {len([i for i in delays if i in cache])}/{len(delays)} verdicts, {len(res)} residential with purity >= {MIN_PURITY}")
+    if not res:
+        sys.exit("no residential candidates; keeping previous list")
+
+    # 5. expensive checks (sites, bandwidth) only for residential IPs
+    usable = site_and_bandwidth(cand, res, delays)
+    final = []
+    for ip, m in usable.items():
+        v = cache[ip]
+        final.append({**m, "country": cand[ip]["country"], "colo": cand[ip]["colo"], "company": v["company"],
+                      "purity": v["purity"], "is_mobile": v["is_mobile"]})
+        log(f"ok {m['proxyip']} {v['company']} purity={v['purity']} delay={m['delay_ms']} down={m['down_mbps']} up={m['up_mbps']}")
 
     final.sort(key=lambda r: (-r["purity"], -((r["down_mbps"] * r["up_mbps"]) ** 0.5) * (1 - min(r["delay_ms"], 900) / 1000)))
     final = final[:TOP_N]
@@ -195,8 +242,10 @@ def main():
     open(OUT, "w").write(",".join(r["proxyip"] for r in final) + "\n")
     json.dump({"generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
+               "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
                "countries": sorted(COUNTRIES), "min_purity": MIN_PURITY, "candidates": len(cand),
-               "not_hosting": len(step2), "residential": len(res), "results": final},
+               "not_hosting": len(step2), "own_egress": len(delays), "residential": len(res),
+               "usable": len(usable), "results": final},
               open(os.path.splitext(OUT)[0] + ".json", "w"), indent=2, ensure_ascii=False)
     log("wrote", OUT, ",".join(r["proxyip"] for r in final))
 

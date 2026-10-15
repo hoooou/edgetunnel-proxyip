@@ -2,7 +2,7 @@ name: screen-proxyip
 
 on:
   schedule:
-    - cron: "0 9 * * *"   # daily 17:00 Asia/Shanghai
+    - cron: "0 3,9,15,21 * * *"   # every 6h: 05/11/17/23 Asia/Shanghai
   workflow_dispatch:
   push:
     branches: [main]
@@ -95,9 +95,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull -q --rebase origin main
           git add proxyip/res-cache.json proxyip/res.txt proxyip/res.json proxyip/node.enc 2>/dev/null || true
-          if git diff --cached --quiet; then echo "no change"; else git commit -m "proxyip/res: $(cat proxyip/res.txt 2>/dev/null || echo cache)" && git push; fi
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -q -m "proxyip/res: $(cat proxyip/res.txt 2>/dev/null || echo cache)"
+          git stash -q --include-untracked || true
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q && exit 0; sleep 5; done
+          exit 1
 
       - name: Publish TXT record
         if: ${{ success() && vars.CF_RECORD_RES != '' && hashFiles('proxyip/res.txt') != '' }}
