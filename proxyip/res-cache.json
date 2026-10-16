@@ -5524,6 +5524,19 @@
   "is_vpn": false,
   "purity": 85.16
  },
+ "185.92.182.237": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "as56971 network",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 85.16
+ },
  "188.137.228.103": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -5549,6 +5562,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 96.87
+ },
+ "188.227.57.112": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "ITGLOBAL US LIR ADMINISTRATORS",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.44
  },
  "188.241.54.51": {
   "asn_type": "hosting",
@@ -5901,6 +5927,19 @@
   "is_vpn": false,
   "purity": 94.92
  },
+ "194.113.235.229": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 94.14
+ },
  "194.113.235.62": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -6225,6 +6264,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 85.55
+ },
+ "195.133.94.188": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "GLB Bulut Teknolojisi Limited Sirketi",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.09
  },
  "195.200.28.88": {
   "asn_type": "isp",
@@ -7019,6 +7071,19 @@
   "is_vpn": false,
   "purity": 97.66
  },
+ "217.179.49.153": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "VDSKA FL1",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.48
+ },
  "217.179.49.227": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -7110,6 +7175,19 @@
   "is_vpn": false,
   "purity": 99.12
  },
+ "24.136.24.254": {
+  "asn_type": "isp",
+  "checked": 1792158826,
+  "company": "RCN",
+  "company_type": "isp",
+  "is_abuser": false,
+  "is_datacenter": false,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.94
+ },
  "24.141.96.92": {
   "asn_type": "isp",
   "checked": 1792136982,
@@ -7123,6 +7201,19 @@
   "is_vpn": false,
   "purity": 99.93
  },
+ "24.78.21.213": {
+  "asn_type": "isp",
+  "checked": 1792158826,
+  "company": "Shaw Communications",
+  "company_type": "isp",
+  "is_abuser": false,
+  "is_datacenter": false,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.95
+ },
  "27.123.246.131": {
   "asn_type": "hosting",
   "checked": 1792136982,
@@ -7135,6 +7226,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.61
+ },
+ "31.169.127.211": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 91.99
  },
  "31.192.237.186": {
   "asn_type": "isp",
@@ -8605,6 +8709,19 @@
   "is_vpn": false,
   "purity": 99.84
  },
+ "80.66.78.190": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 88.28
+ },
  "80.66.78.207": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -9515,6 +9632,19 @@
   "is_vpn": false,
   "purity": 98.44
  },
+ "89.34.167.181": {
+  "asn_type": "isp",
+  "checked": 1792158826,
+  "company": "Hyperoptic Ltd",
+  "company_type": "isp",
+  "is_abuser": false,
+  "is_datacenter": false,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.9
+ },
  "89.34.18.95": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -9917,6 +10047,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 92.97
+ },
+ "95.85.230.15": {
+  "asn_type": "hosting",
+  "checked": 1792158826,
+  "company": "WAIcore Ltd",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 82.81
  },
  "95.85.252.115": {
   "asn_type": "business",
