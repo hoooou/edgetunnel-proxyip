@@ -5342,6 +5342,19 @@
   "is_vpn": false,
   "purity": 93.75
  },
+ "185.239.141.89": {
+  "asn_type": "hosting",
+  "checked": 1792176367,
+  "company": "Individual Entrepreneur Anton Levin",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 93.75
+ },
  "185.239.142.189": {
   "asn_type": "hosting",
   "checked": 1792038304,
@@ -6173,6 +6186,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 95.7
+ },
+ "195.133.38.112": {
+  "asn_type": "hosting",
+  "checked": 1792176367,
+  "company": "NKtelecom INC",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 90.23
  },
  "195.133.38.30": {
   "asn_type": "hosting",
