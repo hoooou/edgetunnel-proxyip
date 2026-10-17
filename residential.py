@@ -183,6 +183,8 @@ def site_and_bandwidth(cand, ips, delays):
         f.write(os.urandom(s.UP_BYTES))
     out = {}
 
+    video_url = s.discover_video_url()
+
     def check(item):
         n, _ = item
         ip = n.split("|", 1)[1].split(":")[0]
@@ -193,8 +195,14 @@ def site_and_bandwidth(cand, ips, delays):
         down, up = s.throughput("down", port), s.throughput("up", port)
         if down is None or up is None or down < MIN_DOWN or up < MIN_UP:
             return n, ip, None, f"bandwidth down={down} up={up}"
+        vttfb = vmbps = None
+        if video_url:
+            ok, vttfb, vmbps, why = s.video_ok(port, video_url)
+            if not ok:
+                return n, ip, None, f"X video {why}"
         return n, ip, {"proxyip": n.split("|", 1)[1], "delay_ms": delays[ip], "down_mbps": down,
-                       "up_mbps": up, "site_ttfb_s": [round(t, 2) for _, t, _ in sites]}, None
+                       "up_mbps": up, "site_ttfb_s": [round(t, 2) for _, t, _ in sites],
+                       "video_ttfb_s": vttfb, "video_mbps": vmbps}, None
 
     with s.Mihomo():
         with cf.ThreadPoolExecutor(int(os.environ.get("RES_BW_CONC", "4"))) as ex:

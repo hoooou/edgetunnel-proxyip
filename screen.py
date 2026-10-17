@@ -53,6 +53,7 @@ DOWN_URL = os.environ.get("DOWN_URL", "https://registry.npmjs.org/typescript/-/t
 DOWN_BYTES = int(os.environ.get("DOWN_BYTES", str(4_000_000)))
 UP_URL = os.environ.get("UP_URL", "https://cdnjs.cloudflare.com/")
 UP_BYTES = int(os.environ.get("UP_BYTES", str(3_000_000)))
+VIDEO_BYTES = int(os.environ.get("VIDEO_BYTES", str(1_500_000)))
 # Each site must answer with an accepted status. "Connected" is not enough: X answers 403 with a
 # body of "IPv6" when the egress is an IPv6 address it does not accept, and CF's bot wall answers
 # 403 with a cf-mitigated header. ChatGPT's anonymous endpoint is 403/cf-mitigated from any
@@ -88,6 +89,15 @@ BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "1"))
 MIN_DOWN = float(os.environ.get("MIN_DOWN", "20"))   # Mbps floor (runner-measured)
 MIN_UP = float(os.environ.get("MIN_UP", "5"))
 BW_TIMEOUT = int(os.environ.get("BW_TIMEOUT", "15"))   # seconds per transfer
+# X video: video.twimg.com resolves to Cloudflare from the US/JP, so video really does travel
+# through the ProxyIP. A video that stutters is usually slow to first byte or unable to hold a
+# steady rate, which a 4 MB tarball download does not reveal. The finalists therefore fetch a
+# real X video once, on a clean stream.
+VIDEO_TWEET_ID = os.environ.get("VIDEO_TWEET_ID", "2109730062740418818")
+VIDEO_URL = os.environ.get("VIDEO_URL", "")
+VIDEO_MIN_MBPS = float(os.environ.get("VIDEO_MIN_MBPS", "6"))
+VIDEO_TTFB_MAX = float(os.environ.get("VIDEO_TTFB_MAX", "2.0"))
+VIDEO_TIMEOUT = int(os.environ.get("VIDEO_TIMEOUT", "20"))
 LISTEN_BASE = int(os.environ.get("LISTEN_BASE", "23000"))  # per-node local port for parallel checks
 STAGE3_CONC = int(os.environ.get("STAGE3_CONC", "6"))
 STAGE4_CONC = int(os.environ.get("STAGE4_CONC", "4"))
@@ -296,6 +306,43 @@ def throughput(direction, port=PORT):
     return round(speed * 8 / 1e6, 1)
 
 
+def _http_json(url, timeout=20):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
+        return json.loads(r.read())
+
+
+def discover_video_url():
+    """A live X video URL (they are hash-based and expire, so ask a public mirror each run)."""
+    if VIDEO_URL:
+        return VIDEO_URL
+    try:
+        tweet = (_http_json(f"https://api.fxtwitter.com/i/status/{VIDEO_TWEET_ID}").get("tweet") or {})
+        videos = ((tweet.get("media") or {}).get("videos") or [])
+        return videos[0]["url"] if videos else None
+    except Exception as e:
+        log(f"video url discovery failed ({e.__class__.__name__}); skipping the video check")
+        return None
+
+
+def video_ok(port, url):
+    """(ok, ttfb_s, mbps, reason). Measures first byte and steady throughput of a real video."""
+    out = subprocess.run(["curl", "-s", "-o", "/dev/null", "-m", str(VIDEO_TIMEOUT),
+                          "-r", f"0-{VIDEO_BYTES}", "-x", f"http://127.0.0.1:{port}",
+                          "-w", "%{http_code} %{size_download} %{speed_download} %{time_starttransfer}",
+                          url], capture_output=True, text=True).stdout.split()
+    if len(out) != 4 or out[0] not in ("200", "206"):
+        return False, None, None, f"status {out[0] if out else '?'}"
+    size, speed, ttfb = int(out[1]), float(out[2]), float(out[3])
+    if size < VIDEO_BYTES * 0.8:
+        return False, round(ttfb, 2), None, f"short read {size}B"
+    mbps = round(speed * 8 / 1e6, 1)
+    if ttfb > VIDEO_TTFB_MAX:
+        return False, round(ttfb, 2), mbps, f"first byte {ttfb:.2f}s > {VIDEO_TTFB_MAX}s"
+    if mbps < VIDEO_MIN_MBPS:
+        return False, round(ttfb, 2), mbps, f"{mbps} Mbps < {VIDEO_MIN_MBPS} Mbps"
+    return True, round(ttfb, 2), mbps, None
+
+
 def main():
     node, opts_key = base_node()
     entry = os.environ.get("ENTRY_IP") or None
@@ -392,6 +439,9 @@ def main():
     # FINAL_CONC streams, so its numbers are a screening estimate; the published order and the
     # floors are decided on a clean single stream.
     final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
+    video_url = discover_video_url() if final and CONFIRM_POOL else None
+    if video_url:
+        log(f"video check target: {video_url[:90]}")
     if final and CONFIRM_POOL:
         pool = final[:max(TOP_N, CONFIRM_POOL)]
         cports = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for n, *_ in pool],
@@ -405,7 +455,15 @@ def main():
                 if d is None or u is None or d < MIN_DOWN or u < MIN_UP:
                     log(f"drop {n}: single-stream confirm down={d} up={u} (screened {d0}/{u0})")
                     continue
-                confirmed.append((n, med, mx, sites, d, u))
+                if video_url:
+                    ok, vttfb, vmbps, why = video_ok(port, video_url)
+                    if not ok:
+                        log(f"drop {n}: X video {why}")
+                        continue
+                    log(f"video {n} ttfb={vttfb}s {vmbps} Mbps")
+                else:
+                    vttfb = vmbps = None
+                confirmed.append((n, med, mx, sites, d, u, vttfb, vmbps))
                 log(f"confirm {n} down={d} up={u} Mbps (screened {d0}/{u0})")
         final = confirmed
 
@@ -423,7 +481,7 @@ def main():
         final = picked[:TOP_N]
     else:
         final = final[:TOP_N]
-    for n, med, mx, sites, d, u in final:
+    for n, med, mx, sites, d, u, *_ in final:
         log(f"keep {n} med={med} max={mx} down={d} up={u} Mbps sites={sites}")
     if len(final) < max(2, TOP_N // 2):
         sys.exit(f"only {len(final)} passed; keeping previous list")
@@ -437,8 +495,9 @@ def main():
         "tested": len(items), "alive": len(alive),
         "down_url": DOWN_URL, "up_url": UP_URL, "min_down_mbps": MIN_DOWN, "min_up_mbps": MIN_UP,
         "results": [{"proxyip": n.split("|", 1)[1], "colo": n.split("|", 1)[0], "delay_median_ms": med,
-                     "delay_max_ms": mx, "site_ttfb_s": s, "down_mbps": d, "up_mbps": u}
-                    for n, med, mx, s, d, u in final],
+                     "delay_max_ms": mx, "site_ttfb_s": s, "down_mbps": d, "up_mbps": u,
+                     "video_ttfb_s": vt, "video_mbps": vm}
+                    for n, med, mx, s, d, u, vt, vm in final],
     }
     json.dump(report, open(os.path.splitext(OUT)[0] + ".json", "w"), indent=2)
     log("wrote", OUT, ",".join(ips))
