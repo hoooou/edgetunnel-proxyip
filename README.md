@@ -12,9 +12,11 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 候选来自面板「获取更多 PROXYIP」同一数据源 `zip.cm.edu.kg.cmliussss.net/all.json`，按国家 US、CF 机房 SJC/LAX/SEA/PDX 过滤（约 1400 个）。每个候选生成一个 `/proxyip=<ip>` 的 VLESS 节点，共用同一个入口，用 mihomo 经 Worker 访问 CF 托管站点：
 
 1. 全部测一次延迟（并发 6；并发高于 8 会让延迟整体虚高），取最快的 40 个；
-2. 这 40 个测 6 轮，必须每轮都成功，按 `中位数 + 0.3 × 最大值` 排序；
-3. 前 20 个逐个检查：经 Worker 看到的出口必须是 IPv4、不是 WARP 或 CF 自有 IP（X 对 IPv6 出口一律回 403 `IPv6`）；x.com 首页必须 200，api.x.com 不能 403，ChatGPT 要能连通；
-4. 通过的逐个测带宽（不并发）：下载 `registry.npmjs.org` 上约 20 MB 的 tgz，上传 8 MB 到 `cdnjs.cloudflare.com`（CF 收下后丢弃）。各测 2 次取较差的一次，下行低于 20 Mbps 或上行低于 5 Mbps 的淘汰；按 `√(下行×上行)` 排序，延迟每多 100 ms 扣 10%，留下前 6 个。
+2. 这 40 个测 4 轮，必须每轮都成功，按 `中位数 + 0.3 × 最大值` 排序；
+3. 前 20 个**并发**检查（每个候选独占一个本地端口，不再逐个切换节点）：经 Worker 看到的出口必须是 IPv4、不是 WARP 或 CF 自有 IP（X 对 IPv6 出口一律回 403 `IPv6`）；x.com 首页必须 200，api.x.com 不能 403，ChatGPT 要能连通；
+4. 通过的**并发**测带宽（各 4 路）：下载 `registry.npmjs.org` 上约 4 MB 的 tgz，上传 3 MB 到 `cdnjs.cloudflare.com`（CF 收下后丢弃），单个传输 15 秒超时。下行低于 20 Mbps 或上行低于 5 Mbps 的淘汰；按 `√(下行×上行)` 排序，延迟每多 100 ms 扣 10%，留下前 6 个。
+
+改并发前后对比：原先第 3、4 步一次只测一个候选，4 MB 下载 + 3 MB 上传按最坏超时算，30 个候选能拖到 40 分钟；现在第 3 步 6 路并行、第 4 步 4 路并行，整轮压缩到几分钟。代价是同一时刻有多个传输共享线路，带宽数字比单测略低，用于排序和设门槛足够。
 
 带宽目标必须在 CF 上，否则 Worker 直连、不经过 ProxyIP。`speed.cloudflare.com` 不能用：EdgeTunnel 会在 Worker 内部直接回 204，测出来是假的。数字是 GitHub runner（美国）测到的 Worker → ProxyIP 这一段，不是你本地的网速。门槛可用环境变量 `MIN_DOWN` / `MIN_UP` 调整。
 

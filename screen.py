@@ -46,9 +46,13 @@ PROBE = "https://claude.ai/cdn-cgi/trace"
 # ProxyIP is never on the path. speed.cloudflare.com is answered by the Worker itself (204), so
 # it measures nothing. registry.npmjs.org serves large tarballs from CF; cdnjs.cloudflare.com
 # accepts and discards a POST body, which gives an upload sink.
-DOWN_URL = os.environ.get("DOWN_URL", "https://registry.npmjs.org/next/-/next-14.2.15.tgz")  # ~20 MB
+# Small payloads on purpose: throughput over a proxy is measurable in a couple of seconds,
+# and short transfers keep the whole run fast. Both targets are Cloudflare-hosted so the
+# request really goes through the ProxyIP.
+DOWN_URL = os.environ.get("DOWN_URL", "https://registry.npmjs.org/typescript/-/typescript-5.6.3.tgz")  # ~4 MB
+DOWN_BYTES = int(os.environ.get("DOWN_BYTES", str(4_000_000)))
 UP_URL = os.environ.get("UP_URL", "https://cdnjs.cloudflare.com/")
-UP_BYTES = int(os.environ.get("UP_BYTES", str(8_000_000)))
+UP_BYTES = int(os.environ.get("UP_BYTES", str(3_000_000)))
 # Each site must answer with an accepted status. "Connected" is not enough: X answers 403 with a
 # body of "IPv6" when the egress is an IPv6 address it does not accept, and CF's bot wall answers
 # 403 with a cf-mitigated header. ChatGPT's anonymous endpoint is 403/cf-mitigated from any
@@ -77,12 +81,15 @@ MIHOMO = os.environ.get("MIHOMO", "./mihomo")
 STAGE1_CONC = int(os.environ.get("STAGE1_CONC", "6"))  # >=8 inflates delays on a single link
 STAGE1_LIMIT = int(os.environ.get("STAGE1_LIMIT", "0"))  # 0 = all
 STAGE2 = int(os.environ.get("STAGE2", "40"))
-ROUNDS2 = int(os.environ.get("ROUNDS2", "6"))
+ROUNDS2 = int(os.environ.get("ROUNDS2", "4"))
 SITE_POOL = int(os.environ.get("SITE_POOL", "20"))   # stage-3/4 pool size
-BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "2"))
+BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "1"))
 MIN_DOWN = float(os.environ.get("MIN_DOWN", "20"))   # Mbps floor (runner-measured)
 MIN_UP = float(os.environ.get("MIN_UP", "5"))
-BW_TIMEOUT = int(os.environ.get("BW_TIMEOUT", "20"))   # seconds per transfer
+BW_TIMEOUT = int(os.environ.get("BW_TIMEOUT", "15"))   # seconds per transfer
+LISTEN_BASE = int(os.environ.get("LISTEN_BASE", "23000"))  # per-node local port for parallel checks
+STAGE3_CONC = int(os.environ.get("STAGE3_CONC", "6"))
+STAGE4_CONC = int(os.environ.get("STAGE4_CONC", "4"))
 WORK = os.environ.get("WORK", "/tmp/pxscreen")
 
 
@@ -166,7 +173,9 @@ def base_node():
     return node, opts_key
 
 
-def write_config(names_paths, node, opts_key, entry):
+def write_config(names_paths, node, opts_key, entry, listeners=False):
+    """Write the profile. With listeners=True every node also gets its own local mixed port,
+    so egress/site/bandwidth checks can run concurrently instead of switching one selector."""
     ps = []
     for name, path in names_paths:
         p = copy.deepcopy(node)
@@ -181,8 +190,14 @@ def write_config(names_paths, node, opts_key, entry):
         "proxy-groups": [{"name": "G", "type": "select", "proxies": [p["name"] for p in ps]}],
         "rules": ["MATCH,G"],
     }
+    ports = {}
+    if listeners:
+        cfg["listeners"] = [{"name": f"l{i}", "type": "mixed", "port": LISTEN_BASE + i,
+                             "listen": "127.0.0.1", "proxy": n} for i, (n, _) in enumerate(names_paths)]
+        ports = {n: LISTEN_BASE + i for i, (n, _) in enumerate(names_paths)}
     os.makedirs(WORK, exist_ok=True)
     yaml.safe_dump(cfg, open(f"{WORK}/config.yaml", "w"), allow_unicode=True)
+    return ports
 
 
 class Mihomo:
@@ -217,9 +232,9 @@ def select(name):
     urllib.request.urlopen(urllib.request.Request(f"{API}/connections", method="DELETE"), timeout=5)
 
 
-def site_ok(url, accept):
+def site_ok(url, accept, port=PORT):
     """(ok, ttfb_s, status). accept=None means any HTTP response counts."""
-    r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-m", "10", "-x", f"http://127.0.0.1:{PORT}",
+    r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-m", "10", "-x", f"http://127.0.0.1:{port}",
                         "-A", UA_BROWSER, "-w", "%{http_code} %{time_starttransfer}", url],
                        capture_output=True, text=True)
     code, t = (r.stdout.split() + ["000", "0"])[:2]
@@ -230,7 +245,7 @@ def site_ok(url, accept):
 EGRESS_TRACES = [TRACE, "https://claude.ai/cdn-cgi/trace", "https://www.cloudflare.com/cdn-cgi/trace"]
 
 
-def egress():
+def egress(port=PORT):
     """What a CF-hosted site sees as the client: (ip, warp flag).
 
     Retries across several CF trace endpoints: a single empty answer (transient reset on one
@@ -238,7 +253,7 @@ def egress():
     """
     for url in EGRESS_TRACES:
         for _ in range(2):
-            r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{PORT}", url],
+            r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{port}", url],
                                capture_output=True, text=True).stdout
             kv = dict(l.split("=", 1) for l in r.splitlines() if "=" in l)
             if kv.get("ip"):
@@ -261,20 +276,20 @@ CF_NETS = [ipaddress.ip_network(n) for n in (
     "2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32 2a09:bac0::/29").split()]
 
 
-def throughput(direction):
-    """Mbps for one transfer through the selected node, or None on failure."""
+def throughput(direction, port=PORT):
+    """Mbps for one transfer through the given local listener, or None on failure."""
     if direction == "down":
-        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{PORT}",
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{port}",
                "-w", "%{http_code} %{size_download} %{speed_download}", DOWN_URL]
     else:
-        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{PORT}", "-X", "POST",
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{port}", "-X", "POST",
                "-H", "Content-Type: application/octet-stream", "--data-binary", f"@{WORK}/up.bin",
                "-w", "%{http_code} %{size_upload} %{speed_upload}", UP_URL]
     out = subprocess.run(cmd, capture_output=True, text=True).stdout.split()
     if len(out) != 3 or out[0] == "000":
         return None
     size, speed = int(out[1]), float(out[2])
-    want = 5_000_000 if direction == "down" else UP_BYTES
+    want = DOWN_BYTES if direction == "down" else UP_BYTES
     if size < want * 0.9:
         return None
     return round(speed * 8 / 1e6, 1)
@@ -311,10 +326,9 @@ def main():
     samples = {n: [] for n in keep}
     with Mihomo():
         for r in range(ROUNDS2):
-            with cf.ThreadPoolExecutor(4) as ex:
+            with cf.ThreadPoolExecutor(6) as ex:
                 for n, v in zip(keep, ex.map(delay, keep)):
                     samples[n].append(v)
-            time.sleep(3)
     scored = []
     for n, v in samples.items():
         if all(v):
@@ -322,41 +336,54 @@ def main():
     scored.sort()
     log(f"stage2: {len(scored)}/{len(keep)} passed all {ROUNDS2} rounds")
 
-    # Stage 3: real site requests; everyone in the top SITE_POOL who passes moves on
+    # Stage 3: egress + real site requests, in parallel (one listener per node)
     passed = []
+    ports = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for _, _, _, n in scored[:SITE_POOL]],
+                         node, opts_key, entry, listeners=True)
     with Mihomo():
-        for score, med, mx, n in scored[:SITE_POOL]:
-            select(n)
-            ip, warp = egress()
+        def check3(item):
+            score, med, mx, n = item
+            port = ports[n]
+            ip, warp = egress(port)
             if not ip or warp == "on" or is_cloudflare(ip):
-                log(f"drop {n}: egress {ip or '?'} warp={warp} (Cloudflare/WARP exit)")
-                continue
+                return n, None, f"egress {ip or '?'} warp={warp} (Cloudflare/WARP exit)"
             if REQUIRE_V4 and ":" in ip:
-                log(f"drop {n}: egress is IPv6 {ip}")
-                continue
-            results = [site_ok(u, acc) for u, acc in SITES]
-            if all(ok for ok, _, _ in results):
-                passed.append((n, med, mx, [round(t, 2) for _, t, _ in results]))
-            else:
-                log(f"drop {n}: site check failed {[(u.split('/')[2], c) for (u, _), (_, _, c) in zip(SITES, results)]}")
+                return n, None, f"egress is IPv6 {ip}"
+            results = [site_ok(u, acc, port) for u, acc in SITES]
+            if not all(ok for ok, _, _ in results):
+                return n, None, f"site check {[(u.split('/')[2], c) for (u, _), (_, _, c) in zip(SITES, results)]}"
+            return n, (med, mx, [round(t, 2) for _, t, _ in results]), None
+        with cf.ThreadPoolExecutor(STAGE3_CONC) as ex:
+            for n, ok, why in ex.map(check3, scored[:SITE_POOL]):
+                if ok:
+                    passed.append((n, *ok))
+                else:
+                    log(f"drop {n}: {why}")
     log(f"stage3: {len(passed)}/{min(SITE_POOL, len(scored))} passed site checks")
 
-    # Stage 4: throughput, one node at a time (no shared-link contention)
+    # Stage 4: throughput in parallel (one listener per node, small payloads)
     final = []
+    ports4 = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for n, _, _, _ in passed],
+                          node, opts_key, entry, listeners=True)
     with Mihomo():
-        for n, med, mx, sites in passed:
-            select(n)
-            down = [x for x in (throughput("down") for _ in range(BW_ROUNDS)) if x is not None]
-            up = [x for x in (throughput("up") for _ in range(BW_ROUNDS)) if x is not None]
+        def check4(item):
+            n, med, mx, sites = item
+            port = ports4[n]
+            down = [x for x in (throughput("down", port) for _ in range(BW_ROUNDS)) if x is not None]
+            up = [x for x in (throughput("up", port) for _ in range(BW_ROUNDS)) if x is not None]
             if len(down) < BW_ROUNDS or len(up) < BW_ROUNDS:
-                log(f"drop {n}: bandwidth test failed down={down} up={up}")
-                continue
+                return n, None, f"bandwidth test failed down={down} up={up}"
             d, u = min(down), min(up)  # worst of the rounds: stable beats bursty
             if d < MIN_DOWN or u < MIN_UP:
-                log(f"drop {n}: down={d} up={u} Mbps below floor {MIN_DOWN}/{MIN_UP}")
-                continue
-            final.append((n, med, mx, sites, d, u))
-            log(f"bw {n} med={med} down={d} up={u} Mbps sites={sites}")
+                return n, None, f"down={d} up={u} Mbps below floor {MIN_DOWN}/{MIN_UP}"
+            return n, (med, mx, sites, d, u), None
+        with cf.ThreadPoolExecutor(STAGE4_CONC) as ex:
+            for n, ok, why in ex.map(check4, passed):
+                if ok:
+                    final.append((n, *ok))
+                    log(f"bw {n} med={ok[0]} down={ok[3]} up={ok[4]} Mbps sites={ok[2]}")
+                else:
+                    log(f"drop {n}: {why}")
     # Rank: bandwidth first (geometric mean of down/up, so one weak direction drags it down),
     # latency as a tie-breaker (every 100 ms costs 10%).
     final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
