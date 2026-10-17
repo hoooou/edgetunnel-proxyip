@@ -7,14 +7,22 @@
 
 EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成 HTTPS 代理），所以要经 TXT 记录中转。Worker 解析域名时先查 TXT，按逗号拆分，支持 `ip:端口`，每个实例缓存至少 5 分钟。
 
+## 运行结构
+
+一个 workflow，matrix 起三个 runner：`us`、`apac`、`res`（住宅）。三个列表同时跑、各自独立测速，互不抢带宽；跑完由单独的 `publish` job 汇总三份结果，一次提交，并按各自变量更新三条 TXT 记录。某个列表这一轮失败时不会覆盖旧列表、也不会动它的 DNS 记录（靠 `<列表>.ok` 标记判断）。
+
 ## 筛选方法
 
 候选来自面板「获取更多 PROXYIP」同一数据源 `zip.cm.edu.kg.cmliussss.net/all.json`，按国家 US、CF 机房 SJC/LAX/SEA/PDX 过滤（约 1400 个）。每个候选生成一个 `/proxyip=<ip>` 的 VLESS 节点，共用同一个入口，用 mihomo 经 Worker 访问 CF 托管站点：
 
-1. 全部测一次延迟（并发 6；并发高于 8 会让延迟整体虚高），取最快的 40 个；
+1. 全部测两次延迟（并发 6；并发高于 8 会让延迟整体虚高），两次都成功才算活，取最快的 40 个——先便宜地剔掉不稳的；
 2. 这 40 个测 4 轮，必须每轮都成功，按 `中位数 + 0.3 × 最大值` 排序；
 3. 前 20 个**并发**检查（每个候选独占一个本地端口，不再逐个切换节点）：经 Worker 看到的出口必须是 IPv4、不是 WARP 或 CF 自有 IP（X 对 IPv6 出口一律回 403 `IPv6`）；x.com 首页必须 200，api.x.com 不能 403，ChatGPT 要能连通；
 4. 通过的**并发**测带宽（各 4 路）：下载 `registry.npmjs.org` 上约 4 MB 的 tgz，上传 3 MB 到 `cdnjs.cloudflare.com`（CF 收下后丢弃），单个传输 15 秒超时。下行低于 20 Mbps 或上行低于 5 Mbps 的淘汰；按 `√(下行×上行)` 排序，延迟每多 100 ms 扣 10%，留下前 6 个。
+
+5. 决赛单路复测：初筛靠前的 16 个逐个单流复测上下行，用复测结果决定排序和是否达标。
+
+  并行初筛会把 runner 的链路摊给 4 路，数字偏低、彼此拖慢；所以并行只用来淘汰和排序，最终发布的门槛与名次由单路复测决定。
 
 改并发前后对比：原先第 3、4 步一次只测一个候选，4 MB 下载 + 3 MB 上传按最坏超时算，30 个候选能拖到 40 分钟；现在第 3 步 6 路并行、第 4 步 4 路并行，整轮压缩到几分钟。代价是同一时刻有多个传输共享线路，带宽数字比单测略低，用于排序和设门槛足够。
 
@@ -43,7 +51,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 ## 东京 + 新加坡 ProxyIP（apac.proxyip.<你的域名>）
 
-同一个 workflow 的第二个 job，跑在美国筛选之后。与美国列表同样的筛选步骤（连通、多轮延迟、出口必须是该 IP 本身的 IPv4、x.com 200 / api.x.com 非 403、上下行带宽），候选是数据源里国家为 JP 或 SG、CF 机房为 NRT / KIX / SIN 的 IP。
+与美西列表同一个 workflow，作为 matrix 的另一个 runner 同时跑（互不共享网络路径）。与美国列表同样的筛选步骤（连通、多轮延迟、出口必须是该 IP 本身的 IPv4、x.com 200 / api.x.com 非 403、上下行带宽），候选是数据源里国家为 JP 或 SG、CF 机房为 NRT / KIX / SIN 的 IP。
 
 最终 8 个，按配额 **东京 4 + 新加坡 4** 各取本国最好的；某一边不够 4 个时，用另一边的补足。写 `proxyip/apac.txt`，发布到 Variable `CF_RECORD_APAC` 指定的 TXT 记录。
 
@@ -53,7 +61,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 ## 住宅 ProxyIP（res.proxyip.<你的域名>）
 
-同一个 workflow 的第二个 job，跑在美国筛选之后（不同时压 Worker）。国家：五眼（US/CA/GB/AU/NZ）+ 西欧（IE/DE/NL/FR/BE/LU/CH/AT/IT/ES/PT/DK/SE/NO/FI/IS）。
+与其它列表同一个 workflow，作为 matrix 的另一个 runner 同时跑。国家：五眼（US/CA/GB/AU/NZ）+ 西欧（IE/DE/NL/FR/BE/LU/CH/AT/IT/ES/PT/DK/SE/NO/FI/IS）。
 
 1. 候选：同一数据源，国家在上述列表内、记录的出口是 IPv4（约 3500 个）；
 2. ip-api.com（免费、无需 key）去掉 hosting / proxy（剩约 900 个）；

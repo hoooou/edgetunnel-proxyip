@@ -83,6 +83,7 @@ STAGE1_LIMIT = int(os.environ.get("STAGE1_LIMIT", "0"))  # 0 = all
 STAGE2 = int(os.environ.get("STAGE2", "40"))
 ROUNDS2 = int(os.environ.get("ROUNDS2", "4"))
 SITE_POOL = int(os.environ.get("SITE_POOL", "20"))   # stage-3/4 pool size
+CONFIRM_POOL = int(os.environ.get("CONFIRM_POOL", "16"))  # single-stream confirmation pool
 BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "1"))
 MIN_DOWN = float(os.environ.get("MIN_DOWN", "20"))   # Mbps floor (runner-measured)
 MIN_UP = float(os.environ.get("MIN_UP", "5"))
@@ -309,14 +310,17 @@ def main():
     if not items:
         sys.exit("no candidates")
 
-    # Stage 1
+    # Stage 1: alive on two independent probes. Cheap, and it drops the flaky half before any
+    # expensive test runs.
     named = [(f"{colo}|{ip}", f"/proxyip={ip}") for ip, colo in items]
     write_config(named, node, opts_key, entry)
+    names1 = [n for n, _ in named]
     with Mihomo():
         with cf.ThreadPoolExecutor(STAGE1_CONC) as ex:
-            d1 = dict(zip([n for n, _ in named], ex.map(delay, [n for n, _ in named])))
-    alive = sorted((v, n) for n, v in d1.items() if v)
-    log(f"stage1: {len(alive)}/{len(named)} alive")
+            first = dict(zip(names1, ex.map(delay, names1)))
+        second = dict(zip(names1, ex.map(delay, names1)))
+    alive = sorted((min(first[n], second[n]), n) for n in names1 if first[n] and second[n])
+    log(f"stage1: {len(alive)}/{len(named)} answered both probes")
     if not alive:
         sys.exit("stage1: nothing alive (entry IP or Worker broken?)")
 
@@ -384,9 +388,29 @@ def main():
                     log(f"bw {n} med={ok[0]} down={ok[3]} up={ok[4]} Mbps sites={ok[2]}")
                 else:
                     log(f"drop {n}: {why}")
+    # Stage 5: confirm the finalists one at a time. Stage 4 shares the runner's link between up to
+    # FINAL_CONC streams, so its numbers are a screening estimate; the published order and the
+    # floors are decided on a clean single stream.
+    final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
+    if final and CONFIRM_POOL:
+        pool = final[:max(TOP_N, CONFIRM_POOL)]
+        cports = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for n, *_ in pool],
+                              node, opts_key, entry, listeners=True)
+        confirmed = []
+        with Mihomo():
+            for n, med, mx, sites, d0, u0 in pool:
+                port = cports[n]
+                d = throughput("down", port)
+                u = throughput("up", port)
+                if d is None or u is None or d < MIN_DOWN or u < MIN_UP:
+                    log(f"drop {n}: single-stream confirm down={d} up={u} (screened {d0}/{u0})")
+                    continue
+                confirmed.append((n, med, mx, sites, d, u))
+                log(f"confirm {n} down={d} up={u} Mbps (screened {d0}/{u0})")
+        final = confirmed
+
     # Rank: bandwidth first (geometric mean of down/up, so one weak direction drags it down),
     # latency as a tie-breaker (every 100 ms costs 10%).
-    final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
     if PER_COUNTRY:
         # Fill each country's quota from its own best, then top up with the best of the rest.
         picked, used = [], {}

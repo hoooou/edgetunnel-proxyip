@@ -16,9 +16,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  us:
+  # One runner per list, all three at the same time: separate runners do not share a network
+  # path, so their measurements do not interfere with each other.
+  screen:
+    name: screen-${{ matrix.name }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: us
+            script: screen.py
+            out: us.txt
+            env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6"
+          - name: apac
+            script: screen.py
+            out: apac.txt
+            # Worker sits in US-West today: the Worker -> Tokyo/Singapore hop caps one upload
+            # stream near 4.5 Mbps, so the floor is looser here. Raise to 5 after moving Placement.
+            env: "COUNTRY=JP,SG COLOS=NRT,KIX,SIN TOP_N=8 PER_COUNTRY=JP:4,SG:4 STAGE2=60 SITE_POOL=30 MIN_UP=3"
+          - name: res
+            script: residential.py
+            out: res.txt
+            env: "RES_BW_CONC=2"
     env:
       MIHOMO_VERSION: v1.19.32
       MIHOMO_SHA256: ba3ce607747a07f948fc35780e108a4a7c7f552a38b9bd4d115f313ebcb89c20
@@ -34,140 +55,83 @@ jobs:
       - name: Install PyYAML
         run: pip install --no-cache-dir PyYAML==6.0.2
 
-      - name: Screen US ProxyIPs
+      - name: Screen ${{ matrix.name }}
         env:
           SUB_URL: ${{ secrets.SUB_URL }}
           ENTRY_IP: ${{ vars.ENTRY_IP }}
-          COUNTRY: US
-          COLOS: SJC,LAX,SEA,PDX
-          TOP_N: "6"
-          OUT: proxyip/us.txt
-        run: python3 screen.py
-
-      - name: Commit list
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add proxyip/us.txt proxyip/us.json proxyip/node.enc 2>/dev/null || git add proxyip/us.txt proxyip/us.json
-          if git diff --cached --quiet; then echo "no change"; else git commit -m "proxyip/us: $(cat proxyip/us.txt)" && git push; fi
-
-      - name: Publish TXT record
-        if: ${{ vars.CF_RECORD != '' }}
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ZONE: ${{ vars.CF_ZONE }}
-          CF_ZONE_ID: ${{ vars.CF_ZONE_ID }}
-          RECORD: ${{ vars.CF_RECORD }}
-          FILE: proxyip/us.txt
-        run: python3 update_dns.py
-
-  apac:
-    needs: us            # one job at a time on the Worker
-    if: always()
-    runs-on: ubuntu-24.04
-    timeout-minutes: 40
-    env:
-      MIHOMO_VERSION: v1.19.32
-      MIHOMO_SHA256: ba3ce607747a07f948fc35780e108a4a7c7f552a38b9bd4d115f313ebcb89c20
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Install mihomo (pinned + checksum)
-        run: |
-          curl -fsSL -o mihomo.gz "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-compatible-${MIHOMO_VERSION}.gz"
-          echo "${MIHOMO_SHA256}  mihomo.gz" | sha256sum -c -
-          gunzip mihomo.gz && chmod +x mihomo && ./mihomo -v
-
-      - name: Install PyYAML
-        run: pip install --no-cache-dir PyYAML==6.0.2
-
-      - name: Screen Tokyo + Singapore ProxyIPs
-        env:
-          SUB_URL: ${{ secrets.SUB_URL }}
-          ENTRY_IP: ${{ vars.ENTRY_IP }}
-          COUNTRY: JP,SG
-          COLOS: NRT,KIX,SIN
-          TOP_N: "8"
-          PER_COUNTRY: JP:4,SG:4
-          STAGE2: "60"
-          SITE_POOL: "30"
-          # The Worker sits in US-West today: the Worker -> Tokyo/Singapore hop caps a single
-          # upload stream near 4.5 Mbps regardless of proxy quality. The floor is looser here so
-          # real capacity is not discarded; raise it (MIN_UP 5) after moving Placement to Tokyo.
-          MIN_UP: "3"
-          OUT: proxyip/apac.txt
-        run: python3 screen.py
-
-      - name: Commit list
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add proxyip/apac.txt proxyip/apac.json proxyip/node.enc 2>/dev/null || true
-          if git diff --cached --quiet; then echo "no change"; exit 0; fi
-          git commit -q -m "proxyip/apac: $(cat proxyip/apac.txt)"
-          git stash -q --include-untracked || true
-          for i in 1 2 3; do git pull -q --rebase origin main && git push -q && exit 0; sleep 5; done
-          exit 1
-
-      - name: Publish TXT record
-        if: ${{ success() && vars.CF_RECORD_APAC != '' }}
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ZONE: ${{ vars.CF_ZONE }}
-          CF_ZONE_ID: ${{ vars.CF_ZONE_ID }}
-          RECORD: ${{ vars.CF_RECORD_APAC }}
-          FILE: proxyip/apac.txt
-        run: python3 update_dns.py
-
-  residential:
-    needs: apac          # run after the other jobs so they never share the Worker at once
-    if: always()
-    runs-on: ubuntu-24.04
-    timeout-minutes: 40
-    env:
-      MIHOMO_VERSION: v1.19.32
-      MIHOMO_SHA256: ba3ce607747a07f948fc35780e108a4a7c7f552a38b9bd4d115f313ebcb89c20
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Install mihomo (pinned + checksum)
-        run: |
-          curl -fsSL -o mihomo.gz "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-compatible-${MIHOMO_VERSION}.gz"
-          echo "${MIHOMO_SHA256}  mihomo.gz" | sha256sum -c -
-          gunzip mihomo.gz && chmod +x mihomo && ./mihomo -v
-
-      - name: Install PyYAML
-        run: pip install --no-cache-dir PyYAML==6.0.2
-
-      - name: Screen residential ProxyIPs (Five Eyes + Western Europe)
-        env:
-          SUB_URL: ${{ secrets.SUB_URL }}
           IPAPI_IS_KEY: ${{ secrets.IPAPI_IS_KEY }}
-          ENTRY_IP: ${{ vars.ENTRY_IP }}
-        run: python3 residential.py
+          PROFILE: ${{ matrix.env }}
+        run: |
+          for kv in $PROFILE; do export "$kv"; done
+          if [ "${{ matrix.name }}" = "res" ]; then export RES_OUT=proxyip/res.txt
+          else export OUT=proxyip/${{ matrix.out }}; fi
+          python3 ${{ matrix.script }}
 
-      - name: Commit list and lookup cache
+      - name: Mark success
+        if: success()
+        run: touch "proxyip/${{ matrix.out }}.ok"
+
+      - name: Upload result
         if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-${{ matrix.name }}
+          # each runner only has the files it produced; wildcards keep this readable
+          path: |
+            proxyip/*.txt
+            proxyip/*.ok
+            proxyip/*.json
+            proxyip/node.enc
+          if-no-files-found: warn
+          retention-days: 3
+
+  # Single writer: collects every runner's artefacts, commits once, and updates one TXT record
+  # per list that actually produced a fresh list this run.
+  publish:
+    needs: screen
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PyYAML
+        run: pip install --no-cache-dir PyYAML==6.0.2
+
+      - name: Collect results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: result-*
+          merge-multiple: true
+          path: proxyip
+
+      - run: ls -la proxyip
+
+      - name: Commit lists and lookup cache
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add proxyip/res-cache.json proxyip/res.txt proxyip/res.json proxyip/node.enc 2>/dev/null || true
+          git add proxyip
           if git diff --cached --quiet; then echo "no change"; exit 0; fi
-          git commit -q -m "proxyip/res: $(cat proxyip/res.txt 2>/dev/null || echo cache)"
-          git stash -q --include-untracked || true
+          git commit -q -m "proxyip: refresh lists"
           for i in 1 2 3; do git pull -q --rebase origin main && git push -q && exit 0; sleep 5; done
           exit 1
 
-      - name: Publish TXT record
-        if: ${{ success() && vars.CF_RECORD_RES != '' && hashFiles('proxyip/res.txt') != '' }}
+      - name: Publish TXT records
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE: ${{ vars.CF_ZONE }}
           CF_ZONE_ID: ${{ vars.CF_ZONE_ID }}
-          RECORD: ${{ vars.CF_RECORD_RES }}
-          FILE: proxyip/res.txt
-        run: python3 update_dns.py
+          REC_US: ${{ vars.CF_RECORD }}
+          REC_APAC: ${{ vars.CF_RECORD_APAC }}
+          REC_RES: ${{ vars.CF_RECORD_RES }}
+        run: |
+          publish () {   # <record> <file>
+            rec="$1"; file="$2"
+            if [ -z "$rec" ] || [ ! -f "$file" ] || [ ! -f "$file.ok" ]; then
+              echo "skip ${rec:-<unset>} (no fresh list this run)"; return 0
+            fi
+            RECORD="$rec" FILE="$file" python3 update_dns.py
+          }
+          publish "$REC_US" proxyip/us.txt
+          publish "$REC_APAC" proxyip/apac.txt
+          publish "$REC_RES" proxyip/res.txt
