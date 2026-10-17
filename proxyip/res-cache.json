@@ -7929,6 +7929,19 @@
   "is_vpn": false,
   "purity": 96.87
  },
+ "45.158.116.43": {
+  "asn_type": "hosting",
+  "checked": 1792244516,
+  "company": "Materialism s.r.l.",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.8
+ },
  "45.203.220.181": {
   "asn_type": "hosting",
   "checked": 1792038304,
