@@ -9151,6 +9151,19 @@
   "is_vpn": false,
   "purity": 96.09
  },
+ "83.147.254.226": {
+  "asn_type": "hosting",
+  "checked": 1792254865,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.09
+ },
  "83.219.249.189": {
   "asn_type": "hosting",
   "checked": 1792136982,

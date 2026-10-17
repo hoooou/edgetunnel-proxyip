@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T13:53:04Z",
+  "generated_at": "2026-10-17T16:39:45Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,19 +28,19 @@
   "min_purity": 90.0,
   "candidates": 3334,
   "not_hosting": 878,
-  "own_egress": 492,
+  "own_egress": 507,
   "residential": 26,
-  "usable": 12,
+  "usable": 20,
   "results": [
     {
       "proxyip": "62.251.108.251",
-      "delay_ms": 970,
-      "down_mbps": 54.3,
-      "up_mbps": 3.4,
+      "delay_ms": 728,
+      "down_mbps": 15.7,
+      "up_mbps": 3.7,
       "site_ttfb_s": [
         0.98,
-        1.0,
-        0.98
+        0.83,
+        0.75
       ],
       "country": "NL",
       "colo": "AMS",
@@ -49,14 +49,30 @@
       "is_mobile": false
     },
     {
-      "proxyip": "99.63.206.163",
-      "delay_ms": 670,
-      "down_mbps": 10.9,
-      "up_mbps": 7.4,
+      "proxyip": "64.58.46.192:8443",
+      "delay_ms": 559,
+      "down_mbps": 25.3,
+      "up_mbps": 6.2,
       "site_ttfb_s": [
-        0.89,
-        0.67,
-        0.7
+        0.96,
+        0.63,
+        0.54
+      ],
+      "country": "CA",
+      "colo": "YUL",
+      "company": "EBOX",
+      "purity": 99.98,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "99.63.206.163",
+      "delay_ms": 560,
+      "down_mbps": 9.0,
+      "up_mbps": 6.9,
+      "site_ttfb_s": [
+        0.93,
+        0.53,
+        0.59
       ],
       "country": "US",
       "colo": "ORD",
@@ -65,30 +81,30 @@
       "is_mobile": false
     },
     {
-      "proxyip": "89.128.206.51",
-      "delay_ms": 878,
-      "down_mbps": 33.4,
-      "up_mbps": 3.2,
+      "proxyip": "70.79.240.221",
+      "delay_ms": 401,
+      "down_mbps": 26.1,
+      "up_mbps": 15.8,
       "site_ttfb_s": [
-        1.73,
-        0.93,
-        0.83
+        0.52,
+        0.46,
+        0.35
       ],
-      "country": "ES",
-      "colo": "MAD",
-      "company": "Ya.com Internet Factory",
+      "country": "CA",
+      "colo": "YVR",
+      "company": "Shaw Communications",
       "purity": 99.97,
       "is_mobile": false
     },
     {
       "proxyip": "38.77.187.51",
-      "delay_ms": 416,
-      "down_mbps": 107.2,
-      "up_mbps": 7.3,
+      "delay_ms": 255,
+      "down_mbps": 45.2,
+      "up_mbps": 8.6,
       "site_ttfb_s": [
-        0.57,
-        0.46,
-        0.41
+        0.4,
+        0.33,
+        0.29
       ],
       "country": "US",
       "colo": "PHX",
@@ -97,67 +113,51 @@
       "is_mobile": false
     },
     {
-      "proxyip": "50.35.41.6",
-      "delay_ms": 496,
-      "down_mbps": 73.5,
-      "up_mbps": 8.5,
+      "proxyip": "71.168.153.36",
+      "delay_ms": 456,
+      "down_mbps": 24.8,
+      "up_mbps": 5.5,
       "site_ttfb_s": [
-        0.54,
-        0.48,
-        0.54
+        1.17,
+        0.6,
+        0.52
+      ],
+      "country": "US",
+      "colo": "EWR",
+      "company": "Verizon Business",
+      "purity": 99.96,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "31.201.109.180",
+      "delay_ms": 1011,
+      "down_mbps": 14.8,
+      "up_mbps": 3.5,
+      "site_ttfb_s": [
+        1.01,
+        0.92,
+        1.2
+      ],
+      "country": "NL",
+      "colo": "AMS",
+      "company": "Odido Netherlands",
+      "purity": 99.96,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "50.35.41.6",
+      "delay_ms": 328,
+      "down_mbps": 37.4,
+      "up_mbps": 17.0,
+      "site_ttfb_s": [
+        0.44,
+        0.38,
+        0.39
       ],
       "country": "US",
       "colo": "SEA",
       "company": "Ziply Fiber",
       "purity": 99.95,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "174.108.80.25:8443",
-      "delay_ms": 753,
-      "down_mbps": 17.3,
-      "up_mbps": 7.2,
-      "site_ttfb_s": [
-        0.4,
-        0.36,
-        0.82
-      ],
-      "country": "US",
-      "colo": "IAD",
-      "company": "Charter Communications Inc",
-      "purity": 99.95,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "172.117.126.136",
-      "delay_ms": 484,
-      "down_mbps": 16.6,
-      "up_mbps": 10.6,
-      "site_ttfb_s": [
-        0.55,
-        0.51,
-        0.53
-      ],
-      "country": "US",
-      "colo": "LAX",
-      "company": "Charter Communications Inc",
-      "purity": 99.91,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "142.188.90.91",
-      "delay_ms": 591,
-      "down_mbps": 73.4,
-      "up_mbps": 5.2,
-      "site_ttfb_s": [
-        1.55,
-        0.62,
-        0.71
-      ],
-      "country": "CA",
-      "colo": "YYZ",
-      "company": "Sympatico HSE",
-      "purity": 99.61,
       "is_mobile": false
     }
   ]
