@@ -93,6 +93,12 @@ jobs:
           PER_COUNTRY: JP:4,SG:4
           STAGE2: "60"
           SITE_POOL: "30"
+          # The Worker sits in US-West today: the Worker -> Tokyo/Singapore hop caps a single
+          # upload stream near 4.5 Mbps regardless of proxy quality, and 8 MB often exceeds 20 s.
+          # Floors are looser here so real capacity is not discarded; raise them (MIN_UP 5)
+          # after moving Placement to Tokyo and re-running.
+          MIN_UP: "3"
+          BW_TIMEOUT: "40"
           OUT: proxyip/apac.txt
         run: python3 screen.py
 

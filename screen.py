@@ -82,6 +82,7 @@ SITE_POOL = int(os.environ.get("SITE_POOL", "20"))   # stage-3/4 pool size
 BW_ROUNDS = int(os.environ.get("BW_ROUNDS", "2"))
 MIN_DOWN = float(os.environ.get("MIN_DOWN", "20"))   # Mbps floor (runner-measured)
 MIN_UP = float(os.environ.get("MIN_UP", "5"))
+BW_TIMEOUT = int(os.environ.get("BW_TIMEOUT", "20"))   # seconds per transfer
 WORK = os.environ.get("WORK", "/tmp/pxscreen")
 
 
@@ -226,12 +227,23 @@ def site_ok(url, accept):
     return ok, float(t), code
 
 
+EGRESS_TRACES = [TRACE, "https://claude.ai/cdn-cgi/trace", "https://www.cloudflare.com/cdn-cgi/trace"]
+
+
 def egress():
-    """What a CF-hosted site sees as the client: (ip, warp flag)."""
-    r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{PORT}", TRACE],
-                       capture_output=True, text=True).stdout
-    kv = dict(l.split("=", 1) for l in r.splitlines() if "=" in l)
-    return kv.get("ip", ""), kv.get("warp", "")
+    """What a CF-hosted site sees as the client: (ip, warp flag).
+
+    Retries across several CF trace endpoints: a single empty answer (transient reset on one
+    CF site) must not be read as "this ProxyIP has no egress".
+    """
+    for url in EGRESS_TRACES:
+        for _ in range(2):
+            r = subprocess.run(["curl", "-s", "-m", "10", "-x", f"http://127.0.0.1:{PORT}", url],
+                               capture_output=True, text=True).stdout
+            kv = dict(l.split("=", 1) for l in r.splitlines() if "=" in l)
+            if kv.get("ip"):
+                return kv["ip"], kv.get("warp", "")
+    return "", ""
 
 
 def is_cloudflare(ip):
@@ -252,10 +264,10 @@ CF_NETS = [ipaddress.ip_network(n) for n in (
 def throughput(direction):
     """Mbps for one transfer through the selected node, or None on failure."""
     if direction == "down":
-        cmd = ["curl", "-s", "-o", "/dev/null", "-m", "20", "-x", f"http://127.0.0.1:{PORT}",
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{PORT}",
                "-w", "%{http_code} %{size_download} %{speed_download}", DOWN_URL]
     else:
-        cmd = ["curl", "-s", "-o", "/dev/null", "-m", "20", "-x", f"http://127.0.0.1:{PORT}", "-X", "POST",
+        cmd = ["curl", "-s", "-o", "/dev/null", "-m", str(BW_TIMEOUT), "-x", f"http://127.0.0.1:{PORT}", "-X", "POST",
                "-H", "Content-Type: application/octet-stream", "--data-binary", f"@{WORK}/up.bin",
                "-w", "%{http_code} %{size_upload} %{speed_upload}", UP_URL]
     out = subprocess.run(cmd, capture_output=True, text=True).stdout.split()

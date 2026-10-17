@@ -45,7 +45,9 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 最终 8 个，按配额 **东京 4 + 新加坡 4** 各取本国最好的；某一边不够 4 个时，用另一边的补足。写 `proxyip/apac.txt`，发布到 Variable `CF_RECORD_APAC` 指定的 TXT 记录。
 
-注意：测速是经你当前的 Worker 做的。Worker 的 Placement 在美西时，亚洲 ProxyIP 每个请求要多跨一次太平洋，延迟明显更高；要用这个列表做主力，应把 Placement 改到东京或新加坡。
+注意：测速是经你当前的 Worker 做的，结果取决于 Placement 在哪。Worker 在美西时，Worker → 东京/新加坡这一段是跨太平洋的单条流，实测上行被压在 4.2–4.8 Mbps（十几个不同 ProxyIP 几乎一致，说明瓶颈在这一段而不是 IP 本身），8 MB 上传也常超过 20 秒。因此 apac job 用了更宽的上行门槛（3 Mbps）和更长的超时（40 秒），避免把真实可用的 IP 当成不合格。把 Placement 改到东京后重新跑一轮，门槛应恢复成上行 5 Mbps。
+
+另外，出口检查会在 x.com、claude.ai、www.cloudflare.com 三个 trace 端点间重试，单个端点偶发空响应不再被判成「出口不对」。
 
 ## 住宅 ProxyIP（res.proxyip.<你的域名>）
 
