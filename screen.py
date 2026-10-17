@@ -16,8 +16,9 @@ Stages:
 
 Environment:
   SUB_URL       required  your EdgeTunnel subscription link (clash format)
-  COUNTRY       default US
+  COUNTRY       default US          one or more, comma separated (JP,SG)
   COLOS         default SJC,LAX,SEA,PDX      CF colos reported by the candidate list
+  PER_COUNTRY   optional quota in the final list, e.g. JP:4,SG:4
   ENTRY_IP      default: first subscription node's server
   TOP_N         default 6
   OUT           default proxyip/us.txt
@@ -65,8 +66,11 @@ PORT = 17890
 UA = {"User-Agent": "Mozilla/5.0 edgetunnel-proxyip-screen"}
 
 SUB_URL = os.environ["SUB_URL"]
-COUNTRY = os.environ.get("COUNTRY", "US")
+COUNTRY = os.environ.get("COUNTRY", "US")          # one or more, comma separated (e.g. JP,SG)
+COUNTRIES = set(COUNTRY.split(","))
 COLOS = set(os.environ.get("COLOS", "SJC,LAX,SEA,PDX").split(","))
+# Optional per-country quota for the final list, e.g. "JP:4,SG:4". Empty = no quota.
+PER_COUNTRY = {k: int(v) for k, v in (x.split(":") for x in os.environ.get("PER_COUNTRY", "").split(",") if x)}
 TOP_N = int(os.environ.get("TOP_N", "6"))
 OUT = os.environ.get("OUT", "proxyip/us.txt")
 MIHOMO = os.environ.get("MIHOMO", "./mihomo")
@@ -103,12 +107,13 @@ def candidates():
     for x in data:
         m = x.get("meta") or {}
         colo = (m.get("colo") or {}).get("iata")
-        if m.get("country") != COUNTRY or colo not in COLOS or not x.get("port"):
+        if m.get("country") not in COUNTRIES or colo not in COLOS or not x.get("port"):
             continue
         if REQUIRE_V4 and ":" in (m.get("clientIp") or ":"):
             continue  # list was built by probing through it; its recorded egress is IPv6/unknown
         port = x["port"][0]
-        out[x["ip"] if port == 443 else f"{x['ip']}:{port}"] = colo
+        # tag = colo for a single country (unchanged), "CC-colo" when several are mixed
+        out[x["ip"] if port == 443 else f"{x['ip']}:{port}"] = colo if len(COUNTRIES) == 1 else f"{m['country']}-{colo}"
     return out
 
 
@@ -343,7 +348,18 @@ def main():
     # Rank: bandwidth first (geometric mean of down/up, so one weak direction drags it down),
     # latency as a tie-breaker (every 100 ms costs 10%).
     final.sort(key=lambda r: -((r[4] * r[5]) ** 0.5) * (1 - min(r[1], 900) / 1000))
-    final = final[:TOP_N]
+    if PER_COUNTRY:
+        # Fill each country's quota from its own best, then top up with the best of the rest.
+        picked, used = [], {}
+        for r in final:
+            cc = r[0].split("|", 1)[0].split("-", 1)[0]
+            if used.get(cc, 0) < PER_COUNTRY.get(cc, 0):
+                picked.append(r); used[cc] = used.get(cc, 0) + 1
+        picked += [r for r in final if r not in picked][:max(0, TOP_N - len(picked))]
+        log("per-country:", {cc: used.get(cc, 0) for cc in PER_COUNTRY})
+        final = picked[:TOP_N]
+    else:
+        final = final[:TOP_N]
     for n, med, mx, sites, d, u in final:
         log(f"keep {n} med={med} max={mx} down={d} up={u} Mbps sites={sites}")
     if len(final) < max(2, TOP_N // 2):
@@ -354,7 +370,7 @@ def main():
     open(OUT, "w").write(",".join(ips) + "\n")
     report = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "source": SOURCE, "probe": PROBE, "sites": [u for u, _ in SITES], "require_ipv4_egress": REQUIRE_V4, "country": COUNTRY, "colos": sorted(COLOS),
+        "source": SOURCE, "probe": PROBE, "sites": [u for u, _ in SITES], "require_ipv4_egress": REQUIRE_V4, "country": COUNTRY, "per_country": PER_COUNTRY, "colos": sorted(COLOS),
         "tested": len(items), "alive": len(alive),
         "down_url": DOWN_URL, "up_url": UP_URL, "min_down_mbps": MIN_DOWN, "min_up_mbps": MIN_UP,
         "results": [{"proxyip": n.split("|", 1)[1], "colo": n.split("|", 1)[0], "delay_median_ms": med,

@@ -61,8 +61,64 @@ jobs:
           FILE: proxyip/us.txt
         run: python3 update_dns.py
 
+  apac:
+    needs: us            # one job at a time on the Worker
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      MIHOMO_VERSION: v1.19.32
+      MIHOMO_SHA256: ba3ce607747a07f948fc35780e108a4a7c7f552a38b9bd4d115f313ebcb89c20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install mihomo (pinned + checksum)
+        run: |
+          curl -fsSL -o mihomo.gz "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-compatible-${MIHOMO_VERSION}.gz"
+          echo "${MIHOMO_SHA256}  mihomo.gz" | sha256sum -c -
+          gunzip mihomo.gz && chmod +x mihomo && ./mihomo -v
+
+      - name: Install PyYAML
+        run: pip install --no-cache-dir PyYAML==6.0.2
+
+      - name: Screen Tokyo + Singapore ProxyIPs
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}
+          ENTRY_IP: ${{ vars.ENTRY_IP }}
+          COUNTRY: JP,SG
+          COLOS: NRT,KIX,SIN
+          TOP_N: "8"
+          PER_COUNTRY: JP:4,SG:4
+          STAGE2: "60"
+          SITE_POOL: "30"
+          OUT: proxyip/apac.txt
+        run: python3 screen.py
+
+      - name: Commit list
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add proxyip/apac.txt proxyip/apac.json proxyip/node.enc 2>/dev/null || true
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -q -m "proxyip/apac: $(cat proxyip/apac.txt)"
+          git stash -q --include-untracked || true
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q && exit 0; sleep 5; done
+          exit 1
+
+      - name: Publish TXT record
+        if: ${{ success() && vars.CF_RECORD_APAC != '' }}
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE: ${{ vars.CF_ZONE }}
+          CF_ZONE_ID: ${{ vars.CF_ZONE_ID }}
+          RECORD: ${{ vars.CF_RECORD_APAC }}
+          FILE: proxyip/apac.txt
+        run: python3 update_dns.py
+
   residential:
-    needs: us            # run after the US job so the two never share the Worker at once
+    needs: apac          # run after the other jobs so they never share the Worker at once
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 40

@@ -39,6 +39,14 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 - 仓库建议公开：公开仓库 Action 分钟数不限；订阅链接和 CF token 都在 Secrets 里，不会出现在日志或文件里。
 - 本地运行：`SUB_URL=... MIHOMO=./mihomo python3 screen.py`（需关闭 TUN，mihomo 用 v1.19.32）。
 
+## 东京 + 新加坡 ProxyIP（apac.proxyip.<你的域名>）
+
+同一个 workflow 的第二个 job，跑在美国筛选之后。与美国列表同样的筛选步骤（连通、多轮延迟、出口必须是该 IP 本身的 IPv4、x.com 200 / api.x.com 非 403、上下行带宽），候选是数据源里国家为 JP 或 SG、CF 机房为 NRT / KIX / SIN 的 IP。
+
+最终 8 个，按配额 **东京 4 + 新加坡 4** 各取本国最好的；某一边不够 4 个时，用另一边的补足。写 `proxyip/apac.txt`，发布到 Variable `CF_RECORD_APAC` 指定的 TXT 记录。
+
+注意：测速是经你当前的 Worker 做的。Worker 的 Placement 在美西时，亚洲 ProxyIP 每个请求要多跨一次太平洋，延迟明显更高；要用这个列表做主力，应把 Placement 改到东京或新加坡。
+
 ## 住宅 ProxyIP（res.proxyip.<你的域名>）
 
 同一个 workflow 的第二个 job，跑在美国筛选之后（不同时压 Worker）。国家：五眼（US/CA/GB/AU/NZ）+ 西欧（IE/DE/NL/FR/BE/LU/CH/AT/IT/ES/PT/DK/SE/NO/FI/IS）。
