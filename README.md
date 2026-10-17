@@ -24,7 +24,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 ### 为什么要单独测 X 视频
 
-`video.twimg.com` 在多数地区解析到的是 **Cloudflare**（CNAME 到 `video.twimg.com.cdn.cloudflare.net`），所以看视频同样要经过 ProxyIP；只有部分地区走 Fastly。视频出问题通常不是「平均带宽不够」，而是首字节慢或长连接撑不住，这两点 4 MB 的普通下载测不出来。
+`video.twimg.com` 在美国、日本解析到的是 **Cloudflare**（CNAME 到 `video.twimg.com.cdn.cloudflare.net`），香港等地才走 Fastly。所以看视频同样要经过 ProxyIP，ProxyIP 的质量直接影响视频。视频出问题通常不是「平均带宽不够」，而是首字节慢或长连接撑不住，这两点 4 MB 的普通下载测不出来。
 
 所以决赛阶段会用一个真实的视频地址测：首字节 ≤ 2 秒、持续吞吐 ≥ 6 Mbps，两项都过才留下。视频地址是哈希路径、会过期，因此每次运行通过公开镜像按固定推文 ID 动态获取；取不到（或该推文被删）时这一项自动跳过并在日志里说明，不会误杀候选。门槛可用 `VIDEO_TTFB_MAX`、`VIDEO_MIN_MBPS` 调整。
 
