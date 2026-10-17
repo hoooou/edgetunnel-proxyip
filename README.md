@@ -59,7 +59,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 2. ip-api.com（免费、无需 key）去掉 hosting / proxy（剩约 900 个）；
 3. 经 Worker 并发做便宜的实测：能连通，且 CF 站点看到的出口就是这个 IP 本身（IPv4、不是 WARP / CF / 转发出去的别的地址）。挂掉或出口不对的不会消耗 ipapi.is 额度；
 4. **最后才做住宅与纯净度识别**：只对第 3 步通过的 IP 调 ipapi.is（Secret `IPAPI_IS_KEY`），要求 `is_datacenter=false` 且 `company.type=isp`，不是 VPN / Tor / 滥用者，纯净度 `100×(1−company.abuser_score)` ≥ 90。结果缓存 7 天（`proxyip/res-cache.json`），每轮最多新查 200 个，每天 4 轮仍在免费额度（每天 1000 个）内；
-5. 只对住宅 IP 做耗时的检查：x.com 200、api.x.com 非 403，带宽下行 ≥5、上行 ≥2 Mbps；
+5. 只对住宅 IP 做耗时的检查（同样并发，各 4 路）：x.com 200、api.x.com 非 403，带宽下行 ≥5、上行 ≥2 Mbps；
 6. 按纯净度、再按带宽和延迟排序，最多 8 个，写 `proxyip/res.txt` 并发布到 `CF_RECORD_RES`。少于 2 个不覆盖。
 
 「住宅」只代表 ipapi.is 判定所属运营主体类型是 ISP、网段不是机房；纯净度是网段层面的，不是单个 IP 的风险分。这类 IP 多是别人家里开放的设备，寿命短、速度不稳，适合做「需要干净 IP 的少数网站」专用节点，不适合当主力。

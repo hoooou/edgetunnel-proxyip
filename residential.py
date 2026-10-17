@@ -176,26 +176,33 @@ def reachable_with_own_egress(cand, ips):
 
 
 def site_and_bandwidth(cand, ips, delays):
-    """Expensive checks, one node at a time: site acceptance and down/up throughput."""
+    """Site acceptance and down/up throughput, in parallel on per-node local listeners."""
     node, opts_key, entry, names = _nodes(cand, ips)
-    s.write_config(names, node, opts_key, entry)
+    ports = s.write_config(names, node, opts_key, entry, listeners=True)
     with open(f"{s.WORK}/up.bin", "wb") as f:
         f.write(os.urandom(s.UP_BYTES))
     out = {}
+
+    def check(item):
+        n, _ = item
+        ip = n.split("|", 1)[1].split(":")[0]
+        port = ports[n]
+        sites = [s.site_ok(u, acc, port) for u, acc in s.SITES]
+        if not all(ok for ok, _, _ in sites):
+            return n, ip, None, f"site check {[c for _, _, c in sites]}"
+        down, up = s.throughput("down", port), s.throughput("up", port)
+        if down is None or up is None or down < MIN_DOWN or up < MIN_UP:
+            return n, ip, None, f"bandwidth down={down} up={up}"
+        return n, ip, {"proxyip": n.split("|", 1)[1], "delay_ms": delays[ip], "down_mbps": down,
+                       "up_mbps": up, "site_ttfb_s": [round(t, 2) for _, t, _ in sites]}, None
+
     with s.Mihomo():
-        for n, _ in names:
-            ip = n.split("|", 1)[1].split(":")[0]
-            s.select(n)
-            sites = [s.site_ok(u, acc) for u, acc in s.SITES]
-            if not all(ok for ok, _, _ in sites):
-                log(f"drop {n}: site check {[c for _, _, c in sites]}")
-                continue
-            down, up = s.throughput("down"), s.throughput("up")
-            if down is None or up is None or down < MIN_DOWN or up < MIN_UP:
-                log(f"drop {n}: bandwidth down={down} up={up}")
-                continue
-            out[ip] = {"proxyip": n.split("|", 1)[1], "delay_ms": delays[ip], "down_mbps": down, "up_mbps": up,
-                       "site_ttfb_s": [round(t, 2) for _, t, _ in sites]}
+        with cf.ThreadPoolExecutor(int(os.environ.get("RES_BW_CONC", "4"))) as ex:
+            for n, ip, ok, why in ex.map(check, names):
+                if ok:
+                    out[ip] = ok
+                else:
+                    log(f"drop {n}: {why}")
     return out
 
 
