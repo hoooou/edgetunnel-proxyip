@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T16:39:45Z",
+  "generated_at": "2026-10-17T17:08:41Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,19 +28,19 @@
   "min_purity": 90.0,
   "candidates": 3334,
   "not_hosting": 878,
-  "own_egress": 507,
-  "residential": 26,
-  "usable": 20,
+  "own_egress": 504,
+  "residential": 25,
+  "usable": 21,
   "results": [
     {
       "proxyip": "62.251.108.251",
-      "delay_ms": 728,
-      "down_mbps": 15.7,
+      "delay_ms": 640,
+      "down_mbps": 15.3,
       "up_mbps": 3.7,
       "site_ttfb_s": [
-        0.98,
-        0.83,
-        0.75
+        0.94,
+        0.75,
+        0.72
       ],
       "country": "NL",
       "colo": "AMS",
@@ -49,30 +49,14 @@
       "is_mobile": false
     },
     {
-      "proxyip": "64.58.46.192:8443",
-      "delay_ms": 559,
-      "down_mbps": 25.3,
-      "up_mbps": 6.2,
-      "site_ttfb_s": [
-        0.96,
-        0.63,
-        0.54
-      ],
-      "country": "CA",
-      "colo": "YUL",
-      "company": "EBOX",
-      "purity": 99.98,
-      "is_mobile": false
-    },
-    {
       "proxyip": "99.63.206.163",
-      "delay_ms": 560,
+      "delay_ms": 520,
       "down_mbps": 9.0,
-      "up_mbps": 6.9,
+      "up_mbps": 7.2,
       "site_ttfb_s": [
-        0.93,
-        0.53,
-        0.59
+        1.09,
+        0.54,
+        0.53
       ],
       "country": "US",
       "colo": "ORD",
@@ -82,13 +66,13 @@
     },
     {
       "proxyip": "70.79.240.221",
-      "delay_ms": 401,
-      "down_mbps": 26.1,
-      "up_mbps": 15.8,
+      "delay_ms": 407,
+      "down_mbps": 25.9,
+      "up_mbps": 18.0,
       "site_ttfb_s": [
-        0.52,
-        0.46,
-        0.35
+        0.4,
+        0.34,
+        0.33
       ],
       "country": "CA",
       "colo": "YVR",
@@ -97,14 +81,30 @@
       "is_mobile": false
     },
     {
-      "proxyip": "38.77.187.51",
-      "delay_ms": 255,
-      "down_mbps": 45.2,
-      "up_mbps": 8.6,
+      "proxyip": "89.128.206.51",
+      "delay_ms": 773,
+      "down_mbps": 14.9,
+      "up_mbps": 3.7,
       "site_ttfb_s": [
-        0.4,
-        0.33,
-        0.29
+        1.1,
+        1.52,
+        0.65
+      ],
+      "country": "ES",
+      "colo": "MAD",
+      "company": "Ya.com Internet Factory",
+      "purity": 99.97,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "38.77.187.51",
+      "delay_ms": 223,
+      "down_mbps": 49.6,
+      "up_mbps": 10.5,
+      "site_ttfb_s": [
+        0.32,
+        0.31,
+        0.28
       ],
       "country": "US",
       "colo": "PHX",
@@ -114,13 +114,13 @@
     },
     {
       "proxyip": "71.168.153.36",
-      "delay_ms": 456,
-      "down_mbps": 24.8,
-      "up_mbps": 5.5,
+      "delay_ms": 523,
+      "down_mbps": 23.8,
+      "up_mbps": 7.5,
       "site_ttfb_s": [
-        1.17,
-        0.6,
-        0.52
+        2.24,
+        0.47,
+        0.46
       ],
       "country": "US",
       "colo": "EWR",
@@ -130,13 +130,13 @@
     },
     {
       "proxyip": "31.201.109.180",
-      "delay_ms": 1011,
-      "down_mbps": 14.8,
+      "delay_ms": 847,
+      "down_mbps": 5.2,
       "up_mbps": 3.5,
       "site_ttfb_s": [
-        1.01,
-        0.92,
-        1.2
+        1.09,
+        0.91,
+        0.75
       ],
       "country": "NL",
       "colo": "AMS",
@@ -146,13 +146,13 @@
     },
     {
       "proxyip": "50.35.41.6",
-      "delay_ms": 328,
-      "down_mbps": 37.4,
-      "up_mbps": 17.0,
+      "delay_ms": 286,
+      "down_mbps": 44.7,
+      "up_mbps": 16.2,
       "site_ttfb_s": [
-        0.44,
         0.38,
-        0.39
+        0.31,
+        0.38
       ],
       "country": "US",
       "colo": "SEA",
