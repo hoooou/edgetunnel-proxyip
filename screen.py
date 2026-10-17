@@ -318,7 +318,7 @@ def main():
     with Mihomo():
         with cf.ThreadPoolExecutor(STAGE1_CONC) as ex:
             first = dict(zip(names1, ex.map(delay, names1)))
-        second = dict(zip(names1, ex.map(delay, names1)))
+            second = dict(zip(names1, ex.map(delay, names1)))
     alive = sorted((min(first[n], second[n]), n) for n in names1 if first[n] and second[n])
     log(f"stage1: {len(alive)}/{len(named)} answered both probes")
     if not alive:
