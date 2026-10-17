@@ -5563,6 +5563,19 @@
   "is_vpn": false,
   "purity": 95.31
  },
+ "188.137.248.120": {
+  "asn_type": "hosting",
+  "checked": 1792222409,
+  "company": "Podaon SIA",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 97.66
+ },
  "188.137.253.212": {
   "asn_type": "hosting",
   "checked": 1792136982,
@@ -5813,6 +5826,19 @@
  "193.168.199.236": {
   "asn_type": "hosting",
   "checked": 1792038304,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.48
+ },
+ "193.168.199.94": {
+  "asn_type": "hosting",
+  "checked": 1792222409,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -8228,6 +8254,19 @@
   "is_vpn": false,
   "purity": 93.75
  },
+ "5.253.188.186": {
+  "asn_type": "hosting",
+  "checked": 1792222409,
+  "company": "DePowered Limited",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
  "5.253.189.215": {
   "asn_type": "hosting",
   "checked": 1792136982,
@@ -8829,6 +8868,19 @@
  "81.31.244.213": {
   "asn_type": "hosting",
   "checked": 1792038304,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 93.75
+ },
+ "81.31.244.79": {
+  "asn_type": "hosting",
+  "checked": 1792222409,
   "company": "Timeweb, LLP",
   "company_type": "hosting",
   "is_abuser": false,
@@ -10021,6 +10073,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 92.19
+ },
+ "94.228.168.228": {
+  "asn_type": "hosting",
+  "checked": 1792222409,
+  "company": "Cloud Hosting Solutions, Limited.",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 91.02
  },
  "94.241.172.243": {
   "asn_type": "hosting",
