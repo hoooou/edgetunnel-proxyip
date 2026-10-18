@@ -10,6 +10,7 @@ Environment:
 """
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -39,6 +40,12 @@ def main():
     ips = [x for x in value.split(",") if x]
     if len(ips) < 2:
         sys.exit(f"{FILE} has {len(ips)} entries; refusing to publish")
+    # A list file must be one line of IP[:port] entries. Anything else (a newline spliced in,
+    # a stray escape, a merged file) would be published as broken data and silently poison the
+    # TXT record, so refuse it instead.
+    bad = [x for x in ips if not re.fullmatch(r"[0-9A-Za-z.\-]+(:\d{1,5})?", x)]
+    if bad:
+        sys.exit(f"{FILE} has malformed entries: {bad[:5]}")
     if not RECORD.endswith("." + ZONE):
         sys.exit(f"{RECORD} is not inside zone {ZONE}")
     content = '"' + ",".join(ips) + '"'

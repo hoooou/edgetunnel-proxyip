@@ -80,11 +80,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: result-${{ matrix.name }}
-          # each runner only has the files it produced; wildcards keep this readable
+          # Only this job's own files. Wildcards here would upload the other lists that are
+          # already committed in the checkout, and the merge in publish would then mix them up.
           path: |
-            proxyip/*.txt
-            proxyip/*.ok
-            proxyip/*.json
+            proxyip/${{ matrix.out }}
+            proxyip/${{ matrix.out }}.ok
+            proxyip/${{ matrix.script == 'residential.py' && 'res.json' || 'us.json' }}
+            proxyip/apac.json
+            proxyip/res-cache.json
             proxyip/node.enc
           if-no-files-found: warn
           retention-days: 3
