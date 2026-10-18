@@ -26,12 +26,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: us
-            script: screen.py
-            out: us.txt
-            # Worker is in Tokyo now, so US proxies sit on a trans-Pacific hop and their upload is
-            # capped near 4.5 Mbps regardless of quality. Kept as a backup list with a lower floor.
-            env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6 MIN_UP=3"
+          # Disabled while the Worker is placed in Tokyo: measured from Tokyo, every US proxy sits
+          # on a trans-Pacific hop (17-19 Mbps down, 3 Mbps up regardless of quality), so a fresh
+          # US list would be noise. The published us.proxyip record keeps its last good value.
+          # Move Placement back to US-West, then uncomment this entry and restore the floors.
+          # - name: us
+          #   script: screen.py
+          #   out: us.txt
+          #   env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6"
           - name: apac
             script: screen.py
             out: apac.txt
