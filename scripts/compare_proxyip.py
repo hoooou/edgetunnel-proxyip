@@ -25,8 +25,15 @@ video = os.environ["VIDEO_URL"]
 
 
 def fetch(url):
-    return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}),
-                                  timeout=60).read()
+    # the public subscription converter occasionally answers 502/504
+    for i in range(5):
+        try:
+            return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}),
+                                          timeout=60).read()
+        except Exception as e:
+            print("fetch retry", i, getattr(e, "code", e.__class__.__name__), flush=True)
+            time.sleep(10 * (i + 1))
+    raise SystemExit("subscription unavailable")
 
 
 def build():
