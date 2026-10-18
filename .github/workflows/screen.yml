@@ -29,13 +29,15 @@ jobs:
           - name: us
             script: screen.py
             out: us.txt
-            env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6"
+            # Worker is in Tokyo now, so US proxies sit on a trans-Pacific hop and their upload is
+            # capped near 4.5 Mbps regardless of quality. Kept as a backup list with a lower floor.
+            env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6 MIN_UP=3"
           - name: apac
             script: screen.py
             out: apac.txt
-            # Worker sits in US-West today: the Worker -> Tokyo/Singapore hop caps one upload
-            # stream near 4.5 Mbps, so the floor is looser here. Raise to 5 after moving Placement.
-            env: "COUNTRY=JP,SG COLOS=NRT,KIX,SIN TOP_N=8 PER_COUNTRY=JP:4,SG:4 STAGE2=60 SITE_POOL=30 MIN_UP=3"
+            # Worker is placed in Tokyo, so Tokyo/Singapore proxies are measured on a local hop:
+            # the normal floor (upload >= 5 Mbps) applies again.
+            env: "COUNTRY=JP,SG COLOS=NRT,KIX,SIN TOP_N=8 PER_COUNTRY=JP:4,SG:4 STAGE2=60 SITE_POOL=30"
           - name: res
             script: residential.py
             out: res.txt
