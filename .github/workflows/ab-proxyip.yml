@@ -1,0 +1,20 @@
+name: ab-proxyip
+on:
+  workflow_dispatch:
+jobs:
+  ab:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl -fsSL -o mihomo.gz "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-linux-amd64-compatible-v1.19.32.gz"
+          echo "ba3ce607747a07f948fc35780e108a4a7c7f552a38b9bd4d115f313ebcb89c20  mihomo.gz" | sha256sum -c -
+          gunzip mihomo.gz && chmod +x mihomo
+      - run: pip install --no-cache-dir PyYAML==6.0.2
+      - env:
+          SUB_URL: ${{ secrets.SUB_URL }}
+          PUBLIC_LIST: "ProxyIP.SG.CMLiussss.net,ProxyIP.JP.CMLiussss.net,ProxyIP.KR.CMLiussss.net,tw.william.us.ci,ProxyIP.US.CMLiussss.net,ProxyIP.CA.CMLiussss.net,ProxyIP.DE.CMLiussss.net,ProxyIP.NL.CMLiussss.net"
+          APAC_DOMAIN: apac.proxyip.yieti.top
+          VIDEO_URL: "https://video.twimg.com/amplify_video/2109730034395103232/vid/avc1/360x486/VFfyIRYoa-0qwypM.mp4?tag=29"
+        run: python3 scripts/compare_proxyip.py
