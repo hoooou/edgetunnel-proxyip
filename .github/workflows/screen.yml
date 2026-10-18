@@ -106,18 +106,27 @@ jobs:
         with:
           pattern: result-*
           merge-multiple: true
-          path: proxyip
+          path: /tmp/results
 
-      - run: ls -la proxyip
+      - run: ls -la /tmp/results
 
+      # Two runs can overlap (schedule + push), and rebasing a binary-ish generated file is how
+      # you get a conflict. Instead: always start from the remote tip, copy the fresh results on
+      # top, commit, push; retry the whole cycle if someone else got there first.
       - name: Commit lists and lookup cache
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add proxyip
-          if git diff --cached --quiet; then echo "no change"; exit 0; fi
-          git commit -q -m "proxyip: refresh lists"
-          for i in 1 2 3; do git pull -q --rebase origin main && git push -q && exit 0; sleep 5; done
+          for attempt in 1 2 3 4; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp -r /tmp/results/. proxyip/
+            git add proxyip/*.txt proxyip/*.json proxyip/node.enc 2>/dev/null || true
+            if git diff --cached --quiet; then echo "no change"; exit 0; fi
+            git commit -q -m "proxyip: refresh lists"
+            if git push -q; then echo "pushed"; exit 0; fi
+            echo "push raced, retry $attempt"; sleep 5
+          done
           exit 1
 
       - name: Publish TXT records
