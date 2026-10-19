@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T22:50:15Z",
+  "generated_at": "2026-10-19T08:27:38Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -26,24 +26,24 @@
     "US"
   ],
   "min_purity": 90.0,
-  "candidates": 3294,
-  "not_hosting": 858,
-  "own_egress": 372,
-  "residential": 19,
-  "usable": 16,
+  "candidates": 3269,
+  "not_hosting": 857,
+  "own_egress": 486,
+  "residential": 22,
+  "usable": 19,
   "results": [
     {
       "proxyip": "62.251.108.251",
-      "delay_ms": 1299,
-      "down_mbps": 9.5,
-      "up_mbps": 2.0,
+      "delay_ms": 1356,
+      "down_mbps": 9.4,
+      "up_mbps": 2.1,
       "site_ttfb_s": [
-        2.38,
-        1.58,
-        1.11
+        1.3,
+        1.2,
+        1.08
       ],
       "video_ttfb_s": 0.35,
-      "video_mbps": 9.8,
+      "video_mbps": 12.7,
       "country": "NL",
       "colo": "AMS",
       "company": "Customers",
@@ -52,16 +52,16 @@
     },
     {
       "proxyip": "70.79.240.221",
-      "delay_ms": 849,
-      "down_mbps": 14.5,
-      "up_mbps": 6.5,
+      "delay_ms": 820,
+      "down_mbps": 14.9,
+      "up_mbps": 3.1,
       "site_ttfb_s": [
-        0.96,
-        0.95,
-        0.73
+        0.86,
+        0.82,
+        0.71
       ],
-      "video_ttfb_s": 0.38,
-      "video_mbps": 16.2,
+      "video_ttfb_s": 0.35,
+      "video_mbps": 12.3,
       "country": "CA",
       "colo": "YVR",
       "company": "Shaw Communications",
@@ -70,16 +70,16 @@
     },
     {
       "proxyip": "89.128.206.51",
-      "delay_ms": 1392,
-      "down_mbps": 9.0,
-      "up_mbps": 2.1,
+      "delay_ms": 1337,
+      "down_mbps": 10.0,
+      "up_mbps": 2.2,
       "site_ttfb_s": [
-        1.45,
-        1.21,
-        1.18
+        1.22,
+        1.54,
+        1.09
       ],
-      "video_ttfb_s": 0.36,
-      "video_mbps": 12.3,
+      "video_ttfb_s": 0.34,
+      "video_mbps": 12.8,
       "country": "ES",
       "colo": "MAD",
       "company": "Ya.com Internet Factory",
@@ -88,16 +88,16 @@
     },
     {
       "proxyip": "38.77.187.51",
-      "delay_ms": 778,
-      "down_mbps": 15.2,
-      "up_mbps": 3.0,
+      "delay_ms": 698,
+      "down_mbps": 15.0,
+      "up_mbps": 3.1,
       "site_ttfb_s": [
         0.8,
-        0.92,
-        0.79
+        0.76,
+        0.81
       ],
-      "video_ttfb_s": 0.37,
-      "video_mbps": 12.0,
+      "video_ttfb_s": 0.35,
+      "video_mbps": 12.5,
       "country": "US",
       "colo": "PHX",
       "company": "ZONA COMMUNICATIONS",
@@ -106,16 +106,16 @@
     },
     {
       "proxyip": "71.168.153.36",
-      "delay_ms": 1086,
-      "down_mbps": 12.6,
-      "up_mbps": 2.5,
+      "delay_ms": 1071,
+      "down_mbps": 13.0,
+      "up_mbps": 2.8,
       "site_ttfb_s": [
-        0.94,
-        0.95,
-        0.91
+        0.93,
+        0.9,
+        1.05
       ],
-      "video_ttfb_s": 0.36,
-      "video_mbps": 12.0,
+      "video_ttfb_s": 0.34,
+      "video_mbps": 12.6,
       "country": "US",
       "colo": "EWR",
       "company": "Verizon Business",
@@ -123,35 +123,17 @@
       "is_mobile": false
     },
     {
-      "proxyip": "31.201.109.180",
-      "delay_ms": 1366,
-      "down_mbps": 9.4,
-      "up_mbps": 2.0,
-      "site_ttfb_s": [
-        1.39,
-        1.26,
-        1.16
-      ],
-      "video_ttfb_s": 0.39,
-      "video_mbps": 11.5,
-      "country": "NL",
-      "colo": "AMS",
-      "company": "Odido Netherlands",
-      "purity": 99.96,
-      "is_mobile": false
-    },
-    {
       "proxyip": "50.35.41.6",
-      "delay_ms": 793,
-      "down_mbps": 16.2,
+      "delay_ms": 788,
+      "down_mbps": 17.7,
       "up_mbps": 3.1,
       "site_ttfb_s": [
-        0.86,
-        0.85,
-        0.78
+        0.74,
+        0.77,
+        0.8
       ],
-      "video_ttfb_s": 0.51,
-      "video_mbps": 10.4,
+      "video_ttfb_s": 0.35,
+      "video_mbps": 14.7,
       "country": "US",
       "colo": "SEA",
       "company": "Ziply Fiber",
@@ -159,21 +141,39 @@
       "is_mobile": false
     },
     {
-      "proxyip": "174.108.80.25:8443",
-      "delay_ms": 957,
-      "down_mbps": 7.8,
-      "up_mbps": 4.5,
+      "proxyip": "24.78.21.213",
+      "delay_ms": 1106,
+      "down_mbps": 6.7,
+      "up_mbps": 3.7,
       "site_ttfb_s": [
-        1.0,
-        1.12,
-        1.12
+        1.96,
+        1.15,
+        0.98
       ],
-      "video_ttfb_s": 0.38,
-      "video_mbps": 12.0,
-      "country": "US",
-      "colo": "IAD",
-      "company": "Charter Communications Inc",
+      "video_ttfb_s": 0.37,
+      "video_mbps": 12.1,
+      "country": "CA",
+      "colo": "ORD",
+      "company": "Shaw Communications",
       "purity": 99.95,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "24.136.24.254:2083",
+      "delay_ms": 935,
+      "down_mbps": 9.9,
+      "up_mbps": 4.0,
+      "site_ttfb_s": [
+        1.24,
+        1.0,
+        0.96
+      ],
+      "video_ttfb_s": 0.39,
+      "video_mbps": 11.9,
+      "country": "US",
+      "colo": "BOS",
+      "company": "RCN",
+      "purity": 99.94,
       "is_mobile": false
     }
   ]
