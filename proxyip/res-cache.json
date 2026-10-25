@@ -2560,6 +2560,19 @@
   "is_vpn": false,
   "purity": 93.36
  },
+ "193.38.235.236": {
+  "asn_type": "hosting",
+  "checked": 1792951599,
+  "company": "ALEKSEI FEDOROV PR KRUSEVAC",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 93.36
+ },
  "193.42.60.24": {
   "asn_type": "hosting",
   "checked": 1792743138,
@@ -3209,6 +3222,32 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.22
+ },
+ "202.71.14.238": {
+  "asn_type": "hosting",
+  "checked": 1792951599,
+  "company": "moula world llc",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 94.14
+ },
+ "204.93.50.147": {
+  "asn_type": "isp",
+  "checked": 1792951599,
+  "company": "NORTHERN CABLE AND FIBER, LLC",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
  },
  "206.245.166.63": {
   "asn_type": "hosting",
@@ -4432,6 +4471,19 @@
   "is_vpn": false,
   "purity": 88.28
  },
+ "46.21.83.6": {
+  "asn_type": "hosting",
+  "checked": 1792951599,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 94.53
+ },
  "46.249.100.111": {
   "asn_type": "hosting",
   "checked": 1792764215,
@@ -5224,6 +5276,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 94.14
+ },
+ "82.21.4.172": {
+  "asn_type": "hosting",
+  "checked": 1792951599,
+  "company": "UP-NETWORK Sarl",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 94.92
  },
  "82.223.196.199": {
   "asn_type": "hosting",
@@ -6134,6 +6199,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 93.75
+ },
+ "94.177.51.175": {
+  "asn_type": "business",
+  "checked": 1792951599,
+  "company": "Individual Entrepreneur Anton Levin",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 92.19
  },
  "94.228.171.26": {
   "asn_type": "hosting",
