@@ -753,6 +753,19 @@
   "is_vpn": false,
   "purity": 87.11
  },
+ "143.20.165.183": {
+  "asn_type": "hosting",
+  "checked": 1793002969,
+  "company": "Private Customer",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 83.98
+ },
  "144.31.119.82": {
   "asn_type": "hosting",
   "checked": 1792764214,
@@ -1675,6 +1688,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 90.62
+ },
+ "178.83.203.218": {
+  "asn_type": "hosting",
+  "checked": 1793002969,
+  "company": "Company 670ebe0bT3WPiqu2",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
  },
  "178.83.45.206": {
   "asn_type": "hosting",
@@ -3418,6 +3444,19 @@
   "is_vpn": false,
   "purity": 91.8
  },
+ "212.43.158.171": {
+  "asn_type": "hosting",
+  "checked": 1793002969,
+  "company": "Podaon SIA",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.44
+ },
  "212.87.222.32": {
   "asn_type": "hosting",
   "checked": 1792764214,
@@ -3547,6 +3586,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 94.14
+ },
+ "216.107.139.19": {
+  "asn_type": "hosting",
+  "checked": 1793002969,
+  "company": "Private Customer",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 93.75
  },
  "216.167.121.127": {
   "asn_type": "isp",
@@ -4977,6 +5029,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 93.75
+ },
+ "77.74.123.153": {
+  "asn_type": "hosting",
+  "checked": 1793002969,
+  "company": "INTERKVM HOST SRL",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 95.31
  },
  "77.83.175.173": {
   "asn_type": "hosting",
