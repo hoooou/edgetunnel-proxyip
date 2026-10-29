@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T20:08:46Z",
+  "generated_at": "2026-10-29T00:39:54Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,22 +28,76 @@
   "min_purity": 90.0,
   "candidates": 2714,
   "not_hosting": 521,
-  "own_egress": 431,
+  "own_egress": 427,
   "residential": 22,
-  "usable": 8,
+  "usable": 16,
   "results": [
     {
-      "proxyip": "174.108.80.25:8443",
-      "delay_ms": 1143,
-      "down_mbps": 6.5,
-      "up_mbps": 3.5,
+      "proxyip": "24.141.96.92:8443",
+      "delay_ms": 1189,
+      "down_mbps": 12.2,
+      "up_mbps": 2.2,
       "site_ttfb_s": [
-        1.56,
-        1.1,
-        1.38
+        1.04,
+        1.28,
+        0.94
       ],
-      "video_ttfb_s": 0.45,
-      "video_mbps": 11.3,
+      "video_ttfb_s": 0.49,
+      "video_mbps": 10.6,
+      "country": "CA",
+      "colo": "YYZ",
+      "company": "Cogeco Cable Canada Inc.",
+      "purity": 99.98,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "89.128.206.51",
+      "delay_ms": 1446,
+      "down_mbps": 7.1,
+      "up_mbps": 2.0,
+      "site_ttfb_s": [
+        1.4,
+        1.6,
+        1.36
+      ],
+      "video_ttfb_s": 0.41,
+      "video_mbps": 10.3,
+      "country": "ES",
+      "colo": "MAD",
+      "company": "Ya.com Internet Factory",
+      "purity": 99.97,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "38.77.187.51",
+      "delay_ms": 717,
+      "down_mbps": 15.7,
+      "up_mbps": 2.8,
+      "site_ttfb_s": [
+        0.82,
+        0.8,
+        0.85
+      ],
+      "video_ttfb_s": 0.4,
+      "video_mbps": 10.9,
+      "country": "US",
+      "colo": "PHX",
+      "company": "ZONA COMMUNICATIONS",
+      "purity": 99.96,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "174.108.80.25:8443",
+      "delay_ms": 1161,
+      "down_mbps": 8.3,
+      "up_mbps": 3.9,
+      "site_ttfb_s": [
+        1.26,
+        1.06,
+        1.05
+      ],
+      "video_ttfb_s": 0.4,
+      "video_mbps": 10.6,
       "country": "US",
       "colo": "ATL",
       "company": "Charter Communications Inc",
@@ -51,35 +105,17 @@
       "is_mobile": false
     },
     {
-      "proxyip": "71.168.153.36",
-      "delay_ms": 1651,
-      "down_mbps": 13.0,
-      "up_mbps": 2.4,
-      "site_ttfb_s": [
-        1.88,
-        1.7,
-        0.92
-      ],
-      "video_ttfb_s": 0.89,
-      "video_mbps": 6.1,
-      "country": "US",
-      "colo": "EWR",
-      "company": "Verizon Business",
-      "purity": 99.95,
-      "is_mobile": false
-    },
-    {
       "proxyip": "50.35.41.6",
-      "delay_ms": 958,
-      "down_mbps": 10.2,
-      "up_mbps": 2.8,
+      "delay_ms": 1041,
+      "down_mbps": 15.4,
+      "up_mbps": 3.0,
       "site_ttfb_s": [
-        1.25,
-        1.35,
-        0.87
+        0.98,
+        0.77,
+        0.86
       ],
-      "video_ttfb_s": 0.44,
-      "video_mbps": 11.2,
+      "video_ttfb_s": 0.53,
+      "video_mbps": 9.8,
       "country": "US",
       "colo": "SEA",
       "company": "Ziply Fiber",
@@ -87,93 +123,57 @@
       "is_mobile": false
     },
     {
-      "proxyip": "89.34.167.181",
-      "delay_ms": 1133,
-      "down_mbps": 9.3,
-      "up_mbps": 2.0,
+      "proxyip": "71.168.153.36",
+      "delay_ms": 949,
+      "down_mbps": 12.0,
+      "up_mbps": 2.3,
       "site_ttfb_s": [
-        2.03,
-        1.68,
-        1.79
+        1.02,
+        1.29,
+        0.92
       ],
-      "video_ttfb_s": 0.87,
-      "video_mbps": 6.3,
-      "country": "GB",
-      "colo": "LHR",
-      "company": "Hyperoptic Ltd",
-      "purity": 99.9,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "154.7.183.116",
-      "delay_ms": 832,
-      "down_mbps": 5.1,
-      "up_mbps": 2.0,
-      "site_ttfb_s": [
-        1.41,
-        0.79,
-        1.5
-      ],
-      "video_ttfb_s": 0.4,
-      "video_mbps": 11.0,
+      "video_ttfb_s": 0.37,
+      "video_mbps": 12.0,
       "country": "US",
-      "colo": "LAX",
-      "company": "Cogent Communications, LLC",
-      "purity": 99.36,
+      "colo": "EWR",
+      "company": "Verizon Business",
+      "purity": 99.95,
       "is_mobile": false
     },
     {
-      "proxyip": "23.246.165.123",
-      "delay_ms": 1656,
-      "down_mbps": 12.3,
-      "up_mbps": 2.5,
-      "site_ttfb_s": [
-        1.78,
-        1.05,
-        1.62
-      ],
-      "video_ttfb_s": 0.42,
-      "video_mbps": 10.6,
-      "country": "US",
-      "colo": "IAD",
-      "company": "TAIPEI101 NETWORK LLC",
-      "purity": 99.02,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "192.204.62.245",
-      "delay_ms": 1292,
-      "down_mbps": 8.5,
+      "proxyip": "82.64.120.239",
+      "delay_ms": 1353,
+      "down_mbps": 9.8,
       "up_mbps": 2.0,
       "site_ttfb_s": [
-        2.01,
-        1.15,
-        1.41
+        1.6,
+        1.26,
+        1.11
       ],
-      "video_ttfb_s": 0.4,
-      "video_mbps": 10.9,
+      "video_ttfb_s": 0.39,
+      "video_mbps": 11.2,
+      "country": "FR",
+      "colo": "CDG",
+      "company": "Free SAS",
+      "purity": 99.77,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "168.143.108.38",
+      "delay_ms": 771,
+      "down_mbps": 17.5,
+      "up_mbps": 3.2,
+      "site_ttfb_s": [
+        0.78,
+        0.75,
+        0.75
+      ],
+      "video_ttfb_s": 0.39,
+      "video_mbps": 11.3,
       "country": "US",
       "colo": "LAX",
       "company": "NTT America, Inc.",
-      "purity": 94.57,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "193.106.150.144",
-      "delay_ms": 1372,
-      "down_mbps": 6.2,
-      "up_mbps": 3.0,
-      "site_ttfb_s": [
-        1.45,
-        2.08,
-        2.04
-      ],
-      "video_ttfb_s": 0.43,
-      "video_mbps": 11.5,
-      "country": "NL",
-      "colo": "AMS",
-      "company": "Inweb Ltd.",
-      "purity": 94.53,
+      "purity": 99.71,
       "is_mobile": false
     }
   ]
