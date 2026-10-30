@@ -49,10 +49,11 @@ jobs:
             # HK/HKG has 192 candidates, but only 26 of them carry an IPv4 egress in the source
             # list's own record, so PRE_V4=0 hands all 192 to the probes and lets stage 3 decide
             # on a fresh measurement; those 26 are tested first instead of being ranked out by
-            # latency (the fastest 30 were 28 IPv6 exits). The pool is IPv6-exit heavy and its
-            # IPv4 exits are weak: floors kept at 15/4 and MIN_KEEP=2 so a good round is not
-            # thrown away, tighter values are a one-line change. No PER_COUNTRY: one country.
-            env: "COUNTRY=HK COLOS=HKG TOP_N=12 MIN_KEEP=2 PRE_V4=0 STAGE2=60 SITE_POOL=40 MIN_DOWN=15 MIN_UP=4"
+            # latency (the fastest 30 were 28 IPv6 exits). Of the 15 that then passed, every one
+            # sat at 10-19 Mbps down / 3.4-3.6 up — the upload is a ceiling of the path, not a
+            # property of the individual proxy, so the floors here are 10/3. Tighter is a
+            # one-line change. No PER_COUNTRY: this list is a single country.
+            env: "COUNTRY=HK COLOS=HKG TOP_N=12 MIN_KEEP=2 PRE_V4=0 STAGE2=60 SITE_POOL=40 MIN_DOWN=10 MIN_UP=3"
           - name: res
             script: residential.py
             out: res.txt
