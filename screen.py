@@ -21,8 +21,14 @@ Environment:
   PER_COUNTRY   optional quota in the final list, e.g. JP:4,SG:4
   ENTRY_IP      default: first subscription node's server
   TOP_N         default 6
+  MIN_KEEP      default max(2, TOP_N // 2)   refuse to overwrite the list below this many
   OUT           default proxyip/us.txt
   MIHOMO        default ./mihomo
+  REQUIRE_V4    default 1   stage 3: the egress seen by a CF site must be IPv4
+  PRE_V4        default = REQUIRE_V4   stage 0: also drop candidates whose recorded egress is
+                IPv6. That record is someone else's measurement, and for some regions (HK) most
+                of the pool is recorded as IPv6 while the IP itself still works — turn it off
+                there and let stage 3 decide.
 """
 from __future__ import annotations
 
@@ -66,6 +72,7 @@ SITES = [
 TRACE = "https://x.com/cdn-cgi/trace"
 UA_BROWSER = "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36"
 REQUIRE_V4 = os.environ.get("REQUIRE_V4", "1") == "1"
+PRE_V4 = os.environ.get("PRE_V4", os.environ.get("REQUIRE_V4", "1")) == "1"
 API = "http://127.0.0.1:19090"
 PORT = 17890
 UA = {"User-Agent": "Mozilla/5.0 edgetunnel-proxyip-screen"}
@@ -77,6 +84,7 @@ COLOS = set(os.environ.get("COLOS", "SJC,LAX,SEA,PDX").split(","))
 # Optional per-country quota for the final list, e.g. "JP:4,SG:4". Empty = no quota.
 PER_COUNTRY = {k: int(v) for k, v in (x.split(":") for x in os.environ.get("PER_COUNTRY", "").split(",") if x)}
 TOP_N = int(os.environ.get("TOP_N", "6"))
+MIN_KEEP = int(os.environ.get("MIN_KEEP", str(max(2, TOP_N // 2))))
 OUT = os.environ.get("OUT", "proxyip/us.txt")
 MIHOMO = os.environ.get("MIHOMO", "./mihomo")
 STAGE1_CONC = int(os.environ.get("STAGE1_CONC", "6"))  # >=8 inflates delays on a single link
@@ -128,7 +136,7 @@ def candidates():
         colo = (m.get("colo") or {}).get("iata")
         if m.get("country") not in COUNTRIES or colo not in COLOS or not x.get("port"):
             continue
-        if REQUIRE_V4 and ":" in (m.get("clientIp") or ":"):
+        if PRE_V4 and ":" in (m.get("clientIp") or ":"):
             continue  # list was built by probing through it; its recorded egress is IPv6/unknown
         port = x["port"][0]
         # tag = colo for a single country (unchanged), "CC-colo" when several are mixed
@@ -483,15 +491,15 @@ def main():
         final = final[:TOP_N]
     for n, med, mx, sites, d, u, *_ in final:
         log(f"keep {n} med={med} max={mx} down={d} up={u} Mbps sites={sites}")
-    if len(final) < max(2, TOP_N // 2):
-        sys.exit(f"only {len(final)} passed; keeping previous list")
+    if len(final) < MIN_KEEP:
+        sys.exit(f"only {len(final)} passed (need {MIN_KEEP}); keeping previous list")
 
     ips = [n.split("|", 1)[1] for n, *_ in final]
     os.makedirs(os.path.dirname(OUT) or ".", exist_ok=True)
     open(OUT, "w").write(",".join(ips) + "\n")
     report = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "source": SOURCE, "probe": PROBE, "sites": [u for u, _ in SITES], "require_ipv4_egress": REQUIRE_V4, "country": COUNTRY, "per_country": PER_COUNTRY, "colos": sorted(COLOS),
+        "source": SOURCE, "probe": PROBE, "sites": [u for u, _ in SITES], "require_ipv4_egress": REQUIRE_V4, "prefilter_ipv4_egress": PRE_V4, "country": COUNTRY, "per_country": PER_COUNTRY, "colos": sorted(COLOS), "min_keep": MIN_KEEP,
         "tested": len(items), "alive": len(alive),
         "down_url": DOWN_URL, "up_url": UP_URL, "min_down_mbps": MIN_DOWN, "min_up_mbps": MIN_UP,
         "results": [{"proxyip": n.split("|", 1)[1], "colo": n.split("|", 1)[0], "delay_median_ms": med,

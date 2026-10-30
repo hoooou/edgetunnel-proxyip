@@ -1,6 +1,6 @@
 # edgetunnel-proxyip
 
-每 6 小时（北京时间 05:00、11:00、17:00、23:00）用 GitHub Action 经自己的 EdgeTunnel Worker 筛一遍美西公共 ProxyIP，结果：
+每 6 小时（北京时间 05:00、11:00、17:00、23:00）用 GitHub Action 经自己的 EdgeTunnel Worker 筛一遍公共 ProxyIP，结果：
 
 - 写进 `proxyip/us.txt`（逗号分隔，可直接粘贴）和 `proxyip/us.json`（测量明细），提交回仓库；
 - 同步成 Cloudflare DNS 的 TXT 记录 `us.proxyip.<你的域名>`，EdgeTunnel 的 PROXYIP 填这个域名即可自动跟随。
@@ -9,7 +9,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 
 ## 运行结构
 
-一个 workflow，matrix 起多个 runner。当前 Worker 放在东京，所以只跑 `apac`（东京）和 `res`（住宅）两份；`us`（美西）已停用——从东京测美西每条都是跨太平洋，17–19 Mbps 下行，测不出好坏，停用后 `us.proxyip` 那条 TXT 保持上一份好数据不变。哪天把 Placement 换回美西，把 workflow 里那段注释打开、门槛恢复即可。三个列表同时跑、各自独立测速，互不抢带宽；跑完由单独的 `publish` job 汇总三份结果，一次提交，并按各自变量更新三条 TXT 记录。某个列表这一轮失败时不会覆盖旧列表、也不会动它的 DNS 记录（靠 `<列表>.ok` 标记判断）。
+一个 workflow，matrix 起多个 runner。当前 Worker 放在东京，所以只跑 `apac`（东京、新加坡）、`hk`（香港）和 `res`（住宅）三份；`us`（美西）已停用——从东京测美西每条都是跨太平洋，17–19 Mbps 下行，测不出好坏，停用后 `us.proxyip` 那条 TXT 保持上一份好数据不变。哪天把 Placement 换回美西，把 workflow 里那段注释打开、门槛恢复即可。三个列表同时跑、各自独立测速，互不抢带宽；跑完由单独的 `publish` job 汇总三份结果，一次提交，并按各自变量更新三条 TXT 记录。某个列表这一轮失败时不会覆盖旧列表、也不会动它的 DNS 记录（靠 `<列表>.ok` 标记判断）。
 
 ## 筛选方法
 
@@ -36,6 +36,7 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 2. 本仓库 Settings → Secrets and variables → Actions：
    - Secrets：`SUB_URL` = 订阅链接（含 token）；`CF_API_TOKEN` = 上一步的 token
    - Variables：`CF_ZONE` = 你的域名（例如 `example.com`）；`CF_RECORD` = `us.proxyip.<你的域名>`；可选 `CF_ZONE_ID`（token 看不到 zone 列表时填）、`ENTRY_IP`
+   - 每份列表各有一条记录变量，没设的那份只提交 `proxyip/*.txt`、不发 DNS：`CF_RECORD`（us）、`CF_RECORD_APAC`（apac）、`CF_RECORD_HK`（hk）、`CF_RECORD_RES`（res-住宅）
 3. Actions 页手动 Run workflow 一次，确认 `proxyip/us.txt` 已生成、DNS 里出现 TXT 记录。
 4. EdgeTunnel 面板「反代」→ PROXYIP 改成 `us.proxyip.<你的域名>`，保存，客户端更新订阅。
 
@@ -60,6 +61,16 @@ EdgeTunnel 不能直接读 raw 链接当 ProxyIP（`https://` 开头会被当成
 视频检查同样受益：`video.twimg.com` 在日本解析到 Cloudflare，Worker 在东京时视频也走本地区，不再跨太平洋。
 
 另外，出口检查会在 x.com、claude.ai、www.cloudflare.com 三个 trace 端点间重试，单个端点偶发空响应不再被判成「出口不对」。
+
+## 香港 ProxyIP（hk.proxyip.<你的域名>）
+
+matrix 里的 `hk` 任务，同一个 workflow 同时跑。候选是数据源里国家为 HK、CF 机房为 HKG 的 IP（192 个），筛选步骤与其它列表一致：连通、多轮延迟、出口必须是 IPv4 且不是 WARP / CF 自有、x.com 200 / api.x.com 非 403、上下行带宽、决赛单路复测。
+
+与美西/日新不同的一处是候选预筛：数据源里这 192 个候选只有 26 个的 `clientIp` 记录是 IPv4，其余 171 个记的是 IPv6 出口。那份记录是别人测的，不代表这些 IP 现在不能用，所以 `hk` 用 `PRE_V4=0` 关掉预筛，192 个全部进第 1 步；出口判定仍在第 3 步，口径没变（必须 IPv4、不是 WARP、不是 CF 自有），只是把判断从「抄记录」改成「实测」。
+
+名额按「能过多少留多少」：`TOP_N=12` 只是上限，最多留 12 个（决赛单路复测池 16 个）；`MIN_KEEP=3` 是覆写门槛，这一轮不足 3 个通过就整轮失败，不覆盖 `hk.txt`、也不动 TXT 记录。带宽门槛与 apac 相同（下行 ≥20、上行 ≥5 Mbps）：香港离东京只有一跳，不需要为跨洋放宽。
+
+写 `proxyip/hk.txt`（+ `hk.json` 明细），发布到 Variable `CF_RECORD_HK` 指定的 TXT 记录，没设就只提交文件不发 DNS。香港这份适合给需要香港出口的网站单独做一个节点（path 写 `/proxyip=hk.proxyip.<你的域名>`），不要直接把它当全局 PROXYIP 用——它只有香港一个地区。
 
 ## 住宅 ProxyIP（res.proxyip.<你的域名>）
 

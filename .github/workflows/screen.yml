@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # One runner per list, all three at the same time: separate runners do not share a network
+  # One runner per list, all of them at the same time: separate runners do not share a network
   # path, so their measurements do not interfere with each other.
   screen:
     name: screen-${{ matrix.name }}
@@ -33,16 +33,28 @@ jobs:
           # - name: us
           #   script: screen.py
           #   out: us.txt
+          #   json: us.json
           #   env: "COUNTRY=US COLOS=SJC,LAX,SEA,PDX TOP_N=6"
           - name: apac
             script: screen.py
             out: apac.txt
+            json: apac.json
             # Worker is placed in Tokyo, so Tokyo/Singapore proxies are measured on a local hop:
             # the normal floor (upload >= 5 Mbps) applies again.
             env: "COUNTRY=JP,SG COLOS=NRT,KIX,SIN TOP_N=8 PER_COUNTRY=JP:4,SG:4 STAGE2=60 SITE_POOL=30"
+          - name: hk
+            script: screen.py
+            out: hk.txt
+            json: hk.json
+            # HK/HKG has 192 candidates, but only 26 of them carry an IPv4 egress in the source
+            # list's own record, so PRE_V4=0 hands all 192 to the probes and lets stage 3 decide
+            # on a fresh measurement. Hong Kong is one hop from the Tokyo Worker, so the normal
+            # bandwidth floors apply. No PER_COUNTRY quota: this list is a single country.
+            env: "COUNTRY=HK COLOS=HKG TOP_N=12 MIN_KEEP=3 PRE_V4=0 STAGE2=60 SITE_POOL=30"
           - name: res
             script: residential.py
             out: res.txt
+            json: res.json
             env: "RES_BW_CONC=2"
     env:
       MIHOMO_VERSION: v1.19.32
@@ -85,11 +97,20 @@ jobs:
           path: |
             proxyip/${{ matrix.out }}
             proxyip/${{ matrix.out }}.ok
-            proxyip/${{ matrix.script == 'residential.py' && 'res.json' || 'us.json' }}
-            proxyip/apac.json
-            proxyip/res-cache.json
+            proxyip/${{ matrix.json }}
             proxyip/node.enc
           if-no-files-found: warn
+          retention-days: 3
+
+      - name: Upload residential lookup cache
+        # Only the residential job writes the cache; uploading a checkout copy from the other
+        # jobs would race the fresh one back to its older state in publish.
+        if: always() && matrix.name == 'res'
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-res-cache
+          path: proxyip/res-cache.json
+          if-no-files-found: ignore
           retention-days: 3
 
   # Single writer: collects every runner's artefacts, commits once, and updates one TXT record
@@ -139,6 +160,7 @@ jobs:
           CF_ZONE_ID: ${{ vars.CF_ZONE_ID }}
           REC_US: ${{ vars.CF_RECORD }}
           REC_APAC: ${{ vars.CF_RECORD_APAC }}
+          REC_HK: ${{ vars.CF_RECORD_HK }}
           REC_RES: ${{ vars.CF_RECORD_RES }}
         run: |
           publish () {   # <record> <file>
@@ -150,4 +172,5 @@ jobs:
           }
           publish "$REC_US" proxyip/us.txt
           publish "$REC_APAC" proxyip/apac.txt
+          publish "$REC_HK" proxyip/hk.txt
           publish "$REC_RES" proxyip/res.txt
