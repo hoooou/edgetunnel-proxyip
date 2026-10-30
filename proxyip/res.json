@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T17:35:14Z",
+  "generated_at": "2026-10-30T18:16:07Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,22 +28,22 @@
   "min_purity": 90.0,
   "candidates": 2714,
   "not_hosting": 521,
-  "own_egress": 394,
+  "own_egress": 406,
   "residential": 4,
-  "usable": 2,
+  "usable": 4,
   "results": [
     {
       "proxyip": "89.128.206.51",
-      "delay_ms": 1145,
-      "down_mbps": 9.4,
-      "up_mbps": 2.0,
+      "delay_ms": 1283,
+      "down_mbps": 9.8,
+      "up_mbps": 2.3,
       "site_ttfb_s": [
-        1.38,
-        1.31,
-        1.46
+        1.17,
+        1.17,
+        1.07
       ],
-      "video_ttfb_s": 0.56,
-      "video_mbps": 10.9,
+      "video_ttfb_s": 0.28,
+      "video_mbps": 23.0,
       "country": "ES",
       "colo": "MAD",
       "company": "Ya.com Internet Factory",
@@ -51,17 +51,53 @@
       "is_mobile": false
     },
     {
-      "proxyip": "86.53.110.160",
-      "delay_ms": 1029,
-      "down_mbps": 7.8,
+      "proxyip": "89.34.167.181",
+      "delay_ms": 1127,
+      "down_mbps": 5.7,
       "up_mbps": 2.1,
       "site_ttfb_s": [
-        1.02,
-        4.35,
-        1.21
+        1.39,
+        1.13,
+        1.02
       ],
-      "video_ttfb_s": 0.43,
-      "video_mbps": 10.9,
+      "video_ttfb_s": 0.3,
+      "video_mbps": 11.8,
+      "country": "GB",
+      "colo": "LHR",
+      "company": "Hyperoptic Ltd",
+      "purity": 99.9,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "86.53.110.160",
+      "delay_ms": 1194,
+      "down_mbps": 8.8,
+      "up_mbps": 2.4,
+      "site_ttfb_s": [
+        1.43,
+        1.35,
+        1.29
+      ],
+      "video_ttfb_s": 0.46,
+      "video_mbps": 10.2,
+      "country": "DE",
+      "colo": "FRA",
+      "company": "GTT-CUSTOMER",
+      "purity": 98.34,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "86.53.110.15",
+      "delay_ms": 1497,
+      "down_mbps": 7.8,
+      "up_mbps": 2.4,
+      "site_ttfb_s": [
+        1.61,
+        1.16,
+        1.14
+      ],
+      "video_ttfb_s": 0.27,
+      "video_mbps": 16.3,
       "country": "DE",
       "colo": "FRA",
       "company": "GTT-CUSTOMER",
