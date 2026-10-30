@@ -140,8 +140,21 @@ def candidates():
             continue  # list was built by probing through it; its recorded egress is IPv6/unknown
         port = x["port"][0]
         # tag = colo for a single country (unchanged), "CC-colo" when several are mixed
-        out[x["ip"] if port == 443 else f"{x['ip']}:{port}"] = colo if len(COUNTRIES) == 1 else f"{m['country']}-{colo}"
+        key = x["ip"] if port == 443 else f"{x['ip']}:{port}"
+        out[key] = colo if len(COUNTRIES) == 1 else f"{m['country']}-{colo}"
+        if ":" not in (m.get("clientIp") or ":"):
+            REC_V4.add(key)  # its source record saw an IPv4 egress; those get tested first
     return out
+
+
+# Candidates whose source record already showed an IPv4 egress. Latency alone is a bad way to
+# pick the stage-3 pool: in Hong Kong the fastest 30 were 28 IPv6 exits and 2 IPv4 ones, so the
+# few that can pass were ranked out before anyone looked at their egress.
+REC_V4 = set()
+
+
+def _ipv4_pref(name):
+    return 0 if name.split("|", 1)[1] in REC_V4 else 1
 
 
 NODE_CACHE = os.environ.get("NODE_CACHE", "proxyip/node.enc")
@@ -378,9 +391,11 @@ def main():
     log(f"stage1: {len(alive)}/{len(named)} answered both probes")
     if not alive:
         sys.exit("stage1: nothing alive (entry IP or Worker broken?)")
+    log(f"{sum(1 for _, n in alive if _ipv4_pref(n) == 0)} of them kept an IPv4 exit on record")
 
-    # Stage 2
-    keep = [n for _, n in alive[:STAGE2]]
+    # Stage 2. Those with an IPv4 exit on record go first: the stage-3 pool is a slice, and on
+    # regions like HK the fastest slice is mostly IPv6 exits that can never pass.
+    keep = [n for _, n in sorted(alive, key=lambda t: (_ipv4_pref(t[1]), t[0]))[:STAGE2]]
     write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for n in keep], node, opts_key, entry)
     samples = {n: [] for n in keep}
     with Mihomo():
@@ -394,10 +409,13 @@ def main():
             scored.append((statistics.median(v) + 0.3 * max(v), statistics.median(v), max(v), n))
     scored.sort()
     log(f"stage2: {len(scored)}/{len(keep)} passed all {ROUNDS2} rounds")
+    # Order for the egress stage only: an IPv4 exit on record first, latency second. The published
+    # order still comes from stage 4/5, so this changes who gets tested, not who wins.
+    pool = sorted(scored, key=lambda r: (_ipv4_pref(r[3]), r[0]))[:SITE_POOL]
 
     # Stage 3: egress + real site requests, in parallel (one listener per node)
     passed = []
-    ports = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for _, _, _, n in scored[:SITE_POOL]],
+    ports = write_config([(n, f"/proxyip={n.split('|', 1)[1]}") for _, _, _, n in pool],
                          node, opts_key, entry, listeners=True)
     with Mihomo():
         def check3(item):
@@ -413,12 +431,12 @@ def main():
                 return n, None, f"site check {[(u.split('/')[2], c) for (u, _), (_, _, c) in zip(SITES, results)]}"
             return n, (med, mx, [round(t, 2) for _, t, _ in results]), None
         with cf.ThreadPoolExecutor(STAGE3_CONC) as ex:
-            for n, ok, why in ex.map(check3, scored[:SITE_POOL]):
+            for n, ok, why in ex.map(check3, pool):
                 if ok:
                     passed.append((n, *ok))
                 else:
                     log(f"drop {n}: {why}")
-    log(f"stage3: {len(passed)}/{min(SITE_POOL, len(scored))} passed site checks")
+    log(f"stage3: {len(passed)}/{len(pool)} passed site checks")
 
     # Stage 4: throughput in parallel (one listener per node, small payloads)
     final = []
