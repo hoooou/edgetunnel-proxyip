@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T18:16:07Z",
+  "generated_at": "2026-10-31T00:24:09Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,40 +28,40 @@
   "min_purity": 90.0,
   "candidates": 2714,
   "not_hosting": 521,
-  "own_egress": 406,
-  "residential": 4,
-  "usable": 4,
+  "own_egress": 416,
+  "residential": 11,
+  "usable": 8,
   "results": [
     {
-      "proxyip": "89.128.206.51",
-      "delay_ms": 1283,
-      "down_mbps": 9.8,
-      "up_mbps": 2.3,
+      "proxyip": "174.108.80.25:8443",
+      "delay_ms": 832,
+      "down_mbps": 7.8,
+      "up_mbps": 2.9,
       "site_ttfb_s": [
-        1.17,
-        1.17,
-        1.07
+        1.06,
+        1.04,
+        0.87
       ],
-      "video_ttfb_s": 0.28,
-      "video_mbps": 23.0,
-      "country": "ES",
-      "colo": "MAD",
-      "company": "Ya.com Internet Factory",
-      "purity": 99.97,
+      "video_ttfb_s": 0.25,
+      "video_mbps": 17.9,
+      "country": "US",
+      "colo": "ATL",
+      "company": "Charter Communications Inc",
+      "purity": 99.95,
       "is_mobile": false
     },
     {
       "proxyip": "89.34.167.181",
-      "delay_ms": 1127,
-      "down_mbps": 5.7,
-      "up_mbps": 2.1,
+      "delay_ms": 950,
+      "down_mbps": 10.4,
+      "up_mbps": 2.4,
       "site_ttfb_s": [
-        1.39,
         1.13,
-        1.02
+        1.55,
+        0.96
       ],
-      "video_ttfb_s": 0.3,
-      "video_mbps": 11.8,
+      "video_ttfb_s": 0.45,
+      "video_mbps": 10.6,
       "country": "GB",
       "colo": "LHR",
       "company": "Hyperoptic Ltd",
@@ -69,17 +69,71 @@
       "is_mobile": false
     },
     {
-      "proxyip": "86.53.110.160",
-      "delay_ms": 1194,
-      "down_mbps": 8.8,
-      "up_mbps": 2.4,
+      "proxyip": "168.143.108.38",
+      "delay_ms": 678,
+      "down_mbps": 19.9,
+      "up_mbps": 4.1,
       "site_ttfb_s": [
-        1.43,
-        1.35,
-        1.29
+        0.64,
+        0.65,
+        0.6
       ],
-      "video_ttfb_s": 0.46,
-      "video_mbps": 10.2,
+      "video_ttfb_s": 0.25,
+      "video_mbps": 17.8,
+      "country": "US",
+      "colo": "LAX",
+      "company": "NTT America, Inc.",
+      "purity": 99.69,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "192.220.21.116",
+      "delay_ms": 578,
+      "down_mbps": 20.4,
+      "up_mbps": 4.3,
+      "site_ttfb_s": [
+        0.74,
+        0.77,
+        0.61
+      ],
+      "video_ttfb_s": 0.26,
+      "video_mbps": 17.2,
+      "country": "US",
+      "colo": "LAX",
+      "company": "NTT America, Inc.",
+      "purity": 99.53,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "154.7.183.116",
+      "delay_ms": 780,
+      "down_mbps": 7.2,
+      "up_mbps": 3.9,
+      "site_ttfb_s": [
+        0.69,
+        0.7,
+        0.67
+      ],
+      "video_ttfb_s": 0.25,
+      "video_mbps": 17.4,
+      "country": "US",
+      "colo": "LAX",
+      "company": "Cogent Communications, LLC",
+      "purity": 99.36,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "86.53.110.160",
+      "delay_ms": 882,
+      "down_mbps": 9.0,
+      "up_mbps": 2.5,
+      "site_ttfb_s": [
+        1.1,
+        1.59,
+        1.16
+      ],
+      "video_ttfb_s": 0.24,
+      "video_mbps": 18.3,
       "country": "DE",
       "colo": "FRA",
       "company": "GTT-CUSTOMER",
@@ -87,21 +141,39 @@
       "is_mobile": false
     },
     {
-      "proxyip": "86.53.110.15",
-      "delay_ms": 1497,
-      "down_mbps": 7.8,
-      "up_mbps": 2.4,
+      "proxyip": "192.204.62.245",
+      "delay_ms": 758,
+      "down_mbps": 21.3,
+      "up_mbps": 3.8,
       "site_ttfb_s": [
-        1.61,
-        1.16,
-        1.14
+        0.78,
+        0.58,
+        0.6
       ],
-      "video_ttfb_s": 0.27,
-      "video_mbps": 16.3,
-      "country": "DE",
-      "colo": "FRA",
-      "company": "GTT-CUSTOMER",
-      "purity": 98.34,
+      "video_ttfb_s": 0.26,
+      "video_mbps": 17.8,
+      "country": "US",
+      "colo": "LAX",
+      "company": "NTT America, Inc.",
+      "purity": 94.57,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "193.106.150.144",
+      "delay_ms": 1402,
+      "down_mbps": 8.6,
+      "up_mbps": 2.3,
+      "site_ttfb_s": [
+        1.42,
+        1.14,
+        1.04
+      ],
+      "video_ttfb_s": 0.24,
+      "video_mbps": 17.9,
+      "country": "NL",
+      "colo": "AMS",
+      "company": "Inweb Ltd.",
+      "purity": 94.53,
       "is_mobile": false
     }
   ]
