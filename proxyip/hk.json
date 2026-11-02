@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T00:06:17Z",
+  "generated_at": "2026-11-02T10:21:30Z",
   "source": "https://zip.cm.edu.kg.cmliussss.net/all.json",
   "probe": "https://claude.ai/cdn-cgi/trace",
   "sites": [
@@ -15,192 +15,177 @@
     "HKG"
   ],
   "min_keep": 2,
-  "tested": 192,
-  "alive": 157,
+  "tested": 174,
+  "alive": 163,
   "down_url": "https://registry.npmjs.org/typescript/-/typescript-5.6.3.tgz",
   "up_url": "https://cdnjs.cloudflare.com/",
   "min_down_mbps": 8.0,
   "min_up_mbps": 2.5,
   "results": [
     {
-      "proxyip": "45.38.60.153:2053",
+      "proxyip": "103.219.192.196",
       "colo": "HKG",
-      "delay_median_ms": 477.0,
-      "delay_max_ms": 636,
+      "delay_median_ms": 446.5,
+      "delay_max_ms": 472,
       "site_ttfb_s": [
-        0.66,
-        0.58,
-        0.54
-      ],
-      "down_mbps": 23.3,
-      "up_mbps": 5.6,
-      "video_ttfb_s": 0.25,
-      "video_mbps": 17.5
-    },
-    {
-      "proxyip": "47.239.4.246",
-      "colo": "HKG",
-      "delay_median_ms": 449.5,
-      "delay_max_ms": 489,
-      "site_ttfb_s": [
-        0.81,
-        0.6,
-        0.62
+        0.71,
+        0.57,
+        0.6
       ],
       "down_mbps": 26.6,
       "up_mbps": 4.9,
-      "video_ttfb_s": 0.25,
-      "video_mbps": 17.6
+      "video_ttfb_s": 0.53,
+      "video_mbps": 11.0
     },
     {
-      "proxyip": "46.8.101.232:2053",
+      "proxyip": "43.161.233.40:8443",
       "colo": "HKG",
-      "delay_median_ms": 437.0,
-      "delay_max_ms": 612,
+      "delay_median_ms": 469.0,
+      "delay_max_ms": 500,
       "site_ttfb_s": [
-        0.63,
-        0.56,
-        0.59
+        1.19,
+        0.7,
+        0.75
       ],
-      "down_mbps": 21.5,
-      "up_mbps": 5.3,
-      "video_ttfb_s": 0.39,
-      "video_mbps": 13.7
-    },
-    {
-      "proxyip": "103.219.192.196",
-      "colo": "HKG",
-      "delay_median_ms": 449.5,
-      "delay_max_ms": 458,
-      "site_ttfb_s": [
-        0.88,
-        0.69,
-        0.44
-      ],
-      "down_mbps": 30.4,
-      "up_mbps": 4.6,
+      "down_mbps": 25.1,
+      "up_mbps": 4.8,
       "video_ttfb_s": 0.29,
-      "video_mbps": 15.3
-    },
-    {
-      "proxyip": "103.219.194.43",
-      "colo": "HKG",
-      "delay_median_ms": 480.0,
-      "delay_max_ms": 579,
-      "site_ttfb_s": [
-        0.83,
-        0.6,
-        0.42
-      ],
-      "down_mbps": 28.3,
-      "up_mbps": 5.3,
-      "video_ttfb_s": 0.31,
-      "video_mbps": 14.4
-    },
-    {
-      "proxyip": "156.224.76.205",
-      "colo": "HKG",
-      "delay_median_ms": 466.0,
-      "delay_max_ms": 538,
-      "site_ttfb_s": [
-        2.07,
-        0.64,
-        0.45
-      ],
-      "down_mbps": 27.8,
-      "up_mbps": 5.0,
-      "video_ttfb_s": 0.26,
-      "video_mbps": 26.2
-    },
-    {
-      "proxyip": "46.8.78.133:8443",
-      "colo": "HKG",
-      "delay_median_ms": 462.0,
-      "delay_max_ms": 568,
-      "site_ttfb_s": [
-        0.71,
-        0.63,
-        0.55
-      ],
-      "down_mbps": 24.9,
-      "up_mbps": 4.6,
-      "video_ttfb_s": 0.34,
-      "video_mbps": 27.6
-    },
-    {
-      "proxyip": "43.154.131.189",
-      "colo": "HKG",
-      "delay_median_ms": 424.0,
-      "delay_max_ms": 496,
-      "site_ttfb_s": [
-        0.73,
-        0.58,
-        0.41
-      ],
-      "down_mbps": 27.6,
-      "up_mbps": 5.0,
-      "video_ttfb_s": 0.24,
-      "video_mbps": 18.0
-    },
-    {
-      "proxyip": "160.236.110.211:8443",
-      "colo": "HKG",
-      "delay_median_ms": 483.0,
-      "delay_max_ms": 554,
-      "site_ttfb_s": [
-        0.63,
-        0.59,
-        0.42
-      ],
-      "down_mbps": 23.6,
-      "up_mbps": 5.5,
-      "video_ttfb_s": 0.26,
-      "video_mbps": 17.7
+      "video_mbps": 34.4
     },
     {
       "proxyip": "34.96.247.17",
       "colo": "HKG",
-      "delay_median_ms": 547.0,
-      "delay_max_ms": 586,
+      "delay_median_ms": 462.5,
+      "delay_max_ms": 600,
       "site_ttfb_s": [
-        0.74,
-        0.7,
-        0.46
+        1.66,
+        0.65,
+        0.59
       ],
-      "down_mbps": 31.3,
+      "down_mbps": 31.0,
+      "up_mbps": 4.9,
+      "video_ttfb_s": 0.43,
+      "video_mbps": 12.9
+    },
+    {
+      "proxyip": "160.236.110.211:8443",
+      "colo": "HKG",
+      "delay_median_ms": 459.5,
+      "delay_max_ms": 527,
+      "site_ttfb_s": [
+        0.67,
+        0.75,
+        0.56
+      ],
+      "down_mbps": 25.1,
+      "up_mbps": 6.6,
+      "video_ttfb_s": 0.4,
+      "video_mbps": 12.7
+    },
+    {
+      "proxyip": "46.8.101.232:2053",
+      "colo": "HKG",
+      "delay_median_ms": 463.0,
+      "delay_max_ms": 471,
+      "site_ttfb_s": [
+        0.56,
+        0.61,
+        0.55
+      ],
+      "down_mbps": 30.1,
+      "up_mbps": 4.6,
+      "video_ttfb_s": 0.28,
+      "video_mbps": 19.3
+    },
+    {
+      "proxyip": "45.38.60.153:2053",
+      "colo": "HKG",
+      "delay_median_ms": 471.0,
+      "delay_max_ms": 596,
+      "site_ttfb_s": [
+        0.44,
+        0.62,
+        0.51
+      ],
+      "down_mbps": 28.3,
       "up_mbps": 4.5,
-      "video_ttfb_s": 0.26,
-      "video_mbps": 34.0
+      "video_ttfb_s": 0.27,
+      "video_mbps": 18.3
+    },
+    {
+      "proxyip": "46.8.78.133:8443",
+      "colo": "HKG",
+      "delay_median_ms": 477.5,
+      "delay_max_ms": 595,
+      "site_ttfb_s": [
+        0.75,
+        0.81,
+        0.59
+      ],
+      "down_mbps": 24.4,
+      "up_mbps": 4.5,
+      "video_ttfb_s": 0.27,
+      "video_mbps": 16.8
+    },
+    {
+      "proxyip": "156.224.76.205",
+      "colo": "HKG",
+      "delay_median_ms": 503.0,
+      "delay_max_ms": 686,
+      "site_ttfb_s": [
+        0.63,
+        0.62,
+        0.45
+      ],
+      "down_mbps": 25.7,
+      "up_mbps": 4.7,
+      "video_ttfb_s": 0.29,
+      "video_mbps": 28.5
+    },
+    {
+      "proxyip": "47.239.4.246",
+      "colo": "HKG",
+      "delay_median_ms": 530.0,
+      "delay_max_ms": 661,
+      "site_ttfb_s": [
+        0.72,
+        0.61,
+        0.44
+      ],
+      "down_mbps": 25.3,
+      "up_mbps": 4.9,
+      "video_ttfb_s": 0.31,
+      "video_mbps": 26.7
+    },
+    {
+      "proxyip": "185.132.125.163",
+      "colo": "HKG",
+      "delay_median_ms": 498.5,
+      "delay_max_ms": 631,
+      "site_ttfb_s": [
+        0.73,
+        0.62,
+        0.47
+      ],
+      "down_mbps": 26.1,
+      "up_mbps": 5.0,
+      "video_ttfb_s": 0.32,
+      "video_mbps": 14.6
     },
     {
       "proxyip": "43.132.231.159",
       "colo": "HKG",
-      "delay_median_ms": 485.5,
-      "delay_max_ms": 619,
+      "delay_median_ms": 492.5,
+      "delay_max_ms": 559,
       "site_ttfb_s": [
-        0.67,
-        0.68,
-        0.55
+        0.46,
+        0.62,
+        0.62
       ],
-      "down_mbps": 11.5,
-      "up_mbps": 4.8,
-      "video_ttfb_s": 0.24,
-      "video_mbps": 17.9
-    },
-    {
-      "proxyip": "154.84.154.37",
-      "colo": "HKG",
-      "delay_median_ms": 535.0,
-      "delay_max_ms": 586,
-      "site_ttfb_s": [
-        0.65,
-        0.55,
-        0.44
-      ],
-      "down_mbps": 17.2,
-      "up_mbps": 5.4,
-      "video_ttfb_s": 0.27,
-      "video_mbps": 17.5
+      "down_mbps": 22.6,
+      "up_mbps": 4.6,
+      "video_ttfb_s": 0.29,
+      "video_mbps": 19.1
     }
   ]
 }
