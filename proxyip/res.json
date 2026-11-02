@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T10:25:16Z",
+  "generated_at": "2026-11-02T23:03:40Z",
   "definition": "ipapi.is company.type=isp and is_datacenter=false; purity=100*(1-company.abuser_score)",
   "order": "candidates -> ip-api non-hosting -> reachable with own IPv4 egress -> ipapi.is residential/purity -> sites + bandwidth",
   "countries": [
@@ -28,22 +28,22 @@
   "min_purity": 90.0,
   "candidates": 2454,
   "not_hosting": 447,
-  "own_egress": 357,
-  "residential": 21,
-  "usable": 14,
+  "own_egress": 375,
+  "residential": 22,
+  "usable": 16,
   "results": [
     {
       "proxyip": "99.63.206.163",
-      "delay_ms": 1116,
-      "down_mbps": 6.6,
-      "up_mbps": 2.3,
+      "delay_ms": 1090,
+      "down_mbps": 6.5,
+      "up_mbps": 3.9,
       "site_ttfb_s": [
-        1.04,
-        1.05,
-        0.98
+        1.16,
+        1.12,
+        1.23
       ],
-      "video_ttfb_s": 0.41,
-      "video_mbps": 9.9,
+      "video_ttfb_s": 0.51,
+      "video_mbps": 9.6,
       "country": "US",
       "colo": "ORD",
       "company": "AT&T Enterprises, LLC",
@@ -51,35 +51,17 @@
       "is_mobile": false
     },
     {
-      "proxyip": "31.201.109.180",
-      "delay_ms": 1418,
-      "down_mbps": 9.0,
-      "up_mbps": 2.4,
-      "site_ttfb_s": [
-        1.33,
-        1.3,
-        1.19
-      ],
-      "video_ttfb_s": 0.39,
-      "video_mbps": 12.9,
-      "country": "NL",
-      "colo": "AMS",
-      "company": "Odido Netherlands",
-      "purity": 99.97,
-      "is_mobile": false
-    },
-    {
       "proxyip": "38.77.187.51",
-      "delay_ms": 957,
-      "down_mbps": 13.4,
+      "delay_ms": 732,
+      "down_mbps": 14.2,
       "up_mbps": 2.9,
       "site_ttfb_s": [
-        0.97,
-        0.77,
-        0.91
+        0.99,
+        0.79,
+        0.84
       ],
-      "video_ttfb_s": 0.36,
-      "video_mbps": 10.8,
+      "video_ttfb_s": 0.43,
+      "video_mbps": 17.7,
       "country": "US",
       "colo": "PHX",
       "company": "ZONA COMMUNICATIONS",
@@ -88,16 +70,16 @@
     },
     {
       "proxyip": "50.35.41.6",
-      "delay_ms": 720,
-      "down_mbps": 16.0,
-      "up_mbps": 3.0,
+      "delay_ms": 701,
+      "down_mbps": 14.4,
+      "up_mbps": 3.2,
       "site_ttfb_s": [
-        0.86,
-        0.73,
+        0.9,
+        0.83,
         0.75
       ],
-      "video_ttfb_s": 0.54,
-      "video_mbps": 8.8,
+      "video_ttfb_s": 0.41,
+      "video_mbps": 10.1,
       "country": "US",
       "colo": "SEA",
       "company": "Ziply Fiber",
@@ -105,17 +87,35 @@
       "is_mobile": false
     },
     {
-      "proxyip": "24.141.96.92:8443",
-      "delay_ms": 901,
-      "down_mbps": 11.6,
-      "up_mbps": 2.5,
+      "proxyip": "174.108.80.25:8443",
+      "delay_ms": 1019,
+      "down_mbps": 7.5,
+      "up_mbps": 4.7,
       "site_ttfb_s": [
-        1.14,
-        0.99,
-        1.06
+        1.19,
+        1.23,
+        1.1
       ],
-      "video_ttfb_s": 0.37,
-      "video_mbps": 10.9,
+      "video_ttfb_s": 0.42,
+      "video_mbps": 9.5,
+      "country": "US",
+      "colo": "IAD",
+      "company": "Charter Communications Inc",
+      "purity": 99.95,
+      "is_mobile": false
+    },
+    {
+      "proxyip": "24.141.96.92:8443",
+      "delay_ms": 949,
+      "down_mbps": 11.6,
+      "up_mbps": 3.0,
+      "site_ttfb_s": [
+        1.19,
+        0.96,
+        0.95
+      ],
+      "video_ttfb_s": 0.58,
+      "video_mbps": 9.1,
       "country": "CA",
       "colo": "YYZ",
       "company": "Cogeco Cable Canada Inc.",
@@ -124,16 +124,16 @@
     },
     {
       "proxyip": "71.168.153.36",
-      "delay_ms": 1003,
-      "down_mbps": 11.4,
-      "up_mbps": 2.3,
+      "delay_ms": 931,
+      "down_mbps": 11.7,
+      "up_mbps": 2.5,
       "site_ttfb_s": [
-        1.05,
         1.16,
-        1.08
+        1.3,
+        0.91
       ],
-      "video_ttfb_s": 0.39,
-      "video_mbps": 10.6,
+      "video_ttfb_s": 0.37,
+      "video_mbps": 10.7,
       "country": "US",
       "colo": "EWR",
       "company": "Verizon Business",
@@ -141,39 +141,39 @@
       "is_mobile": false
     },
     {
+      "proxyip": "2.7.113.69",
+      "delay_ms": 1200,
+      "down_mbps": 8.6,
+      "up_mbps": 2.0,
+      "site_ttfb_s": [
+        1.53,
+        1.28,
+        1.41
+      ],
+      "video_ttfb_s": 0.39,
+      "video_mbps": 10.9,
+      "country": "FR",
+      "colo": "MRS",
+      "company": "POP GRE",
+      "purity": 99.95,
+      "is_mobile": false
+    },
+    {
       "proxyip": "168.143.108.38",
-      "delay_ms": 829,
-      "down_mbps": 17.1,
+      "delay_ms": 675,
+      "down_mbps": 16.2,
       "up_mbps": 3.1,
       "site_ttfb_s": [
-        0.94,
-        0.82,
-        0.7
+        0.89,
+        0.74,
+        0.74
       ],
       "video_ttfb_s": 0.4,
-      "video_mbps": 9.9,
+      "video_mbps": 10.3,
       "country": "US",
       "colo": "LAX",
       "company": "NTT America, Inc.",
       "purity": 99.69,
-      "is_mobile": false
-    },
-    {
-      "proxyip": "142.188.90.91",
-      "delay_ms": 983,
-      "down_mbps": 13.6,
-      "up_mbps": 2.5,
-      "site_ttfb_s": [
-        0.95,
-        0.97,
-        0.85
-      ],
-      "video_ttfb_s": 0.39,
-      "video_mbps": 10.2,
-      "country": "CA",
-      "colo": "YYZ",
-      "company": "Sympatico HSE",
-      "purity": 99.61,
       "is_mobile": false
     }
   ]
