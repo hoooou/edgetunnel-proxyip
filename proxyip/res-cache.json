@@ -337,6 +337,19 @@
   "is_vpn": false,
   "purity": 87.89
  },
+ "138.124.2.178": {
+  "asn_type": "hosting",
+  "checked": 1793959892,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.87
+ },
  "138.124.2.203": {
   "asn_type": "hosting",
   "checked": 1793406146,
