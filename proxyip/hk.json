@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T09:28:50Z",
+  "generated_at": "2026-11-08T00:08:45Z",
   "source": "https://zip.cm.edu.kg.cmliussss.net/all.json",
   "probe": "https://claude.ai/cdn-cgi/trace",
   "sites": [
@@ -16,116 +16,116 @@
   ],
   "min_keep": 2,
   "tested": 151,
-  "alive": 138,
+  "alive": 136,
   "down_url": "https://registry.npmjs.org/typescript/-/typescript-5.6.3.tgz",
   "up_url": "https://cdnjs.cloudflare.com/",
   "min_down_mbps": 8.0,
   "min_up_mbps": 2.5,
   "results": [
     {
+      "proxyip": "47.239.4.246",
+      "colo": "HKG",
+      "delay_median_ms": 544.0,
+      "delay_max_ms": 580,
+      "site_ttfb_s": [
+        0.78,
+        0.69,
+        0.57
+      ],
+      "down_mbps": 19.9,
+      "up_mbps": 3.8,
+      "video_ttfb_s": 0.37,
+      "video_mbps": 11.2
+    },
+    {
+      "proxyip": "183.87.146.5",
+      "colo": "HKG",
+      "delay_median_ms": 562.5,
+      "delay_max_ms": 602,
+      "site_ttfb_s": [
+        0.86,
+        0.69,
+        0.68
+      ],
+      "down_mbps": 19.8,
+      "up_mbps": 3.7,
+      "video_ttfb_s": 0.37,
+      "video_mbps": 11.0
+    },
+    {
       "proxyip": "185.132.125.163",
       "colo": "HKG",
-      "delay_median_ms": 556.0,
-      "delay_max_ms": 735,
+      "delay_median_ms": 561.0,
+      "delay_max_ms": 610,
       "site_ttfb_s": [
         0.74,
-        0.67,
-        0.52
+        0.74,
+        0.71
       ],
-      "down_mbps": 16.5,
+      "down_mbps": 20.1,
       "up_mbps": 3.9,
-      "video_ttfb_s": 0.38,
+      "video_ttfb_s": 0.41,
       "video_mbps": 10.4
     },
     {
       "proxyip": "45.38.60.153:2053",
       "colo": "HKG",
-      "delay_median_ms": 659.5,
-      "delay_max_ms": 1010,
+      "delay_median_ms": 561.5,
+      "delay_max_ms": 583,
       "site_ttfb_s": [
-        1.04,
-        1.03,
-        0.71
+        0.74,
+        0.7,
+        0.59
       ],
-      "down_mbps": 16.6,
-      "up_mbps": 3.0,
-      "video_ttfb_s": 0.74,
-      "video_mbps": 7.7
-    },
-    {
-      "proxyip": "47.239.4.246",
-      "colo": "HKG",
-      "delay_median_ms": 609.5,
-      "delay_max_ms": 707,
-      "site_ttfb_s": [
-        0.81,
-        0.81,
-        0.57
-      ],
-      "down_mbps": 19.2,
-      "up_mbps": 3.8,
+      "down_mbps": 19.0,
+      "up_mbps": 3.9,
       "video_ttfb_s": 0.4,
-      "video_mbps": 9.8
-    },
-    {
-      "proxyip": "43.132.231.159",
-      "colo": "HKG",
-      "delay_median_ms": 660.0,
-      "delay_max_ms": 714,
-      "site_ttfb_s": [
-        0.89,
-        0.97,
-        0.75
-      ],
-      "down_mbps": 9.6,
-      "up_mbps": 3.2,
-      "video_ttfb_s": 0.38,
-      "video_mbps": 10.5
-    },
-    {
-      "proxyip": "34.96.247.17",
-      "colo": "HKG",
-      "delay_median_ms": 683.0,
-      "delay_max_ms": 818,
-      "site_ttfb_s": [
-        0.8,
-        0.69,
-        0.53
-      ],
-      "down_mbps": 18.8,
-      "up_mbps": 3.7,
-      "video_ttfb_s": 0.37,
-      "video_mbps": 10.6
-    },
-    {
-      "proxyip": "45.38.42.216",
-      "colo": "HKG",
-      "delay_median_ms": 665.0,
-      "delay_max_ms": 742,
-      "site_ttfb_s": [
-        1.03,
-        0.87,
-        0.73
-      ],
-      "down_mbps": 16.6,
-      "up_mbps": 5.1,
-      "video_ttfb_s": 0.38,
-      "video_mbps": 10.9
+      "video_mbps": 11.0
     },
     {
       "proxyip": "46.8.101.232:2053",
       "colo": "HKG",
-      "delay_median_ms": 716.0,
-      "delay_max_ms": 722,
+      "delay_median_ms": 579.5,
+      "delay_max_ms": 648,
       "site_ttfb_s": [
-        1.1,
-        0.87,
-        0.79
+        0.82,
+        0.71,
+        0.62
       ],
-      "down_mbps": 16.6,
+      "down_mbps": 18.6,
       "up_mbps": 3.6,
+      "video_ttfb_s": 0.42,
+      "video_mbps": 10.0
+    },
+    {
+      "proxyip": "34.96.247.17",
+      "colo": "HKG",
+      "delay_median_ms": 583.5,
+      "delay_max_ms": 604,
+      "site_ttfb_s": [
+        0.71,
+        0.67,
+        0.55
+      ],
+      "down_mbps": 17.8,
+      "up_mbps": 3.8,
+      "video_ttfb_s": 0.37,
+      "video_mbps": 11.8
+    },
+    {
+      "proxyip": "43.132.231.159",
+      "colo": "HKG",
+      "delay_median_ms": 627.5,
+      "delay_max_ms": 662,
+      "site_ttfb_s": [
+        0.87,
+        0.87,
+        0.7
+      ],
+      "down_mbps": 8.8,
+      "up_mbps": 3.8,
       "video_ttfb_s": 0.39,
-      "video_mbps": 12.5
+      "video_mbps": 10.9
     }
   ]
 }
