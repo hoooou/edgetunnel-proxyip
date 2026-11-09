@@ -222,7 +222,7 @@
  },
  "132.243.204.84": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "365.partners INC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -231,7 +231,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.48
+  "purity": 100.0
  },
  "132.243.221.234": {
   "asn_type": "business",
@@ -363,19 +363,6 @@
   "is_vpn": false,
   "purity": 99.22
  },
- "138.124.67.214": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 84.77
- },
  "138.124.75.161": {
   "asn_type": "hosting",
   "checked": 1794011608,
@@ -469,7 +456,7 @@
  },
  "140.174.50.208": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NTT America, Inc.",
   "company_type": "isp",
   "is_abuser": false,
@@ -478,7 +465,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 97.71
+  "purity": 99.96
  },
  "140.235.130.13": {
   "asn_type": "business",
@@ -586,8 +573,8 @@
  },
  "143.20.160.195": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Private Customer",
+  "checked": 1794183723,
+  "company": "Company 64d3458brTzt8gEz",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -595,7 +582,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 87.11
+  "purity": 99.61
  },
  "143.20.160.43": {
   "asn_type": "hosting",
@@ -1249,7 +1236,7 @@
  },
  "178.253.23.221": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Timeweb, LLP",
   "company_type": "hosting",
   "is_abuser": false,
@@ -1258,7 +1245,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 90.62
+  "purity": 99.22
  },
  "178.253.23.53": {
   "asn_type": "hosting",
@@ -1975,19 +1962,6 @@
   "is_vpn": false,
   "purity": 99.41
  },
- "193.42.62.86": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "RackNerd LLC France Datacenter:",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": true,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.44
- },
  "193.47.60.247": {
   "asn_type": "hosting",
   "checked": 1794011608,
@@ -2289,7 +2263,7 @@
  },
  "195.200.28.88": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "SERVERS TECH FZCO",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2298,7 +2272,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 84.37
+  "purity": 98.44
  },
  "195.78.49.161": {
   "asn_type": "hosting",
@@ -2367,7 +2341,7 @@
  },
  "195.96.156.29": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Individual Entrepreneur Anton Levin",
   "company_type": "business",
   "is_abuser": false,
@@ -2376,89 +2350,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.87
- },
- "2.26.142.121": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Individual Entrepreneur Anton Levin",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.44
- },
- "2.26.162.166": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Senko Digital LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.85
- },
- "2.26.17.154": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NEKOBYTE INTERNATIONAL LIMITED",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.14
- },
- "2.26.26.33": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Senko Digital LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "2.26.28.167": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NEKOBYTE INTERNATIONAL LIMITED",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.7
- },
- "2.27.29.155": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Senko Digital LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.55
+  "purity": 100.0
  },
  "2.7.113.69": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "POP GRE",
   "company_type": "isp",
   "is_abuser": false,
@@ -2471,7 +2367,7 @@
  },
  "201.10.80.72": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBALTECH LLC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2480,11 +2376,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.22
+  "purity": 100.0
  },
  "202.71.14.238": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "moula world llc",
   "company_type": "business",
   "is_abuser": false,
@@ -2493,11 +2389,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 99.22
  },
  "212.113.104.94": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Eduard Ilin",
   "company_type": "business",
   "is_abuser": false,
@@ -2506,76 +2402,63 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 97.27
- },
- "212.113.104.95": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Eduard Ilin",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.27
+  "purity": 100.0
  },
  "212.113.112.186": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "AS216127 DE iPv4",
   "company_type": "business",
-  "is_abuser": false,
+  "is_abuser": true,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 98.05
  },
  "212.113.112.223": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "AS216127 DE iPv4",
   "company_type": "business",
-  "is_abuser": false,
+  "is_abuser": true,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 98.05
  },
  "212.113.112.23": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "AS216127 DE iPv4",
   "company_type": "business",
-  "is_abuser": false,
+  "is_abuser": true,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 98.05
  },
  "212.113.112.239": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "AS216127 DE iPv4",
   "company_type": "business",
-  "is_abuser": false,
+  "is_abuser": true,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 98.05
  },
  "212.135.42.14": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Catixs Ltd",
   "company_type": "business",
   "is_abuser": false,
@@ -2584,7 +2467,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.75
+  "purity": 99.49
  },
  "212.17.236.195": {
   "asn_type": "hosting",
@@ -2601,7 +2484,7 @@
  },
  "212.192.20.65": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baxet Group Inc.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2610,11 +2493,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
+  "purity": 100.0
  },
  "212.22.74.165": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2623,7 +2506,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.19
+  "purity": 99.61
  },
  "212.43.158.171": {
   "asn_type": "hosting",
@@ -2640,7 +2523,7 @@
  },
  "212.87.222.32": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -2649,24 +2532,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 84.77
- },
- "212.87.222.43": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 84.77
+  "purity": 98.83
  },
  "213.108.2.225": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2675,11 +2545,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 57.81
+  "purity": 99.61
  },
  "213.165.53.118": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Intezio Networks Germany",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2688,11 +2558,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.58
+  "purity": 99.61
  },
  "213.165.58.111": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "WAIcore Ltd",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2701,11 +2571,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 85.94
+  "purity": 99.22
  },
  "213.176.119.213": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -2714,11 +2584,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.7
+  "purity": 100.0
  },
  "213.176.17.62": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -2727,11 +2597,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 85.55
+  "purity": 100.0
  },
  "213.176.18.108": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -2740,11 +2610,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.92
+  "purity": 98.44
  },
  "213.176.18.232": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -2753,7 +2623,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.92
+  "purity": 98.44
  },
  "216.107.139.19": {
   "asn_type": "hosting",
@@ -2781,22 +2651,9 @@
   "is_vpn": false,
   "purity": 99.43
  },
- "216.167.13.196": {
-  "asn_type": "isp",
-  "checked": 1793578068,
-  "company": "NTT America, Inc.",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.19
- },
  "216.238.53.98": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "MoeDove Broadband - United States",
   "company_type": "isp",
   "is_abuser": false,
@@ -2805,7 +2662,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.05
+  "purity": 98.83
  },
  "216.36.80.137": {
   "asn_type": "isp",
@@ -2822,7 +2679,7 @@
  },
  "216.36.86.25": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Private Customer",
   "company_type": "business",
   "is_abuser": false,
@@ -2831,24 +2688,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
- },
- "216.57.106.100": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.36
+  "purity": 98.88
  },
  "217.154.53.220": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "IONOS SE",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2857,7 +2701,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.93
+  "purity": 99.61
  },
  "217.179.48.74": {
   "asn_type": "business",
@@ -2872,22 +2716,9 @@
   "is_vpn": false,
   "purity": 97.66
  },
- "217.179.49.153": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "VDSKA FL1",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.48
- },
  "217.179.49.227": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "VDSKA FL1",
   "company_type": "business",
   "is_abuser": false,
@@ -2896,11 +2727,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.48
+  "purity": 99.61
  },
  "217.60.7.231": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "CGI GLOBAL LIMITED",
   "company_type": "business",
   "is_abuser": false,
@@ -2909,11 +2740,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.75
+  "purity": 98.44
  },
  "217.65.79.122": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ALEKSEI FEDOROV PR KRUSEVAC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2922,7 +2753,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.87
+  "purity": 100.0
  },
  "23.128.36.44": {
   "asn_type": "business",
@@ -2939,7 +2770,7 @@
  },
  "23.144.12.63": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Clean Pipe Networks LLC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2948,37 +2779,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
- },
- "23.246.165.123": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "TAIPEI101 NETWORK LLC",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.44
- },
- "24.136.24.254": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "RCN",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.95
+  "purity": 93.36
  },
  "24.141.96.92": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Cogeco Cable Canada Inc.",
   "company_type": "isp",
   "is_abuser": false,
@@ -2987,24 +2792,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.95
- },
- "24.78.21.213": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "Shaw Communications",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.95
+  "purity": 99.98
  },
  "27.123.246.131": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Michael Sebastian Schinzel trading as IP-Projects GmbH & Co. KG",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3013,37 +2805,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.12
- },
- "31.192.237.186": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "RUSSIAN FEDERATION",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": true,
-  "purity": 93.36
- },
- "31.201.109.180": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "Odido Netherlands",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.97
+  "purity": 99.8
  },
  "31.59.140.91": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ETERNITY INTERNATIONAL LIMITED",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3052,7 +2818,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 82.03
+  "purity": 99.22
  },
  "31.59.179.193": {
   "asn_type": "business",
@@ -3067,10 +2833,10 @@
   "is_vpn": false,
   "purity": 91.41
  },
- "31.76.17.160": {
+ "38.114.103.107": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NEKOBYTE INTERNATIONAL LIMITED",
+  "checked": 1794183723,
+  "company": "Baxet Group Inc.",
   "company_type": "hosting",
   "is_abuser": false,
   "is_datacenter": true,
@@ -3078,51 +2844,38 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.44
+  "purity": 99.41
  },
- "31.76.40.94": {
+ "38.242.229.125": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "CHSL ONE LTD",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.53
- },
- "31.76.96.60": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NEKOBYTE INTERNATIONAL LIMITED",
+  "checked": 1794183723,
+  "company": "Contabo GmbH",
   "company_type": "hosting",
   "is_abuser": false,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.31
+  "is_vpn": true,
+  "purity": 99.06
  },
- "31.77.105.195": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Senko Digital LLC",
-  "company_type": "hosting",
+ "38.77.187.51": {
+  "asn_type": "isp",
+  "checked": 1794183723,
+  "company": "ZONA COMMUNICATIONS",
+  "company_type": "isp",
   "is_abuser": false,
-  "is_datacenter": true,
+  "is_datacenter": false,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.92
+  "purity": 99.94
  },
- "31.77.133.173": {
+ "45.10.166.101": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NEKOBYTE INTERNATIONAL LIMITED",
+  "checked": 1794183723,
+  "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
   "is_datacenter": true,
@@ -3132,87 +2885,9 @@
   "is_vpn": false,
   "purity": 99.61
  },
- "31.77.183.133": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "CHSL Helsinki",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.44
- },
- "38.114.103.107": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Baxet Group Inc.",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.66
- },
- "38.242.229.125": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Contabo GmbH",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": true,
-  "purity": 97.36
- },
- "38.246.230.77": {
-  "asn_type": "business",
-  "checked": 1793578068,
-  "company": "NetLab",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.51
- },
- "38.77.187.51": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "ZONA COMMUNICATIONS",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.96
- },
- "45.10.166.101": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baykov Ilya Sergeevich",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 63.67
- },
  "45.11.24.55": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "GLB Bulut Teknolojisi Limited Sirketi",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3221,11 +2896,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": true,
-  "purity": 94.53
+  "purity": 99.22
  },
  "45.129.143.91": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "ALEKSEI FEDOROV PR KRUSEVAC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3234,24 +2909,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.44
- },
- "45.131.135.79": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Individual Entrepreneur Anton Levin",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.09
+  "purity": 99.22
  },
  "45.131.185.203": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baxet Group Inc.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3260,11 +2922,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.7
+  "purity": 100.0
  },
  "45.133.16.41": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ITGLOBAL NL LIR Administrators",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3273,11 +2935,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.05
+  "purity": 100.0
  },
  "45.133.17.106": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ITGLOBAL NL LIR Administrators",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3286,24 +2948,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
- },
- "45.133.17.118": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "ITGLOBAL NL LIR Administrators",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.83
+  "purity": 100.0
  },
  "45.133.17.27": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ITGLOBAL NL LIR Administrators",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3312,11 +2961,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
+  "purity": 100.0
  },
  "45.138.100.73": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3325,11 +2974,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 59.77
+  "purity": 99.22
  },
  "45.140.205.7": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3338,11 +2987,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 53.91
+  "purity": 99.61
  },
  "45.144.172.33": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baxet Group Inc.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3351,11 +3000,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.48
+  "purity": 99.61
  },
  "45.144.232.27": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3364,11 +3013,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 98.83
  },
  "45.151.233.18": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3377,11 +3026,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 68.36
+  "purity": 100.0
  },
  "45.151.233.211": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3390,11 +3039,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 68.36
+  "purity": 100.0
  },
  "45.155.54.115": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "ibcs fr",
   "company_type": "business",
   "is_abuser": false,
@@ -3403,11 +3052,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.87
+  "purity": 99.22
  },
  "45.82.13.135": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3416,11 +3065,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 74.22
+  "purity": 96.87
  },
  "45.85.93.45": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Internet Utilities Europe and Asia Limited",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3429,11 +3078,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 99.61
  },
  "45.88.77.143": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Podaon SIA",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3446,7 +3095,7 @@
  },
  "45.95.174.50": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "RackNerd LLC France Datacenter:",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3455,11 +3104,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 97.85
+  "purity": 99.41
  },
  "46.20.106.214": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3468,11 +3117,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 87.5
+  "purity": 97.66
  },
  "46.249.100.111": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Deployish Limited",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3481,11 +3130,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.51
+  "purity": 98.63
  },
  "46.249.103.176": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Deployish Limited",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3494,11 +3143,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.51
+  "purity": 98.63
  },
  "46.249.99.199": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Deployish Limited",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3507,11 +3156,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.95
+  "purity": 97.66
  },
  "5.10.251.122": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "LUMADOCK LTD",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3520,11 +3169,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.61
+  "purity": 100.0
  },
  "5.175.236.36": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3533,11 +3182,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.4": {
   "asn_type": "isp",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3546,11 +3195,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.48": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3559,11 +3208,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.53": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3572,11 +3221,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.54": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3585,11 +3234,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.58": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3598,11 +3247,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.175.236.6": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NyaNet",
   "company_type": "business",
   "is_abuser": false,
@@ -3611,7 +3260,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.36
+  "purity": 99.61
  },
  "5.253.189.215": {
   "asn_type": "hosting",
@@ -3628,7 +3277,7 @@
  },
  "5.253.59.106": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "GCS SER NET",
   "company_type": "business",
   "is_abuser": true,
@@ -3637,11 +3286,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.58
+  "purity": 94.92
  },
  "5.39.249.167": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Ilia Baikov",
   "company_type": "business",
   "is_abuser": false,
@@ -3650,24 +3299,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.97
- },
- "5.61.42.102": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "3nt solutions LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.24
+  "purity": 98.44
  },
  "50.35.41.6": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Ziply Fiber",
   "company_type": "isp",
   "is_abuser": false,
@@ -3676,24 +3312,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.95
- },
- "62.182.198.178": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "SIA VEESP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 91.8
+  "purity": 99.97
  },
  "62.251.108.251": {
   "asn_type": "isp",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Customers",
   "company_type": "business",
   "is_abuser": false,
@@ -3704,22 +3327,9 @@
   "is_vpn": false,
   "purity": 99.99
  },
- "62.60.217.170": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 90.62
- },
  "62.60.249.250": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3728,11 +3338,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.73
+  "purity": 99.02
  },
  "62.60.251.214": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3741,11 +3351,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.73
+  "purity": 99.02
  },
  "62.60.251.86": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3754,11 +3364,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.73
+  "purity": 99.02
  },
  "64.81.32.10": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetLab Global",
   "company_type": "business",
   "is_abuser": false,
@@ -3767,24 +3377,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.41
- },
- "66.163.118.13": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GTHost",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.7
+  "purity": 99.66
  },
  "66.163.118.177": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GTHost",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3793,24 +3390,24 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.7
+  "purity": 97.97
  },
  "66.226.145.131": {
-  "asn_type": "business",
-  "checked": 1793527137,
+  "asn_type": "hosting",
+  "checked": 1794183723,
   "company": "Mammoth Media Pty Ltd",
-  "company_type": "business",
+  "company_type": "hosting",
   "is_abuser": false,
-  "is_datacenter": false,
+  "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.88
+  "purity": 99.93
  },
  "71.168.153.36": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Verizon Business",
   "company_type": "isp",
   "is_abuser": false,
@@ -3819,24 +3416,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.95
- },
- "72.4.71.182": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "u1host Finland",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.61
+  "purity": 99.97
  },
  "72.56.109.9": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Timeweb, LLP",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3845,7 +3429,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.92
+  "purity": 100.0
  },
  "77.74.123.153": {
   "asn_type": "hosting",
@@ -3862,7 +3446,7 @@
  },
  "77.83.175.173": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Podaon SIA",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3871,11 +3455,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.22
+  "purity": 98.44
  },
  "78.111.91.80": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ITGLOBAL NL LIR Administrators",
   "company_type": "hosting",
   "is_abuser": false,
@@ -3884,11 +3468,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
+  "purity": 100.0
  },
  "78.153.139.20": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -3897,233 +3481,12 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 81.25
- },
- "78.17.187.151": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Russian Federation",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.31
+  "purity": 95.7
  },
  "78.17.187.181": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Russian Federation",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.31
- },
- "78.17.187.202": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Russian Federation",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.31
- },
- "79.110.48.71": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Individual Entrepreneur Anton Levin",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "80.66.78.190": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 87.89
- },
- "80.66.78.207": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 87.89
- },
- "80.71.152.162": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLB Bulut Teknolojisi Limited Sirketi",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.86
- },
- "80.89.238.254": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Podaon SIA",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.71
- },
- "81.19.139.158": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 83.2
- },
- "81.19.139.232": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 83.2
- },
- "81.31.244.213": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "81.31.244.79": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "82.115.4.65": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "SIA VEESP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 86.13
- },
- "82.115.6.21": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "SIA VEESP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 86.13
- },
- "82.117.245.166": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Private person",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.44
- },
- "82.117.245.170": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Private person",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": true,
-  "purity": 98.44
- },
- "82.139.234.55": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Private Customer",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.83
- },
- "82.152.197.22": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Company 64d3452fEn9ztAmd",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4133,9 +3496,152 @@
   "is_vpn": false,
   "purity": 99.61
  },
+ "79.110.48.71": {
+  "asn_type": "business",
+  "checked": 1794183723,
+  "company": "Individual Entrepreneur Anton Levin",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "80.66.78.207": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "80.71.152.162": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "GLB Bulut Teknolojisi Limited Sirketi",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.82
+ },
+ "81.19.139.158": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.44
+ },
+ "81.31.244.213": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "81.31.244.79": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "82.115.4.65": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "SIA VEESP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.41
+ },
+ "82.115.6.21": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "SIA VEESP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.41
+ },
+ "82.117.245.166": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Private person",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "82.117.245.170": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Private person",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": true,
+  "purity": 100.0
+ },
+ "82.139.234.55": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Company 64d3455caLbNJv7x",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
  "82.21.117.137": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "HOSTKEY B.V.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4144,11 +3650,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 99.61
  },
  "82.21.117.200": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "HOSTKEY B.V.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4157,11 +3663,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 99.61
  },
  "82.21.117.93": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "HOSTKEY B.V.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4170,7 +3676,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 99.61
  },
  "82.21.4.172": {
   "asn_type": "hosting",
@@ -4185,22 +3691,9 @@
   "is_vpn": false,
   "purity": 0.0
  },
- "82.223.196.199": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "ARSYS INTERNET S.L.U.",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.41
- },
  "82.26.150.163": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "HOSTKEY B.V.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4209,11 +3702,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 94.14
+  "purity": 99.22
  },
  "82.26.93.17": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "HOSTKEY B.V.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4222,11 +3715,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.7
+  "purity": 98.83
  },
  "82.64.120.239": {
   "asn_type": "isp",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Free SAS",
   "company_type": "isp",
   "is_abuser": false,
@@ -4235,11 +3728,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.78
+  "purity": 99.85
  },
  "82.73.67.204": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Ziggo Consumers",
   "company_type": "isp",
   "is_abuser": false,
@@ -4248,11 +3741,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.95
+  "purity": 99.96
  },
  "83.147.216.170": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4261,24 +3754,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.19
- },
- "83.147.254.226": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.09
+  "purity": 98.83
  },
  "83.219.249.189": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4291,7 +3771,7 @@
  },
  "83.219.249.208": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4304,7 +3784,7 @@
  },
  "84.19.3.83": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Individual Entrepreneur Anton Levin",
   "company_type": "business",
   "is_abuser": false,
@@ -4313,11 +3793,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 100.0
  },
  "84.234.17.132": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Infomaniak Network SA",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4326,11 +3806,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.44
+  "purity": 99.8
  },
  "84.234.31.84": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Infomaniak Network SA",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4339,12 +3819,12 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.32
+  "purity": 99.71
  },
  "84.32.208.201": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Private Customer",
+  "checked": 1794183723,
+  "company": "Company 64d34573Gz9YjyWz",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4352,11 +3832,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 83.2
+  "purity": 99.61
  },
  "85.137.24.82": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "ALEKSEI FEDOROV PR KRUSEVAC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4365,11 +3845,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.44
+  "purity": 100.0
  },
  "85.234.100.221": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4378,11 +3858,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.09
+  "purity": 97.27
  },
  "85.234.100.68": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4391,7 +3871,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.09
+  "purity": 97.27
  },
  "86.53.110.15": {
   "asn_type": "isp",
@@ -4408,7 +3888,7 @@
  },
  "86.53.110.160": {
   "asn_type": "isp",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GTT-CUSTOMER",
   "company_type": "isp",
   "is_abuser": false,
@@ -4417,11 +3897,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.54
+  "purity": 99.46
  },
  "87.120.167.95": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "G-Core Labs S.A.",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4430,11 +3910,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.31
+  "purity": 100.0
  },
  "87.120.222.125": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4443,11 +3923,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 90.23
+  "purity": 99.22
  },
  "87.120.222.168": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4456,11 +3936,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 90.23
+  "purity": 99.22
  },
  "87.120.222.207": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4469,11 +3949,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 90.23
+  "purity": 99.22
  },
  "87.120.92.172": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "WAIcore Ltd",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4482,11 +3962,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 81.64
+  "purity": 98.05
  },
  "87.251.85.34": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4495,11 +3975,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 87.5
+  "purity": 98.44
  },
  "87.251.87.213": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "nuxt.cloud hosting provider",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4508,12 +3988,12 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 89.84
+  "purity": 96.87
  },
  "88.216.60.108": {
   "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Private Customer",
+  "checked": 1794183723,
+  "company": "Company 64d34573Gz9YjyWz",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4521,12 +4001,12 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 87.11
+  "purity": 99.61
  },
  "88.216.60.68": {
   "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "Private Customer",
+  "checked": 1794183723,
+  "company": "Company 64d34573Gz9YjyWz",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4534,11 +4014,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 87.11
+  "purity": 99.61
  },
  "88.218.76.29": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "RackNerd LLC",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4547,389 +4027,12 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.09
+  "purity": 98.05
  },
  "88.218.78.48": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "RackNerd LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.7
- },
- "89.106.89.97": {
-  "asn_type": "hosting",
-  "checked": 1793578068,
-  "company": "GHOSTnet GmbH",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.84
- },
- "89.110.71.35": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "SERVERS TECH FZCO",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 89.84
- },
- "89.125.169.35": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "Russian Federation",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.27
- },
- "89.125.37.137": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Andris Jakovlevs",
-  "company_type": "business",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 81.64
- },
- "89.125.76.10": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baxet Group Inc.",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.48
- },
- "89.125.83.28": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baxet Group Inc.",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.27
- },
- "89.125.95.85": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baxet",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.87
- },
- "89.128.206.51": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "Ya.com Internet Factory",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.97
- },
- "89.19.209.6": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.87
- },
- "89.19.210.121": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.87
- },
- "89.19.214.216": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 91.8
- },
- "89.213.171.201": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Company 65005c7aBb90Dt04",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 89.06
- },
- "89.213.171.222": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "Company 65005c7aBb90Dt04",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 89.06
- },
- "89.34.167.181": {
-  "asn_type": "isp",
-  "checked": 1793527137,
-  "company": "Hyperoptic Ltd",
-  "company_type": "isp",
-  "is_abuser": false,
-  "is_datacenter": false,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.9
- },
- "89.42.142.219": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "SERVA ONE LTD",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "9.163.235.73": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "cloud",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.96
- },
- "91.108.254.93": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baxet Group Inc.",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.66
- },
- "91.132.160.255": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Senko Digital LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 91.6
- },
- "91.184.243.7": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "AEZA GROUP LLC",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 84.37
- },
- "91.186.212.1": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.92
- },
- "91.186.213.30": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.66
- },
- "91.186.213.42": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 97.66
- },
- "91.186.217.49": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NetCrafters OU",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 86.33
- },
- "91.186.222.76": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "FIRST SERVER, SOCIEDAD LIMITADA",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.05
- },
- "91.211.114.208": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baykov Ilya Sergeevich",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 88.28
- },
- "91.219.23.154": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 76.08
- },
- "92.118.168.129": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Baykov Ilya Sergeevich",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.92
- },
- "92.119.125.143": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "RackNerd LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 98.05
- },
- "92.119.56.83": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NRP TEKNOLOJi LiMiTED SiRKETi",
   "company_type": "hosting",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4939,9 +4042,100 @@
   "is_vpn": false,
   "purity": 98.83
  },
- "92.51.37.45": {
+ "89.110.71.35": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
+  "company": "SERVERS TECH FZCO",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
+ "89.125.169.35": {
+  "asn_type": "isp",
+  "checked": 1794183723,
+  "company": "Russian Federation",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "89.125.37.137": {
+  "asn_type": "business",
+  "checked": 1794183723,
+  "company": "Andris Jakovlevs",
+  "company_type": "business",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.83
+ },
+ "89.125.76.10": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Baxet Group Inc.",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
+ "89.125.83.28": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Baxet Group Inc.",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.8
+ },
+ "89.125.95.85": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Baxet",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "89.128.206.51": {
+  "asn_type": "isp",
+  "checked": 1794183723,
+  "company": "Ya.com Internet Factory",
+  "company_type": "isp",
+  "is_abuser": false,
+  "is_datacenter": false,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.98
+ },
+ "89.19.209.6": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
   "company": "Timeweb, LLP",
   "company_type": "hosting",
   "is_abuser": false,
@@ -4950,12 +4144,38 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.75
+  "purity": 100.0
  },
- "93.115.172.130": {
+ "89.19.210.121": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "moula world llc",
+  "checked": 1794183723,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "89.19.214.216": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "89.213.171.201": {
+  "asn_type": "business",
+  "checked": 1794183723,
+  "company": "Company 65005c7aBb90Dt04",
   "company_type": "business",
   "is_abuser": false,
   "is_datacenter": true,
@@ -4963,38 +4183,38 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.75
+  "purity": 100.0
  },
- "93.115.175.158": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "CHSL ONE LTD",
-  "company_type": "hosting",
-  "is_abuser": true,
+ "89.213.171.222": {
+  "asn_type": "business",
+  "checked": 1794183723,
+  "company": "Company 65005c7aBb90Dt04",
+  "company_type": "business",
+  "is_abuser": false,
   "is_datacenter": true,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.41
+  "purity": 100.0
  },
- "93.88.205.184": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "NKtelecom INC",
-  "company_type": "hosting",
-  "is_abuser": true,
-  "is_datacenter": true,
+ "89.34.167.181": {
+  "asn_type": "isp",
+  "checked": 1794183723,
+  "company": "Hyperoptic Ltd",
+  "company_type": "isp",
+  "is_abuser": false,
+  "is_datacenter": false,
   "is_mobile": false,
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 85.94
+  "purity": 100.0
  },
- "94.141.123.232": {
+ "89.42.142.219": {
   "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "WAIcore Ltd",
+  "checked": 1794183723,
+  "company": "SERVA ONE LTD",
   "company_type": "hosting",
   "is_abuser": false,
   "is_datacenter": true,
@@ -5002,11 +4222,102 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 84.37
+  "purity": 100.0
  },
- "94.156.177.78": {
+ "91.184.243.7": {
   "asn_type": "hosting",
-  "checked": 1793578068,
+  "checked": 1794183723,
+  "company": "AEZA GROUP LLC",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "91.186.212.1": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.83
+ },
+ "91.186.213.30": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
+ "91.186.213.42": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
+ "91.186.217.49": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.83
+ },
+ "91.186.222.76": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "FIRST SERVER, SOCIEDAD LIMITADA",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.41
+ },
+ "91.219.23.154": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 95.69
+ },
+ "92.118.168.129": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
   "company": "Baykov Ilya Sergeevich",
   "company_type": "hosting",
   "is_abuser": false,
@@ -5015,11 +4326,102 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 91.02
+  "purity": 100.0
+ },
+ "92.119.56.83": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NRP TEKNOLOJi LiMiTED SiRKETi",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "92.51.37.45": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
+ "93.115.172.130": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "moula world llc",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.44
+ },
+ "93.115.175.158": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "CHSL ONE LTD",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.44
+ },
+ "93.88.205.184": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "NKtelecom INC",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
+ "94.141.123.232": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "WAIcore Ltd",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.22
+ },
+ "94.156.177.78": {
+  "asn_type": "hosting",
+  "checked": 1794183723,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 97.27
  },
  "94.177.51.17": {
   "asn_type": "business",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "Individual Entrepreneur Anton Levin",
   "company_type": "business",
   "is_abuser": false,
@@ -5028,11 +4430,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 93.75
+  "purity": 100.0
  },
  "94.177.51.175": {
   "asn_type": "business",
-  "checked": 1793578068,
+  "checked": 1794183723,
   "company": "Individual Entrepreneur Anton Levin",
   "company_type": "business",
   "is_abuser": false,
@@ -5041,7 +4443,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.19
+  "purity": 100.0
  },
  "94.228.168.228": {
   "asn_type": "hosting",
@@ -5069,35 +4471,9 @@
   "is_vpn": false,
   "purity": 96.48
  },
- "94.241.172.243": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "Timeweb, LLP",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.75
- },
- "95.140.152.230": {
-  "asn_type": "hosting",
-  "checked": 1793527137,
-  "company": "lease for Timeweb",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 95.83
- },
  "95.140.154.46": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "lease for Timeweb",
   "company_type": "hosting",
   "is_abuser": false,
@@ -5106,11 +4482,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 95.83
+  "purity": 99.28
  },
  "95.140.159.153": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "lease for Timeweb",
   "company_type": "hosting",
   "is_abuser": false,
@@ -5119,11 +4495,11 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 92.77
+  "purity": 99.02
  },
  "95.85.230.15": {
   "asn_type": "hosting",
-  "checked": 1793527137,
+  "checked": 1794183723,
   "company": "WAIcore Ltd",
   "company_type": "hosting",
   "is_abuser": false,
@@ -5132,20 +4508,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 81.64
- },
- "95.85.252.115": {
-  "asn_type": "business",
-  "checked": 1793527137,
-  "company": "1Cent Host",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 73.05
+  "purity": 100.0
  },
  "99.63.206.163": {
   "asn_type": "isp",
