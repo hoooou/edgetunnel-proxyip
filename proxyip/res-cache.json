@@ -597,19 +597,6 @@
   "is_vpn": false,
   "purity": 99.61
  },
- "143.20.165.183": {
-  "asn_type": "hosting",
-  "checked": 1793614895,
-  "company": "Private Customer",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 83.98
- },
  "145.63.131.82": {
   "asn_type": "hosting",
   "checked": 1794011608,
@@ -794,7 +781,7 @@
  },
  "154.40.50.111": {
   "asn_type": "business",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "NetLab",
   "company_type": "business",
   "is_abuser": false,
@@ -803,7 +790,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.24
+  "purity": 98.29
  },
  "154.7.183.116": {
   "asn_type": "business",
@@ -1262,7 +1249,7 @@
  },
  "178.83.203.218": {
   "asn_type": "hosting",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "Company 670ebe0bT3WPiqu2",
   "company_type": "business",
   "is_abuser": false,
@@ -1271,7 +1258,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.22
+  "purity": 98.83
  },
  "178.83.45.206": {
   "asn_type": "hosting",
@@ -1455,19 +1442,6 @@
   "is_vpn": false,
   "purity": 99.61
  },
- "185.225.202.128": {
-  "asn_type": "hosting",
-  "checked": 1793614895,
-  "company": "GLOBALTECH LLC",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 94.92
- },
  "185.232.204.222": {
   "asn_type": "business",
   "checked": 1794011608,
@@ -1522,7 +1496,7 @@
  },
  "185.236.20.238": {
   "asn_type": "hosting",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "GLOBAL CONNECTIVITY SOLUTIONS LLP",
   "company_type": "hosting",
   "is_abuser": true,
@@ -1531,7 +1505,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 82.03
+  "purity": 98.44
  },
  "185.236.20.87": {
   "asn_type": "hosting",
@@ -1649,19 +1623,6 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 100.0
- },
- "185.46.112.199": {
-  "asn_type": "business",
-  "checked": 1793614895,
-  "company": "INFRAWIRE NETWORKS SAS",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 96.09
  },
  "185.58.115.45": {
   "asn_type": "hosting",
@@ -2471,7 +2432,7 @@
  },
  "212.17.236.195": {
   "asn_type": "hosting",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "YUNYOO LTD",
   "company_type": "hosting",
   "is_abuser": false,
@@ -2480,7 +2441,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.51
+  "purity": 99.71
  },
  "212.192.20.65": {
   "asn_type": "hosting",
@@ -2507,19 +2468,6 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.61
- },
- "212.43.158.171": {
-  "asn_type": "hosting",
-  "checked": 1793614895,
-  "company": "Podaon SIA",
-  "company_type": "hosting",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 99.22
  },
  "212.87.222.32": {
   "asn_type": "hosting",
@@ -2690,6 +2638,19 @@
   "is_vpn": false,
   "purity": 98.88
  },
+ "216.57.106.100": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "Timeweb, LLP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
  "217.154.53.220": {
   "asn_type": "hosting",
   "checked": 1794183723,
@@ -2705,7 +2666,7 @@
  },
  "217.179.48.74": {
   "asn_type": "business",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "VDSKA NL1",
   "company_type": "business",
   "is_abuser": true,
@@ -2714,7 +2675,20 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 97.66
+  "purity": 99.61
+ },
+ "217.179.49.153": {
+  "asn_type": "business",
+  "checked": 1794220856,
+  "company": "VDSKA FL1",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
  },
  "217.179.49.227": {
   "asn_type": "business",
@@ -2757,7 +2731,7 @@
  },
  "23.128.36.44": {
   "asn_type": "business",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "Red Team LTD",
   "company_type": "business",
   "is_abuser": false,
@@ -2766,7 +2740,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.09
+  "purity": 99.22
  },
  "23.144.12.63": {
   "asn_type": "business",
@@ -2820,19 +2794,6 @@
   "is_vpn": false,
   "purity": 99.22
  },
- "31.59.179.193": {
-  "asn_type": "business",
-  "checked": 1793614895,
-  "company": "Akenai Products LTD",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 91.41
- },
  "38.114.103.107": {
   "asn_type": "hosting",
   "checked": 1794183723,
@@ -2858,6 +2819,19 @@
   "is_tor": false,
   "is_vpn": true,
   "purity": 99.06
+ },
+ "38.246.230.77": {
+  "asn_type": "business",
+  "checked": 1794220856,
+  "company": "NetLab",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": false,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.16
  },
  "38.77.187.51": {
   "asn_type": "isp",
@@ -3314,6 +3288,19 @@
   "is_vpn": false,
   "purity": 99.97
  },
+ "62.182.198.178": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "SIA VEESP",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.32
+ },
  "62.251.108.251": {
   "asn_type": "isp",
   "checked": 1794183723,
@@ -3326,6 +3313,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.99
+ },
+ "62.60.217.170": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.02
  },
  "62.60.249.250": {
   "asn_type": "hosting",
@@ -3378,6 +3378,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.66
+ },
+ "66.163.118.13": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "GTHost",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 97.97
  },
  "66.163.118.177": {
   "asn_type": "hosting",
@@ -3535,6 +3548,19 @@
   "is_vpn": false,
   "purity": 98.82
  },
+ "80.89.238.254": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "Podaon SIA",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
+ },
  "81.19.139.158": {
   "asn_type": "hosting",
   "checked": 1794183723,
@@ -3639,6 +3665,19 @@
   "is_vpn": false,
   "purity": 99.22
  },
+ "82.152.197.22": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "Company 64d3452fEn9ztAmd",
+  "company_type": "business",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
  "82.21.117.137": {
   "asn_type": "hosting",
   "checked": 1794183723,
@@ -3680,16 +3719,16 @@
  },
  "82.21.4.172": {
   "asn_type": "hosting",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "UP-NETWORK Sarl",
   "company_type": "hosting",
-  "is_abuser": true,
+  "is_abuser": false,
   "is_datacenter": true,
   "is_mobile": false,
-  "is_proxy": true,
+  "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 0.0
+  "purity": 64.45
  },
  "82.26.150.163": {
   "asn_type": "hosting",
@@ -3755,6 +3794,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 98.83
+ },
+ "83.147.254.226": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "NetCrafters OU",
+  "company_type": "hosting",
+  "is_abuser": true,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
  },
  "83.219.249.189": {
   "asn_type": "hosting",
@@ -3875,7 +3927,7 @@
  },
  "86.53.110.15": {
   "asn_type": "isp",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "GTT-CUSTOMER",
   "company_type": "isp",
   "is_abuser": false,
@@ -3884,7 +3936,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.54
+  "purity": 99.46
  },
  "86.53.110.160": {
   "asn_type": "isp",
@@ -4224,6 +4276,19 @@
   "is_vpn": false,
   "purity": 100.0
  },
+ "91.132.160.255": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "Senko Digital LLC",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 98.63
+ },
  "91.184.243.7": {
   "asn_type": "hosting",
   "checked": 1794183723,
@@ -4301,6 +4366,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 99.41
+ },
+ "91.211.114.208": {
+  "asn_type": "hosting",
+  "checked": 1794220856,
+  "company": "Baykov Ilya Sergeevich",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 100.0
  },
  "91.219.23.154": {
   "asn_type": "hosting",
@@ -4512,7 +4590,7 @@
  },
  "99.63.206.163": {
   "asn_type": "isp",
-  "checked": 1793614895,
+  "checked": 1794220856,
   "company": "AT&T Enterprises, LLC",
   "company_type": "isp",
   "is_abuser": false,
@@ -4521,6 +4599,6 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 99.98
+  "purity": 99.99
  }
 }
