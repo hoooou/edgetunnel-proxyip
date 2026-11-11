@@ -1468,6 +1468,19 @@
   "is_vpn": false,
   "purity": 99.61
  },
+ "185.225.202.128": {
+  "asn_type": "hosting",
+  "checked": 1794391533,
+  "company": "GLOBALTECH LLC",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 99.61
+ },
  "185.232.204.222": {
   "asn_type": "business",
   "checked": 1794011608,
@@ -2612,19 +2625,6 @@
   "is_vpn": false,
   "purity": 98.44
  },
- "216.107.139.19": {
-  "asn_type": "hosting",
-  "checked": 1793738898,
-  "company": "Private Customer",
-  "company_type": "business",
-  "is_abuser": false,
-  "is_datacenter": true,
-  "is_mobile": false,
-  "is_proxy": false,
-  "is_tor": false,
-  "is_vpn": false,
-  "purity": 93.36
- },
  "216.167.125.99": {
   "asn_type": "business",
   "checked": 1794096440,
@@ -2653,7 +2653,7 @@
  },
  "216.36.80.137": {
   "asn_type": "isp",
-  "checked": 1793738898,
+  "checked": 1794391533,
   "company": "Private Customer",
   "company_type": "business",
   "is_abuser": false,
@@ -2662,7 +2662,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 98.83
+  "purity": 98.88
  },
  "216.36.86.25": {
   "asn_type": "isp",
@@ -3079,6 +3079,19 @@
   "is_tor": false,
   "is_vpn": false,
   "purity": 96.87
+ },
+ "45.82.56.140": {
+  "asn_type": "hosting",
+  "checked": 1794391533,
+  "company": "ClearStack B.V.",
+  "company_type": "hosting",
+  "is_abuser": false,
+  "is_datacenter": true,
+  "is_mobile": false,
+  "is_proxy": false,
+  "is_tor": false,
+  "is_vpn": false,
+  "purity": 96.09
  },
  "45.85.93.45": {
   "asn_type": "hosting",
@@ -4577,7 +4590,7 @@
  },
  "94.228.171.26": {
   "asn_type": "hosting",
-  "checked": 1793754068,
+  "checked": 1794391533,
   "company": "NetCrafters OU",
   "company_type": "hosting",
   "is_abuser": true,
@@ -4586,7 +4599,7 @@
   "is_proxy": false,
   "is_tor": false,
   "is_vpn": false,
-  "purity": 96.48
+  "purity": 100.0
  },
  "95.140.154.46": {
   "asn_type": "hosting",
